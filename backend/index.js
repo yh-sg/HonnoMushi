@@ -7,6 +7,8 @@ const express = require("express"),
     cors = require("cors")
     mongoose = require("mongoose");
 
+
+
 //connection
 mongoose.connect(
     process.env.MONGODBLOCAL,
@@ -20,6 +22,10 @@ mongoose.connect(
         console.log("Mongodb connected!");
     }
 )
+
+app.use(morgan("combined"));
+app.use(cors());
+app.use(express.json());
 
 //mongoose profile schema
 const bookSchema = new mongoose.Schema({
@@ -79,15 +85,77 @@ app.get("/books", async(req,res)=>{
             message: "Unable to get books"
         })
     }
-    
 })
 
-app.use(morgan("combined"));
-app.use(cors());
-app.use(express.json());
+app.get("/books/:letter", async(req,res)=>{
+    const limit=10,
+        skip = 10;
 
-app.get("/book", async(req,res)=>{
+    try {
+        // let booksLetter = await Books.find({"title": /^T/i});
+        // let booksLetter = await Books.find({ title: { $regex: "/^" + req.params.letter + "/" }});
+        let booksLetter = await Books.find({title: new RegExp('^' + req.params.letter, 'i')});
 
+        
+        res.status(200).send({
+            letter: req.params.letter,
+            count: booksLetter.length,
+            booksLetter
+            
+        })
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: `Unable to get books from alphabet ${req.params.letter}`
+        })
+    }
+})
+
+//@route books/letter
+app.get("/books/:letter", async(req,res)=>{
+    const limit=10,
+        skip = 10;
+
+    try {
+        // let booksLetter = await Books.find({"title": /^T/i});
+        // let booksLetter = await Books.find({ title: { $regex: "/^" + req.params.letter + "/" }});
+        let booksLetter = await Books.find({title: new RegExp('^' + req.params.letter, 'i')});
+
+        
+        res.status(200).send({
+            letter: req.params.letter,
+            count: booksLetter.length,
+            booksLetter
+            
+        })
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: `Unable to get books from alphabet ${req.params.letter}`
+        })
+    }
+})
+
+//@route book/id
+app.get("/book/:id",async(req,res)=>{
+    
+    try {
+        let book = await Books.find({book_id: req.params.id})
+
+        if(!book){
+            return res.status(400).json({message:"Book not found"})
+        }
+
+        res.status(200).json({
+            message: "book found!",
+            book
+        })
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({
+            message: `Unable to get book details`
+        })
+    }
 })
 
 app.listen(PORT, (e)=>{
