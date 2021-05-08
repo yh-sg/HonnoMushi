@@ -53,7 +53,7 @@ const bookSchema = new mongoose.Schema({
         type: Number
     },
     rating:{
-        type: mongoose.Types.Decimal128
+        type: Number
     },
     rating_count:{
         type: Number
@@ -61,7 +61,7 @@ const bookSchema = new mongoose.Schema({
     review_count:{
         type: Number
     },
-    generes:{
+    genres:{
         type: String
     },
     image_url:{
@@ -140,15 +140,37 @@ app.get("/books/:letter", async(req,res)=>{
 app.get("/book/:id",async(req,res)=>{
     
     try {
-        let book = await Books.find({book_id: req.params.id})
+        let book = await Books.find({book_id: req.params.id});
+            // regex = /[|]/g,
+            // bookResult = book[0];
+
+            // bookResult.authors = bookResult.authors.replace(regex,", ")
+            // bookResult.genres = bookResult.genres.replace(regex,", ")
+
 
         if(!book){
             return res.status(400).json({message:"Book not found"})
         }
 
+        //only take what we wanted^^
+        let bookFormat = book.map(e=>{
+            return{
+                bookId: e.book_id,
+                title: e.title,
+                authors: e.authors,
+                authors: e.authors.split("|"),
+                summary: e.description,
+                pages: e.pages,
+                rating: e.rating,
+                ratingCount: e.rating_count,
+                image_url: e.image_url,
+                genres: e.genres.split("|"),
+            }
+        })
         res.status(200).json({
             message: "book found!",
-            book
+            book,
+            bookFormat
         })
     } catch (e) {
         console.log(e);
