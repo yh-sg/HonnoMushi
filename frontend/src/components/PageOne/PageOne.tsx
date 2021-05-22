@@ -1,5 +1,8 @@
 import React from "react";
-import { Button, Container, Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
+import Navigation from "../Navigation/Navigation";
+import library from "../../images/library.jpg";
+import { ContainerStyle, LibraryImageStyle } from "./PageOne.style";
 
 const letters: String[] = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 
@@ -8,8 +11,13 @@ const numbers: String[] = "0123456789".split("");
 const PageOne: React.FC = () => {
 	return (
 		<>
-			<Container>
-				<h1>HonnoMushi</h1>
+			<Navigation />
+			<ContainerStyle>
+				<LibraryImageStyle
+					src={library}
+					alt='classic vintage library of books'
+				/>
+				<h1>Search for a Book 📖</h1>
 				<Row>
 					{letters.map((letter, index) => (
 						<Button
@@ -28,7 +36,7 @@ const PageOne: React.FC = () => {
 						</Button>
 					))}
 				</Row>
-			</Container>
+			</ContainerStyle>
 		</>
 	);
 };
