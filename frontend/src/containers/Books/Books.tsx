@@ -1,33 +1,42 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
-import { BooksState } from "../../store/Books/BooksReducer";
 import { RootState } from "../../store/rootReducer";
 
 const Books: React.FC = () => {
 	const { letter } = useParams() as {
 		letter: string;
 	};
-
 	const dispatch = useDispatch();
 
+	const [data, setData] = useState([])
+	
+	const allBookState = useSelector((state: RootState) => state.allBooks);
+	
 	useEffect(() => {
 		dispatch(getBooksByLetter(letter));
+		
 	}, []);
 
-	const allBookState = useSelector((state: RootState) => state.allBooks);
-	// const booksState = useSelector<BooksState, BooksState["books"]>(
-	// 	(state) => state.books
-	// );
-
 	console.log("allBookState -->", allBookState);
-	// console.log("booksState -->", booksState);
+
+	console.log(allBookState)
 
 	return (
 		<>
 			<h3>Books 📕📗 starting with '{letter}'</h3>
-
+			{allBookState.books![0].booksLetter.map((e,i)=>{
+				const {title, authors, description} = e;
+				return(
+					<div key={i}>
+						<p>{title}</p>
+						<p>{authors}</p>
+						<p>{description}</p>
+						<hr/>
+					</div>
+				)
+			})}
 			{/* {booksState && booksState.} */}
 		</>
 	);

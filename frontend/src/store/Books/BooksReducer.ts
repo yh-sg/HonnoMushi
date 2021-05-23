@@ -8,7 +8,7 @@ import {
 
 export interface BooksState {
 	loading: boolean;
-	books: Books[] | null;
+	books?: Books[] | null;
 	error: string;
 }
 
@@ -21,10 +21,11 @@ const initialState = {
 const booksReducer = (
 	state: BooksState = initialState,
 	action: DispatchBookActions
-) => {
+):BooksState => {
 	switch (action.type) {
 		case BOOKS_LOADING: {
 			return {
+				...state,
 				loading: true,
 			};
 		}
@@ -32,7 +33,7 @@ const booksReducer = (
 			return {
 				...state,
 				loading: false,
-				books: action.payload,
+				books: [action.payload],
 			};
 		}
 		case BOOKS_FAIL: {
