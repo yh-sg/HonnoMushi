@@ -21,7 +21,7 @@ const App: React.FC = () => {
 				<Route path='/contact'>
 					<Contact />
 				</Route>
-				<Route path='/books/:letter'>
+				<Route exact path='/books/:letter'>
 					<Books />
 				</Route>
 			</Switch>

@@ -1,5 +1,4 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 import library from "../../images/library.jpg";
 import BooksSelection from "../../containers/BooksSelection/BooksSelection";
 import { ContainerStyle, LibraryImageStyle } from "./HomePage.style";
@@ -7,7 +6,6 @@ import { ContainerStyle, LibraryImageStyle } from "./HomePage.style";
 const PageOne: React.FC = () => {
 	return (
 		<>
-			<Router>
 				<ContainerStyle>
 					<LibraryImageStyle
 						src={library}
@@ -16,7 +14,6 @@ const PageOne: React.FC = () => {
 					<h1>Search for a Book 📖</h1>
 					<BooksSelection />
 				</ContainerStyle>
-			</Router>
 		</>
 	);
 };
