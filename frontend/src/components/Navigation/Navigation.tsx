@@ -1,5 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import book from "../../images/book.png";
 
 const Navigation: React.FC = () => {
@@ -13,14 +14,16 @@ const Navigation: React.FC = () => {
 					height='30'
 					className='d-inline-block align-top'
 				/>
-				<Navbar.Brand href='#home' className='pl-2'>
+				{/* <Navbar.Brand className='pl-2'>
 					HonnoMushi
-				</Navbar.Brand>
+				</Navbar.Brand> */}
+				<Link to='/'>HonnoMushi</Link>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
-						<Nav.Link>About</Nav.Link>
-						<Nav.Link href='#home'>Contact</Nav.Link>
+						<Link to='/about'>About</Link>
+						<Link to='/contact'>Contact</Link>
+						{/* <Nav.Link>Contact</Nav.Link> */}
 					</Nav>
 					<Form inline>
 						<FormControl

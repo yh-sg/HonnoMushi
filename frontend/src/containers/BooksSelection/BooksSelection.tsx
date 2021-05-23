@@ -27,14 +27,14 @@ const BooksSelection = () => {
 				))}
 			</Row>
 			<Row>
-				{numbers.map((letter, index) => (
+				{numbers.map((number, index) => (
 					<Button
 						key={index}
 						className='col-2 m-4 p-2'
 						variant='outline-primary'
-						onClick={() => handleClickLetterOrNumber(letter)}
+						onClick={() => handleClickLetterOrNumber(number)}
 					>
-						{letter}
+						{number}
 					</Button>
 				))}
 			</Row>
