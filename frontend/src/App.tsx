@@ -1,10 +1,10 @@
 import React from "react";
-import PageOne from "./components/PageOne/PageOne";
+import HomePage from "./components/HomePage/HomePage";
 
 const App: React.FC = () => {
 	return (
 		<>
-			<PageOne />
+			<HomePage />
 		</>
 	);
 };
