@@ -27,7 +27,6 @@ const Books: React.FC = () => {
 	return (
 		<>
 			<h3>Books 📕📗 starting with '{letter}'</h3>
-
 			{/* {booksState && booksState.} */}
 		</>
 	);

@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage/HomePage";
 import Navigation from "./components/Navigation/Navigation";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
 import Books from "./containers/Books/Books";
 
 const App: React.FC = () => {
@@ -21,8 +22,11 @@ const App: React.FC = () => {
 				<Route path='/contact'>
 					<Contact />
 				</Route>
-				<Route path='/books/:letter'>
+				<Route exact path='/books/:letter'>
 					<Books />
+				</Route>
+				<Route path='*'>
+					<PageNotFound />
 				</Route>
 			</Switch>
 		</Router>

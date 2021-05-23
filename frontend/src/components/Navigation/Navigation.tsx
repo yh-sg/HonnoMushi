@@ -14,17 +14,18 @@ const Navigation: React.FC = () => {
 					height='30'
 					className='d-inline-block align-top'
 				/>
-				{/* <Navbar.Brand className='pl-2'>
+				<Navbar.Brand as={Link} to='/' className='pl-2'>
 					HonnoMushi
-				</Navbar.Brand> */}
-				<Link to='/'>HonnoMushi</Link>
+				</Navbar.Brand>
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
-						<Link to='/about'>About</Link>
-						<Link to='/contact'>Contact2</Link>
-						<Link to='/books/P'>BooksByLetter</Link>
-						<Nav.Link>Contact</Nav.Link>
+						<Nav.Link as={Link} to='/about'>
+							About
+						</Nav.Link>
+						<Nav.Link as={Link} to='/contact'>
+							Contact
+						</Nav.Link>
 					</Nav>
 					<Form inline>
 						<FormControl
