@@ -8,13 +8,13 @@ import {
 
 export interface BooksState {
 	loading: boolean;
-	books?: Books[] | null;
+	books: Books[];
 	error: string;
 }
 
 const initialState = {
 	loading: false,
-	books: null,
+	books: [],
 	error: "",
 };
 
