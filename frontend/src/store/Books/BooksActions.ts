@@ -16,12 +16,14 @@ export const getBooksByLetter =
 			});
 
 			const booksAPI = await axios.get(endpoint);
-			console.log("booksAPI >>> ", booksAPI);
 
-			dispatch({
-				type: BOOKS_SUCCESS,
-				payload: booksAPI.data,
-			});
+			if (booksAPI.status === 200) {
+				console.log("booksAPI >>> ", booksAPI);
+				dispatch({
+					type: BOOKS_SUCCESS,
+					payload: booksAPI.data,
+				});
+			}
 		} catch (error) {
 			console.log("ERROR >>>> ", error);
 			dispatch({

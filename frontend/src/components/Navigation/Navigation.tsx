@@ -22,8 +22,9 @@ const Navigation: React.FC = () => {
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
 						<Link to='/about'>About</Link>
-						<Link to='/contact'>Contact</Link>
-						{/* <Nav.Link>Contact</Nav.Link> */}
+						<Link to='/contact'>Contact2</Link>
+						<Link to='/books/P'>BooksByLetter</Link>
+						<Nav.Link>Contact</Nav.Link>
 					</Nav>
 					<Form inline>
 						<FormControl

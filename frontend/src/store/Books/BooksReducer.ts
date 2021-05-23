@@ -6,9 +6,9 @@ import {
 	DispatchBookActions,
 } from "./BookTypes";
 
-interface BooksState {
+export interface BooksState {
 	loading: boolean;
-	books: Books | null;
+	books: Books[] | null;
 	error: string;
 }
 
@@ -25,21 +25,19 @@ const booksReducer = (
 	switch (action.type) {
 		case BOOKS_LOADING: {
 			return {
-				...state,
 				loading: true,
 			};
 		}
 		case BOOKS_SUCCESS: {
 			return {
 				...state,
-				payload: action.payload,
+				loading: false,
+				books: action.payload,
 			};
 		}
 		case BOOKS_FAIL: {
 			return {
 				...state,
-				loading: false,
-				books: null,
 				error: action.payload,
 			};
 		}
