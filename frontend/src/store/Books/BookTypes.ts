@@ -8,20 +8,6 @@ export type Books = {
 	booksLetter: Book[];
 };
 
-// authors: "Laura Thalassa";
-// book_id: "c170607a";
-// description: "They";
-// edition: "2nd Edition";
-// format: "Paperback";
-// genres: "Romance|Fantasy|New Adult|Fantasy|Paranormal|Romance|Paranormal Romance|Science Fiction|Dystopia";
-// image_url: "https://images.gr-assets.com/books/1537316666l/37769929.jpg";
-// pages: 381;
-// rating: 4.06;
-// rating_count: 13671;
-// review_count: 1886;
-// title: "Pestilence";
-// _id: "6095f2e31eb6a85a10c5a954";
-
 type Book = {
 	_id: string;
 	book_id: string;

@@ -1,8 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
 import { Button, Row } from "react-bootstrap";
-import { Link, useHistory } from "react-router-dom";
-import { getBooksByLetter } from "../../store/Books/BooksActions";
+import { useHistory } from "react-router-dom";
 import { BooksSelectionStyle } from "./BooksSelection.style";
 
 const letters: string[] = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
