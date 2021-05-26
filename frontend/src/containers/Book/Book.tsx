@@ -19,18 +19,28 @@ const Book = () => {
 
 	const { loading, book, error } = bookState;
 	// book.map((b) => console.log(b));
-
-	// console.log(book.genres);
+	console.log(book.bookFormat);
+	
+	// const {} = book;
 	return (
 		<>
 			{error && <div>Insert React Error Boundary</div>}
 			{loading && <div>Insert Loading gif</div>}
 			<h3>Book</h3>
-			<h3>{book.genres}</h3>
+			{/* <h3>{book.genres}</h3> */}
 			{book && (
 				<>
-					<h3>{book.title}</h3>
-					<h3>{book.genres}</h3>
+					{book.bookFormat.map((book,i)=>{
+						const {image_url, title, genres, authors, pages} = book
+						return(
+							<div key={i}>
+								<h3>{title}</h3>
+								<h3>{genres}</h3>
+								<h3>{authors}</h3>
+								<h3>{pages}</h3>
+							</div>
+						)
+					})}
 				</>
 			)}
 		</>

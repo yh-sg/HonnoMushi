@@ -12,7 +12,7 @@ export const ROUTES: RouteProps[] = [
 	{ path: "/", component: HomePage, exact: true },
 	{ path: "/about", component: About },
 	{ path: "/contact", component: Contact },
-	{ path: "/books/:letter", component: Books, exact: true },
+	{ path: "/books/:alphabet", component: Books, exact: true },
 	{ path: "/book/:id", component: Book, exact: true },
 	{ path: "*", component: PageNotFound },
 ];

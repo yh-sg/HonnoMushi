@@ -14,13 +14,23 @@ export type BookFormat = {
 	genres: string[];
 };
 
+export type Book = {
+	letter: string;
+	book: BookFormat[];
+	bookFormat: BookFormat[];
+};
+
+// message: "book found!",
+// book,
+// bookFormat
+
 export interface BookLoading {
 	type: typeof BOOK_LOADING;
 }
 
 export interface BookSuccess {
 	type: typeof BOOK_SUCCESS;
-	payload: BookFormat;
+	payload: Book;
 }
 
 export interface BookFail {
