@@ -19,7 +19,7 @@ export const getBookById =
 			const bookAPI = await axios.get(endpoint);
 
 			if (bookAPI.status === 200) {
-				// console.log("bookAPI >>> ", bookAPI);
+				console.log("bookAPI >>> ", bookAPI);
 				dispatch({
 					type: BOOK_SUCCESS,
 					payload: bookAPI.data,

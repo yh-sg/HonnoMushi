@@ -2,7 +2,7 @@ export const BOOK_LOADING = "BOOK_LOADING";
 export const BOOK_SUCCESS = "BOOK_SUCCESS";
 export const BOOK_FAIL = "BOOK_FAIL";
 
-export type BookFormat = {
+type BookFormat = {
 	book_id: string;
 	title: string;
 	authors: string[];
@@ -14,13 +14,19 @@ export type BookFormat = {
 	genres: string[];
 };
 
+export type Book = {
+	message: string;
+	book: BookFormat[];
+	bookFormat: BookFormat[];
+};
+
 export interface BookLoading {
 	type: typeof BOOK_LOADING;
 }
 
 export interface BookSuccess {
 	type: typeof BOOK_SUCCESS;
-	payload: BookFormat;
+	payload: Book;
 }
 
 export interface BookFail {

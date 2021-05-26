@@ -1,5 +1,5 @@
 import {
-	BookFormat,
+	Book,
 	BOOK_FAIL,
 	BOOK_LOADING,
 	BOOK_SUCCESS,
@@ -8,23 +8,13 @@ import {
 
 interface BookState {
 	loading: boolean;
-	book: BookFormat;
+	book: Book[];
 	error: string;
 }
 
 const initialState = {
 	loading: false,
-	book: {
-		book_id: "",
-		title: "",
-		authors: [],
-		summary: "",
-		pages: 0,
-		rating: 0,
-		ratingCount: 0,
-		image_url: "",
-		genres: [],
-	},
+	book: [],
 	error: "",
 };
 
@@ -43,7 +33,7 @@ const bookReducer = (
 			return {
 				...state,
 				loading: false,
-				book: action.payload,
+				book: [action.payload],
 			};
 		}
 		case BOOK_FAIL: {
