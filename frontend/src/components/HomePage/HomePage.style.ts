@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
-export const ContainerStyle = styled.div`
+export const ContainerStyle = styled.div<{
+	isBooksSearch?: boolean;
+}>`
 	text-align: center;
+	padding: ${(props): string => (props.isBooksSearch ? "3rem " : "")};
 `;
 
 export const LibraryImageStyle = styled.img`

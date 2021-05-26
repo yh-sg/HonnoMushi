@@ -11,7 +11,7 @@ const BooksSelection = () => {
 	return (
 		<>
 			<BooksSelectionStyle>
-				<Row>
+				<Row className='ml-5'>
 					{letters.map((letter, index) => (
 						<Button
 							key={index}
@@ -23,7 +23,7 @@ const BooksSelection = () => {
 						</Button>
 					))}
 				</Row>
-				<Row>
+				<Row className='ml-5'>
 					{numbers.map((number, index) => (
 						<Button
 							key={index}

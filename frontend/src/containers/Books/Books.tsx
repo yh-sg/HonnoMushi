@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Table } from "react-bootstrap";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
+import { ContainerStyle } from "../../components/HomePage/HomePage.style";
+import { BooksTableStyle, BookTableHeaderStyle } from "./Books.style";
 
 const Books: React.FC = () => {
 	const { letter } = useParams() as {
@@ -22,41 +23,51 @@ const Books: React.FC = () => {
 
 	return (
 		<>
-			{error && <div>Insert React Error Boundary</div>}
-			{loading && <div>Insert Loading gif</div>}
+			<ContainerStyle isBooksSearch={!!books}>
+				{error && <div>Insert React Error Boundary</div>}
+				{loading && <div>Insert Loading gif</div>}
+				{books &&
+					books.map((book, i) => {
+						return (
+							<h3 key={i}>
+								There are {book.count} books 📕📗 starting with '{book.letter}'
+							</h3>
+						);
+					})}
+			</ContainerStyle>
+
 			{books &&
 				books.map((book, i) => {
 					return (
 						<>
-							<h3>
-								There are {book.count} books 📕📗 starting with '{book.letter}'
-							</h3>
-							<Table striped bordered hover>
-								<thead>
-									<tr>
-										<th></th>
-										<th>Title</th>
-										<th>Rating</th>
-										<th>Format</th>
-									</tr>
-								</thead>
-								{book.booksLetter.map((books, i) => {
+							<BooksTableStyle>
+								<BookTableHeaderStyle className='row'>
+									<div className='col-2'>cover</div>
+									<div className='col-6'>title</div>
+									<div className='col-2'>rating</div>
+									<div className='col-2'>format</div>
+								</BookTableHeaderStyle>
+								<br />
+								{book.booksLetter.map((book, i) => {
 									return (
-										<tbody>
-											<tr>
-												<img
-													src={books.image_url}
-													alt={books.title}
-													width='100'
-												/>
-												<td>{books.title}</td>
-												<td>{books.rating}</td>
-												<td>{books.format}</td>
-											</tr>
-										</tbody>
+										<div key={i}>
+											<div className='row'>
+												<div className='col-2'>
+													<img
+														src={book.image_url}
+														alt={book.title}
+														width='50'
+													/>
+												</div>
+												<div className='col-6'>{book.title}</div>
+												<div className='col-2'>{book.rating}</div>
+												<div className='col-2'>{book.format}</div>
+											</div>
+											<br />
+										</div>
 									);
 								})}
-							</Table>
+							</BooksTableStyle>
 						</>
 					);
 				})}
