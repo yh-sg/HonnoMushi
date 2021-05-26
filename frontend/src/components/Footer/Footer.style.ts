@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const FooterStyle = styled.div`
-	background: orange;
+	background: #f7c133;
 `;
 
 export const AllRightsStyle = styled.div`

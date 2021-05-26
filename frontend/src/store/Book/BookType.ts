@@ -1,0 +1,31 @@
+export const BOOK_LOADING = "BOOK_LOADING";
+export const BOOK_SUCCESS = "BOOK_SUCCESS";
+export const BOOK_FAIL = "BOOK_FAIL";
+
+export type BookFormat = {
+	book_id: string;
+	title: string;
+	authors: string[];
+	summary: string;
+	pages: number;
+	rating: number;
+	ratingCount: number;
+	image_url: string;
+	genres: string[];
+};
+
+export interface BookLoading {
+	type: typeof BOOK_LOADING;
+}
+
+export interface BookSuccess {
+	type: typeof BOOK_SUCCESS;
+	payload: BookFormat;
+}
+
+export interface BookFail {
+	type: typeof BOOK_FAIL;
+	payload: string;
+}
+
+export type DispatchBookAction = BookLoading | BookSuccess | BookFail;

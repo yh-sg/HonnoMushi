@@ -5,6 +5,7 @@ import HomePage from "./components/HomePage/HomePage";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Books from "./containers/Books/Books";
+import Book from "./containers/Book/Book";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 
 export const ROUTES: RouteProps[] = [
@@ -12,6 +13,7 @@ export const ROUTES: RouteProps[] = [
 	{ path: "/about", component: About },
 	{ path: "/contact", component: Contact },
 	{ path: "/books/:letter", component: Books, exact: true },
+	{ path: "/book/:id", component: Book, exact: true },
 	{ path: "*", component: PageNotFound },
 ];
 

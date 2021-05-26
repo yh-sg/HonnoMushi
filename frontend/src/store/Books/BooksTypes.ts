@@ -1,14 +1,8 @@
-export const BOOKS_LOADING = "BOOK_LOADING";
-export const BOOKS_SUCCESS = "BOOK_SUCCESS";
-export const BOOKS_FAIL = "BOOK_FAIL";
+export const BOOKS_LOADING = "BOOKS_LOADING";
+export const BOOKS_SUCCESS = "BOOKS_SUCCESS";
+export const BOOKS_FAIL = "BOOKS_FAIL";
 
-export type Books = {
-	letter: string;
-	count: number;
-	booksLetter: Book[];
-};
-
-type Book = {
+type BookLetter = {
 	_id: string;
 	book_id: string;
 	title: string;
@@ -20,8 +14,14 @@ type Book = {
 	rating: number;
 	rating_count: number;
 	review_count: number;
-	genres: string;
+	genres: string[];
 	image_url: string;
+};
+
+export type Books = {
+	letter: string;
+	count: number;
+	booksLetter: BookLetter[];
 };
 
 interface BooksLoading {
@@ -38,4 +38,4 @@ interface BooksFail {
 	payload: string;
 }
 
-export type DispatchBookActions = BooksLoading | BooksSuccess | BooksFail;
+export type DispatchBooksActions = BooksLoading | BooksSuccess | BooksFail;

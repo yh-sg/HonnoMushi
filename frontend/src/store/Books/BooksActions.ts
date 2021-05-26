@@ -4,11 +4,11 @@ import {
 	BOOKS_LOADING,
 	BOOKS_SUCCESS,
 	BOOKS_FAIL,
-	DispatchBookActions,
-} from "./BookTypes";
+	DispatchBooksActions,
+} from "./BooksTypes";
 
 export const getBooksByLetter =
-	(letter: string) => async (dispatch: Dispatch<DispatchBookActions>) => {
+	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>) => {
 		const endpoint = `http://localhost:3010/books/${letter}`;
 		try {
 			dispatch({
