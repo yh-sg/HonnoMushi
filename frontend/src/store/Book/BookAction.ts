@@ -12,11 +12,11 @@ export const getBookById =
 		const endpoint = `http://localhost:3010/book/${id}`;
 
 		try {
+			const bookAPI = await axios.get(endpoint);
+
 			dispatch({
 				type: BOOK_LOADING,
 			});
-
-			const bookAPI = await axios.get(endpoint);
 
 			if (bookAPI.status === 200) {
 				console.log("bookAPI >>> ", bookAPI);
