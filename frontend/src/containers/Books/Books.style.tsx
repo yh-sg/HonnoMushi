@@ -12,9 +12,12 @@ export const BooksTableHeaderStyle = styled.div`
 
 export const BooksImageStyle = styled.img`
 	width: 50px;
+	transition: all 0.5s ease-in-out;
 
 	:hover {
 		cursor: pointer;
+		transform: scale(1.1);
+		box-shadow: 2px 2px 8px black;
 	}
 `;
 

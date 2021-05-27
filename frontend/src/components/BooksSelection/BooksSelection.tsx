@@ -11,30 +11,32 @@ const BooksSelection = () => {
 	return (
 		<>
 			<BooksSelectionStyle>
-				<Row className='ml-5'>
-					{letters.map((letter, index) => (
-						<Button
-							key={index}
-							className='col-2 m-4 p-2'
-							variant='outline-success'
-							onClick={() => history.push(`/books/${letter}`)}
-						>
-							{letter}
-						</Button>
-					))}
-				</Row>
-				<Row className='ml-5'>
-					{numbers.map((number, index) => (
-						<Button
-							key={index}
-							className='col-2 m-4 p-2'
-							variant='outline-primary'
-							onClick={() => history.push(`/books/${number}`)}
-						>
-							{number}
-						</Button>
-					))}
-				</Row>
+				<div className='row'>
+					<div className='col-7'>
+						{letters.map((letter, index) => (
+							<Button
+								key={index}
+								className='col-2 m-4 p-2'
+								variant='outline-success'
+								onClick={() => history.push(`/books/${letter}`)}
+							>
+								{letter}
+							</Button>
+						))}
+					</div>
+					<div className='col-5'>
+						{numbers.map((number, index) => (
+							<Button
+								key={index}
+								className='col-2 m-4 p-2'
+								variant='outline-primary'
+								onClick={() => history.push(`/books/${number}`)}
+							>
+								{number}
+							</Button>
+						))}
+					</div>
+				</div>
 			</BooksSelectionStyle>
 		</>
 	);

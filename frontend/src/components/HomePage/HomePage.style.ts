@@ -8,7 +8,7 @@ export const ContainerStyle = styled.div<{
 `;
 
 export const LibraryImageStyle = styled.img`
-	width: 85vw;
+	width: 75vw;
 	border-radius: 2rem;
 	margin: 2rem;
 	box-shadow: 5px 5px 10px black;

@@ -2,5 +2,5 @@ import styled from "styled-components";
 
 export const BooksSelectionStyle = styled.div`
 	margin: 0 auto;
-	width: 70vw;
+	width: 80vw;
 `;

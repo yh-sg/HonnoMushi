@@ -8,13 +8,13 @@ import {
 
 export interface BooksState {
 	loading: boolean;
-	books: Books[];
+	books: Books;
 	error: string;
 }
 
 const initialState = {
 	loading: false,
-	books: [],
+	books: { letter: "", count: 0, booksLetter: [] },
 	error: "",
 };
 
@@ -33,7 +33,7 @@ const booksReducer = (
 			return {
 				...state,
 				loading: false,
-				books: [action.payload],
+				books: action.payload,
 			};
 		}
 		case BOOKS_FAIL: {
