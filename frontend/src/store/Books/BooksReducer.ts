@@ -3,25 +3,25 @@ import {
 	BOOKS_LOADING,
 	BOOKS_SUCCESS,
 	BOOKS_FAIL,
-	DispatchBookActions,
-} from "./BookTypes";
+	DispatchBooksActions,
+} from "./BooksTypes";
 
 export interface BooksState {
 	loading: boolean;
-	books: Books[];
+	books: Books;
 	error: string;
 }
 
 const initialState = {
 	loading: false,
-	books: [],
+	books: { letter: "", count: 0, booksLetter: [] },
 	error: "",
 };
 
 const booksReducer = (
 	state: BooksState = initialState,
-	action: DispatchBookActions
-):BooksState => {
+action: DispatchBooksActions
+): BooksState => {
 	switch (action.type) {
 		case BOOKS_LOADING: {
 			return {

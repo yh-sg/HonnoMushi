@@ -1,51 +1,84 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
+import { ContainerStyle } from "../../components/HomePage/HomePage.style";
+import {
+	BooksTableStyle,
+	BooksTableHeaderStyle,
+	BooksImageStyle,
+	BooksTitleStyle,
+} from "./Books.style";
 
 const Books: React.FC = () => {
-	const { letter } = useParams() as {
-		letter: string;
-	};
+	const history = useHistory();
 	const dispatch = useDispatch();
-	
-	const allBookState = useSelector((state: RootState) => state.allBooks);
-	
+	const { alphabet } = useParams() as {
+		alphabet: string;
+	};
+
 	useEffect(() => {
-		dispatch(getBooksByLetter(letter));
+		dispatch(getBooksByLetter(alphabet));
 	}, []);
 
-	console.log("allBookState -->", allBookState);
+	const allBooksState = useSelector((state: RootState) => state.allBooks),
+		{ books, error, loading } = allBooksState,
+		{ letter, count, booksLetter } = books;
 
 	return (
 		<>
-			<h3>Books 📕📗 starting with '{letter}'</h3>
-			<hr/>
-			{allBookState.books.map((e,i)=>{
-				const {letter,count,booksLetter} = e;
-				console.log(booksLetter);
-				return(
-					<div key={i}>
-						<h5>Total Books:{count}</h5>
-						{booksLetter.map(e=>{
-							const {title, _id, pages, rating, description, image_url} = e;
-							return(
-								<div key={_id}>
-									<h1>{title}</h1>
-									<p>Pages: {pages}</p>
-									<p>Rating: {rating}</p>
-									<p>Desc: {description}</p>
-									<img src={image_url} alt={title}/>
-									<hr/>
-								</div>
-							)
-						})}
-						<hr/>
-					</div>
-				)
-			})}
-			{/* {booksState && booksState.} */}
+			<ContainerStyle isBooksSearch={!!books}>
+				{error && <div>Insert React Error Boundary</div>}
+				{loading && <Spinner animation='border' variant='warning' />}
+				{!loading && books && (
+					<h3>
+						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗
+						starting with '{letter}'
+					</h3>
+				)}
+			</ContainerStyle>
+
+			{!loading && books && (
+				<>
+					{count >= 1 && (
+						<BooksTableStyle>
+							<BooksTableHeaderStyle className='row'>
+								<div className='col-2'>cover</div>
+								<div className='col-6'>title</div>
+								<div className='col-2'>rating</div>
+								<div className='col-2'>format</div>
+							</BooksTableHeaderStyle>
+							<br />
+							{booksLetter.map((book, i) => {
+								return (
+									<div key={i}>
+										<div className='row'>
+											<div className='col-2'>
+												<BooksImageStyle
+													src={book.image_url}
+													alt={book.image_url ? book.title : "not available"}
+													onClick={() => history.push(`/book/${book.book_id}`)}
+												/>
+											</div>
+											<BooksTitleStyle
+												className='col-6'
+												onClick={() => history.push(`/book/${book.book_id}`)}
+											>
+												{book.title}
+											</BooksTitleStyle>
+											<div className='col-2'>{book.rating}</div>
+											<div className='col-2'>{book.format}</div>
+										</div>
+										<br />
+									</div>
+								);
+							})}
+						</BooksTableStyle>
+					)}
+				</>
+			)}
 		</>
 	);
 };
