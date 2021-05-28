@@ -10,19 +10,20 @@ import {
 export const getBooksByLetter =
 	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>) => {
 		const endpoint = `http://localhost:3010/books/${letter}`;
+		const booksAPI = await axios.get(endpoint);
 		try {
 			dispatch({
 				type: BOOKS_LOADING,
 			});
 
-			const booksAPI = await axios.get(endpoint);
-
 			if (booksAPI.status === 200) {
-				console.log("booksAPI >>> ", booksAPI);
-				dispatch({
-					type: BOOKS_SUCCESS,
-					payload: booksAPI.data,
-				});
+				// console.log("booksAPI >>> ", booksAPI);
+				setTimeout(() => {
+					dispatch({
+						type: BOOKS_SUCCESS,
+						payload: booksAPI.data,
+					});
+				}, 2000);
 			}
 		} catch (error) {
 			console.log("ERROR >>>> ", error);

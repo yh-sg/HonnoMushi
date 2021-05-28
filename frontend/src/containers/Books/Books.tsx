@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
@@ -30,7 +31,7 @@ const Books: React.FC = () => {
 		<>
 			<ContainerStyle isBooksSearch={!!books}>
 				{error && <div>Insert React Error Boundary</div>}
-				{loading && <div>Insert Loading gif</div>}
+				{loading && <Spinner animation='border' variant='warning' />}
 				{books && (
 					<h3>
 						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗

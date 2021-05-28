@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 import { getBookById } from "../../store/Book/BookAction";
 import { RootState } from "../../store/rootReducer";
 import { BookContainer, ImageStyle } from "./Book.style";
@@ -22,11 +23,11 @@ const Book = () => {
 	return (
 		<>
 			{error && <div>Insert React Error Boundary</div>}
-			{loading && <div>Insert Loading gif</div>}
+			{loading && <Spinner animation='border' variant='warning' />}
 			{book && (
 				<>
 					{book.bookFormat.map((content, i) => {
-						console.log("content", content);
+						// console.log("content", content);
 						const { authors, image_url, pages, rating, ratingCount, title } =
 							content;
 						const genres = content.genres.join(", ");

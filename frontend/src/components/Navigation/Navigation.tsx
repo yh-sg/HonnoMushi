@@ -32,6 +32,7 @@ const Navigation: React.FC = () => {
 							type='text'
 							placeholder='Search for a book'
 							className='mr-sm-2'
+							style={{ width: "15rem" }}
 						/>
 						<Button variant='outline-dark'>🔍</Button>
 					</Form>
