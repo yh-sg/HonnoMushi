@@ -32,7 +32,7 @@ const Books: React.FC = () => {
 			<ContainerStyle isBooksSearch={!!books}>
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
-				{books && (
+				{!loading && books && (
 					<h3>
 						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗
 						starting with '{letter}'
@@ -40,7 +40,7 @@ const Books: React.FC = () => {
 				)}
 			</ContainerStyle>
 
-			{books && (
+			{!loading && books && (
 				<>
 					{count >= 1 && (
 						<BooksTableStyle>
