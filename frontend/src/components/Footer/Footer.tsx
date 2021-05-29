@@ -4,7 +4,7 @@ import {
 	FooterStyle,
 	AllRightsStyle,
 	SocialLinksStyle,
-	IconStyle,
+	SocialIconsStyle,
 } from "./Footer.style";
 
 const Footer = () => {
@@ -16,18 +16,30 @@ const Footer = () => {
 				</AllRightsStyle>
 				<SocialLinksStyle className='col-4'>
 					<div>Social Links:</div>
-					<IconStyle>
+					<SocialIconsStyle
+						href='https://www.linkedin.com/in/wangyh92/'
+						target='_blank'
+					>
 						<FaLinkedin />
-					</IconStyle>
-					<IconStyle>
+					</SocialIconsStyle>
+					<SocialIconsStyle
+						href='https://www.instagram.com/kinokuniya_singapore/'
+						target='_blank'
+					>
 						<FaInstagram />
-					</IconStyle>
-					<IconStyle>
+					</SocialIconsStyle>
+					<SocialIconsStyle
+						href='https://github.com/yh-sg/HonnoMushi'
+						target='_blank'
+					>
 						<FaGithub />
-					</IconStyle>
-					<IconStyle>
+					</SocialIconsStyle>
+					<SocialIconsStyle
+						href='https://www.linkedin.com/in/lindahsu007/'
+						target='_blank'
+					>
 						<FaLinkedin />
-					</IconStyle>
+					</SocialIconsStyle>
 				</SocialLinksStyle>
 			</FooterStyle>
 		</>

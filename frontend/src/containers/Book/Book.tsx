@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
-import { Spinner } from "react-bootstrap";
+import { useParams, useHistory } from "react-router-dom";
+import { Spinner, Button } from "react-bootstrap";
 import { getBookById } from "../../store/Book/BookAction";
 import { RootState } from "../../store/rootReducer";
-import { BookContainer, ImageStyle } from "./Book.style";
+import { BookContainer, ImageStyle, ButtonsRowStyle } from "./Book.style";
+import { ContainerStyle } from "../../components/HomePage/HomePage.style";
 
 const Book = () => {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const { id } = useParams() as {
 		id: string;
 	};
@@ -22,9 +24,12 @@ const Book = () => {
 
 	return (
 		<>
-			{error && <div>Insert React Error Boundary</div>}
-			{loading && <Spinner animation='border' variant='warning' />}
-			{book && (
+			<ContainerStyle isBooksSearching={!!book} loading={loading}>
+				{error && <div>Insert React Error Boundary</div>}
+				{loading && <Spinner animation='border' variant='warning' />}
+			</ContainerStyle>
+
+			{!loading && book && (
 				<>
 					{book.bookFormat.map((content, i) => {
 						// console.log("content", content);
@@ -61,6 +66,18 @@ const Book = () => {
 										<p>
 											<code>Summary:</code> {summary}
 										</p>
+										<ButtonsRowStyle className='row'>
+											<Button
+												onClick={() => history.push(`/books/${title[0]}`)}
+												variant='success'
+												className='ml-3 mr-3'
+											>
+												Back to Books
+											</Button>
+											<Button onClick={() => history.push(`/`)}>
+												Back to HonnoMushi
+											</Button>
+										</ButtonsRowStyle>
 									</div>
 								</div>
 							</BookContainer>

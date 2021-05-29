@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 export const ContainerStyle = styled.div<{
-	isBooksSearch?: boolean;
+	isBooksSearching?: boolean;
+	count?: number;
+	loading?: boolean;
 }>`
 	text-align: center;
-	padding: ${(props): string => (props.isBooksSearch ? "3rem " : "")};
+	padding: ${(props): string => (props.isBooksSearching ? "3rem " : "")};
+	margin-bottom: ${(props): string =>
+		props.loading || props.count === 0 ? "31.5rem" : ""};
 `;
 
 export const LibraryImageStyle = styled.img`

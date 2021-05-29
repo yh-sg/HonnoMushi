@@ -12,7 +12,14 @@ export const SocialLinksStyle = styled.div`
 	padding: 1rem;
 `;
 
-export const IconStyle = styled.span`
-	font-size: 1.5rem;
+export const SocialIconsStyle = styled.a`
+	color: #333;
+	font-size: 1.7rem;
+	line-height: 2rem;
 	padding-right: 7px;
+
+	:hover {
+		cursor: pointer;
+		color: #853100;
+	}
 `;
