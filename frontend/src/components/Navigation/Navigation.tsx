@@ -20,17 +20,17 @@ const Navigation: React.FC = () => {
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
-						<Nav.Link as={Link} to='/about'>
+						{/* <Nav.Link as={Link} to='/about'>
 							About
 						</Nav.Link>
 						<Nav.Link as={Link} to='/contact'>
 							Contact
-						</Nav.Link>
+						</Nav.Link> */}
 					</Nav>
 					<Form inline>
 						<FormControl
 							type='text'
-							placeholder='Search for a book'
+							placeholder='Coming soon...'
 							className='mr-sm-2'
 							style={{ width: "15rem" }}
 						/>

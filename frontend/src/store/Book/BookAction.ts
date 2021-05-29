@@ -20,10 +20,12 @@ export const getBookById =
 
 			if (bookAPI.status === 200) {
 				// console.log("bookAPI >>> ", bookAPI);
-				dispatch({
-					type: BOOK_SUCCESS,
-					payload: bookAPI.data,
-				});
+				setTimeout(() => {
+					dispatch({
+						type: BOOK_SUCCESS,
+						payload: bookAPI.data,
+					});
+				}, 1000);
 			}
 		} catch (error) {
 			console.log("ERROR >>>> ", error);

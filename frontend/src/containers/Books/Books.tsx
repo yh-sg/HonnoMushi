@@ -29,7 +29,11 @@ const Books: React.FC = () => {
 
 	return (
 		<>
-			<ContainerStyle isBooksSearch={!!books}>
+			<ContainerStyle
+				isBooksSearching={!!books}
+				count={count}
+				loading={loading}
+			>
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && (
@@ -43,7 +47,7 @@ const Books: React.FC = () => {
 			{!loading && books && (
 				<>
 					{count >= 1 && (
-						<BooksTableStyle>
+						<BooksTableStyle count={count}>
 							<BooksTableHeaderStyle className='row'>
 								<div className='col-2'>cover</div>
 								<div className='col-6'>title</div>
