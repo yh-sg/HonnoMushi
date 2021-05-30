@@ -51,3 +51,4 @@
     - API file for react(simplify) (Yonghan)
     - CUD for books/users (Yonghan)
     - About/Create/Users book collection for Navbar (Linda)
+    - Pagination for books (yonghan/Linda)
