@@ -1,11 +1,16 @@
-# HonnoMushi
+# HonnoMushi（本の虫）- Bookworms
+
+## Members
+  - yonghan(Backend) [https://github.com/yh-sg]
+  - linda(Frontend) [https://github.com/Paddlepop25]
   
 ### User Stories
 
-1. #### As books lovers:
-    - We would like to create an app that would organize and find the books easily
-    - Allow users to search their favorite books. (Search function)
-    - This project will help us review and improve on what we had learnt so far from our work and self-studies. Start simple first! Remind each other^^
+1. #### User Stories
+    - As book lovers:
+      - We would like to create an app that would organize and find the books easily
+      - Allow users to search their favorite books. (Search function)
+      - This project will help us review and improve on what we had learnt so far from our work and self-studies. Start simple first! Remind each other^^
 
 2. #### Overview (Summary) of the project
     -	To create a simple book app for users to look at the book details, to search for the book that they want to read. See more specific of the books review e.g., goodread.api.
