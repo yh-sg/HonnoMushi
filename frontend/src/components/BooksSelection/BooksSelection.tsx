@@ -11,12 +11,12 @@ const BooksSelection = () => {
 	return (
 		<>
 			<BooksSelectionStyle>
-				<div className='row'>
-					<div className='col-7'>
+				<div className='row mt-3 mb-3'>
+					<div>
 						{letters.map((letter, index) => (
 							<Button
 								key={index}
-								className='col-2 m-4 p-2'
+								className='col-3 col-md-1 m-2 mb-3'
 								variant='outline-success'
 								onClick={() => history.push(`/books/${letter}`)}
 							>
@@ -24,18 +24,19 @@ const BooksSelection = () => {
 							</Button>
 						))}
 					</div>
-					<div className='col-5'>
-						{numbers.map((number, index) => (
-							<Button
-								key={index}
-								className='col-2 m-4 p-2'
-								variant='outline-primary'
-								onClick={() => history.push(`/books/${number}`)}
-							>
-								{number}
-							</Button>
-						))}
-					</div>
+				</div>
+
+				<div className='row mb-3'>
+					{numbers.map((number, index) => (
+						<Button
+							key={index}
+							className='col m-2 p-2'
+							variant='outline-primary'
+							onClick={() => history.push(`/books/${number}`)}
+						>
+							{number}
+						</Button>
+					))}
 				</div>
 			</BooksSelectionStyle>
 		</>
