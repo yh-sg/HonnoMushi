@@ -3,13 +3,13 @@ require('dotenv').config();
 const express = require("express"),
     morgan = require("morgan"),
     app = express(),
-    PORT = parseInt(process.env.PORT) || 3010,
+    PORT = process.env.PORT || 3010,
     cors = require("cors");
 mongoose = require("mongoose");
 
 //connection
 mongoose.connect(
-    process.env.MONGODBLOCAL,
+    process.env.MOGODBCLOUD,
     {
         useCreateIndex: true,
         useNewUrlParser: true,

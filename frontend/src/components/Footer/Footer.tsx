@@ -17,10 +17,10 @@ const Footer = () => {
 				<SocialLinksStyle className='col-4'>
 					<div>Social Links:</div>
 					<SocialIconsStyle
-						href='https://www.linkedin.com/in/wangyh92/'
+						href='https://github.com/yh-sg/'
 						target='_blank'
 					>
-						<FaLinkedin />
+						<FaGithub />
 					</SocialIconsStyle>
 					<SocialIconsStyle
 						href='https://www.instagram.com/kinokuniya_singapore/'
