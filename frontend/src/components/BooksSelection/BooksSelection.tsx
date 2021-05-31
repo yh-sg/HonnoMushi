@@ -19,6 +19,7 @@ const BooksSelection = () => {
 								className='col-3 col-md-1 m-2 mb-3'
 								variant='outline-success'
 								onClick={() => history.push(`/books/${letter}`)}
+								data-testid='letterButton'
 							>
 								{letter}
 							</Button>
@@ -33,6 +34,7 @@ const BooksSelection = () => {
 							className='col m-2 p-2'
 							variant='outline-primary'
 							onClick={() => history.push(`/books/${number}`)}
+							data-testid='numberButton'
 						>
 							{number}
 						</Button>
