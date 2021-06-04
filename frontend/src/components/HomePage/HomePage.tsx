@@ -3,7 +3,7 @@ import library from "../../images/library.jpg";
 import BooksSelection from "../BooksSelection/BooksSelection";
 import { ContainerStyle, LibraryImageStyle } from "./HomePage.style";
 
-const PageOne: React.FC = () => {
+const HomePage: React.FC = () => {
 	return (
 		<>
 			<ContainerStyle>
@@ -18,4 +18,4 @@ const PageOne: React.FC = () => {
 	);
 };
 
-export default PageOne;
+export default HomePage;

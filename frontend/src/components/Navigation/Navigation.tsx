@@ -5,6 +5,12 @@ import book from "../../images/book.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
 const Navigation: React.FC = () => {
+	const [inputValue, setInputValue] = React.useState("Coming soon...");
+
+	const onInputChange = (): void => {
+		setInputValue(inputValue);
+	};
+
 	return (
 		<>
 			<Navbar bg='warning' expand='md'>
@@ -31,11 +37,17 @@ const Navigation: React.FC = () => {
 					<Form inline>
 						<FormControl
 							type='text'
-							placeholder='Coming soon...'
+							value={inputValue}
+							onChange={onInputChange}
 							className='mt-1'
 							style={{ width: "15rem" }}
+							data-testid='input-book'
 						/>
-						<Button variant='outline-dark' className='ml-1 mr-2 mt-1'>
+						<Button
+							variant='outline-dark'
+							className='ml-1 mr-2 mt-1'
+							data-testid='search'
+						>
 							🔍
 						</Button>
 					</Form>
