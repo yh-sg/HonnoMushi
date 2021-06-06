@@ -27,4 +27,9 @@ public class BooksService implements IBooksService{
 		return bookRepository.findBooksByLetterStartsWith(letter);
 	}
 
+	@Override
+	public List<Books> findBook(String id) {
+		return bookRepository.findBook(id);
+	}
+
 }

@@ -33,7 +33,7 @@ action: DispatchBooksActions
 			return {
 				...state,
 				loading: false,
-				books: [action.payload],
+				books: action.payload,
 			};
 		}
 		case BOOKS_FAIL: {

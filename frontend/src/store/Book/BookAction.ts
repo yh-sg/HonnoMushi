@@ -9,7 +9,7 @@ import {
 
 export const getBookById =
 	(id: string) => async (dispatch: Dispatch<DispatchBookAction>) => {
-		const endpoint = `http://localhost:3010/book/${id}`;
+		const endpoint = `http://localhost:8080/book/${id}`;
 
 		try {
 			const bookAPI = await axios.get(endpoint);

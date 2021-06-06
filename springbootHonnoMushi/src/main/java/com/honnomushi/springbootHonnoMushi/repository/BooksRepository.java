@@ -12,4 +12,6 @@ import com.honnomushi.springbootHonnoMushi.model.Books;
 public interface BooksRepository extends JpaRepository<Books, String> {
 	@Query(value = "SELECT b from book2018 b WHERE b.title LIKE :letter%")
 	List<Books> findBooksByLetterStartsWith(String letter);
+	@Query(value="SELECT b from book2018 b WHERE b.book_id=:id")
+	List<Books> findBook(String id);
 }
