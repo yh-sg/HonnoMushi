@@ -35,8 +35,8 @@ const Books: React.FC = () => {
 				loading={loading}
 			>
 				{error && <div>Insert React Error Boundary</div>}
-				{loading && <Spinner animation='border' variant='warning' />}
-				{!loading && books && (
+				{(loading || !letter) && <Spinner animation='border' variant='warning' />}
+				{!loading && letter && books && (
 					<h3>
 						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗
 						starting with '{letter}'
