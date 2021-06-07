@@ -9,7 +9,7 @@ import {
 
 export const getBooksByLetter =
 	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>) => {
-		const endpoint = `http://localhost:3010/books/${letter}`;
+		const endpoint = `http://localhost:8080/books/${letter}`;
 		const booksAPI = await axios.get(endpoint);
 		try {
 			dispatch({
