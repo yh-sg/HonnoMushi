@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import book from "../../images/book.png";
+import books from "../../images/books.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
 const Navigation: React.FC = () => {
@@ -16,7 +16,7 @@ const Navigation: React.FC = () => {
 			<Navbar bg='warning' expand='md'>
 				<HonnoMushiLogoStyled
 					alt='HM'
-					src={book}
+					src={books}
 					width='25px'
 					height='25px'
 					className='d-inline-block align-top'
@@ -51,10 +51,20 @@ const Navigation: React.FC = () => {
 							🔍
 						</Button>
 					</Form>
-					<Button variant='outline-danger' className='mr-2 mt-1'>
+					<Button
+						as={Link}
+						to='/register'
+						variant='outline-danger'
+						className='mr-2 mt-1'
+					>
 						Register
 					</Button>
-					<Button variant='outline-dark' className='mr-2 mt-1'>
+					<Button
+						as={Link}
+						to='/login'
+						variant='outline-dark'
+						className='mr-2 mt-1'
+					>
 						Log In
 					</Button>
 					{/* {resetPassword && (
