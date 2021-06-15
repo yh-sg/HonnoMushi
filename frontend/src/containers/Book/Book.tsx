@@ -16,7 +16,7 @@ const Book = () => {
 
 	useEffect(() => {
 		dispatch(getBookById(id));
-	}, []);
+	}, [dispatch, id]);
 
 	const bookState = useSelector((state: RootState) => state.book);
 

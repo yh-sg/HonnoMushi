@@ -1,80 +1,59 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import validation from "./Validation";
-import { FormContainer } from "./RegisterForm.style";
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import TextField from "../TextField/TextField";
 
-const Login: React.FC = () => {
-	const history = useHistory();
-
-	const [values, setValues] = React.useState({
-		username: "",
-		email: "",
-		password: "",
+const RegisterForm: React.FC = () => {
+	const validate = Yup.object({
+		username: Yup.string()
+			.min(5, "Usename must be at least 5 characters")
+			.max(15, "Username must not be more than 15 characters")
+			.required("Required"),
+		email: Yup.string().email("Email is invalid").required("Email is required"),
+		password: Yup.string()
+			.min(5, "Password must be at least 5 characters")
+			.required("Password is required"),
+		confirmPassword: Yup.string()
+			.oneOf([Yup.ref("password"), null], "Passwords must match")
+			.required("Enter your password again"),
 	});
 
-	const [errors, setErrors] = React.useState<any>({});
-
-	const handleChange = (event: React.FormEvent<HTMLInputElement>): void => {
-		setValues({
-			...values,
-			[event.currentTarget.name]: event.currentTarget.value,
-		});
-	};
-
-	const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>): void => {
-		event.preventDefault();
-		setErrors(validation(values));
-		setValues({
-			username: "",
-			email: "",
-			password: "",
-		});
-		// if no errors then push
-		// history.push({ pathname: "/registersuccess" });
-	};
-
 	return (
-		<FormContainer>
-			<h3>Create Account</h3>
-			<form>
-				<div className='username'>
-					<label>Username</label>
-					<input
-						type='text'
-						placeholder='e.g. Amir Ahmad'
-						name='username'
-						onChange={handleChange}
-						value={values.username}
-					/>
-					{errors.username && <p>{errors.username}</p>}
-				</div>
-
-				<div className='email'>
-					<label>Email</label>
-					<input
-						type='email'
-						placeholder='e.g. aa123@gmail.com'
-						name='email'
-						onChange={handleChange}
-						value={values.email}
-					/>
-					{errors.email && <p>{errors.email}</p>}
-				</div>
-				<div className='password'>
-					<label>Password</label>
-					<input
-						type='password'
-						placeholder='e.g. ******'
-						name='password'
-						onChange={handleChange}
-						value={values.password}
-					/>
-					{errors.password && <p>{errors.password}</p>}
-				</div>
-				<button onClick={handleSubmit}>Register</button>
-			</form>
-		</FormContainer>
+		<>
+			<Formik
+				initialValues={{
+					userName: "",
+					email: "",
+					password: "",
+					confirmPassword: "",
+				}}
+				onSubmit={(values) => console.log(values)}
+				validationSchema={validate}
+			>
+				{(formik) => (
+					<div className='container'>
+						<h3 className='my-4 font-weight-bold-display-4'>Sign Up</h3>
+						<Form>
+							<TextField label='Username' name='username' type='text' />
+							<TextField label='Email' name='email' type='email' />
+							<TextField label='Password' name='password' type='password' />
+							<TextField
+								label='Confirm Password'
+								name='confirmPassword'
+								type='password'
+							/>
+							<button className='btn btn-dark mt-4 mb-4' type='submit'>
+								Register
+							</button>
+							<button className='btn btn-danger mx-3 mt-4 mb-4' type='reset'>
+								Reset
+							</button>
+						</Form>
+					</div>
+				)}
+			</Formik>
+		</>
 	);
 };
 
-export default Login;
+export default RegisterForm;
