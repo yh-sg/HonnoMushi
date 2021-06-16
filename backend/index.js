@@ -28,10 +28,11 @@ app.use(morgan("combined"));
 app.use(cors());
 app.use(express.json());
 
-// test
+// test in Heroku
 app.get('/', (req, res) => {
     res.status(200);
-    res.json({ Hello: "Kitty" });
+    res.send("Hello!")
 });
 
 app.use('/', require('./routes/booksRoute'))
+app.use('/auth', require('./routes/authRoute'))
