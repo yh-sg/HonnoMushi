@@ -12,7 +12,7 @@ import {
 	BooksTitleStyle,
 } from "./Books.style";
 
-const Books: React.FC = () => {
+const Books: React.FC = ():React.ReactElement => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { alphabet } = useParams() as {
@@ -44,7 +44,7 @@ const Books: React.FC = () => {
 				)}
 			</ContainerStyle>
 
-			{!loading && books && (
+			{!loading && letter && books && (
 				<>
 					{count >= 1 && (
 						<BooksTableStyle count={count}>

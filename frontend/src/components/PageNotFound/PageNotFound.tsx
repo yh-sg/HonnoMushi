@@ -3,7 +3,7 @@ import pageNotFound from "../../images/pageNotFound.jpg";
 import { ContainerStyle } from "../HomePage/HomePage.style";
 import { PageNotFoundImageStyle } from "./PageNotFound.style";
 
-const PageNotFound = () => {
+const PageNotFound:React.FC = ():React.ReactElement => {
 	return (
 		<>
 			<ContainerStyle>

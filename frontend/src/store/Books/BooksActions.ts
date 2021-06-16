@@ -1,5 +1,4 @@
 import { Dispatch } from "react";
-import axios from "axios";
 import {
 	BOOKS_LOADING,
 	BOOKS_SUCCESS,
@@ -17,7 +16,6 @@ export const getBooksByLetter =
 			});
 
 			if (booksAPI.status === 200) {
-				// console.log("booksAPI >>> ", booksAPI);
 				setTimeout(() => {
 					dispatch({
 						type: BOOKS_SUCCESS,

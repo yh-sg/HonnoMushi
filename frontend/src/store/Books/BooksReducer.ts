@@ -1,3 +1,4 @@
+import { Reducer } from "redux";
 import {
 	Books,
 	BOOKS_LOADING,
@@ -18,33 +19,33 @@ const initialState = {
 	error: "",
 };
 
-const booksReducer = (
+const booksReducer:Reducer<BooksState,DispatchBooksActions> = (
 	state: BooksState = initialState,
-action: DispatchBooksActions
-): BooksState => {
-	switch (action.type) {
-		case BOOKS_LOADING: {
-			return {
-				...state,
-				loading: true,
-			};
+	action: DispatchBooksActions
+	): BooksState => {
+		switch (action.type) {
+			case BOOKS_LOADING: {
+				return {
+					...state,
+					loading: true,
+				};
+			}
+			case BOOKS_SUCCESS: {
+				return {
+					...state,
+					loading: false,
+					books: action.payload,
+				};
+			}
+			case BOOKS_FAIL: {
+				return {
+					...state,
+					error: action.payload,
+				};
+			}
+			default:
+				return state;
 		}
-		case BOOKS_SUCCESS: {
-			return {
-				...state,
-				loading: false,
-				books: action.payload,
-			};
-		}
-		case BOOKS_FAIL: {
-			return {
-				...state,
-				error: action.payload,
-			};
-		}
-		default:
-			return state;
-	}
-};
+	};
 
 export default booksReducer;

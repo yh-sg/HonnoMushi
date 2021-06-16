@@ -3,7 +3,7 @@ import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import book from "../../images/book.png";
 
-const Navigation: React.FC = () => {
+const Navigation: React.FC = ():React.ReactElement => {
 	return (
 		<>
 			<Navbar bg='warning' expand='sm'>

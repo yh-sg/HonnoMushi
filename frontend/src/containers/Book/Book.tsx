@@ -7,7 +7,7 @@ import { RootState } from "../../store/rootReducer";
 import { BookContainer, ImageStyle, ButtonsRowStyle } from "./Book.style";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
 
-const Book = () => {
+const Book:React.FC = ():React.ReactElement => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { id } = useParams() as {
