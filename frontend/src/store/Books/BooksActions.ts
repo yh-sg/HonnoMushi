@@ -6,11 +6,11 @@ import {
 	BOOKS_FAIL,
 	DispatchBooksActions,
 } from "./BooksTypes";
+import * as api from '../../api'
 
 export const getBooksByLetter =
-	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>) => {
-		const endpoint = `http://localhost:8080/books/${letter}`;
-		const booksAPI = await axios.get(endpoint);
+	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const booksAPI = await api.fetchBooks(letter)
 		try {
 			dispatch({
 				type: BOOKS_LOADING,
