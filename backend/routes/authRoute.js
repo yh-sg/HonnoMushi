@@ -5,6 +5,7 @@ const router = require('express').Router(),
 
 router.post("/login", async(req,res)=>{
     //email, password from frontend
+    //frontend form, hope to add react-dropzone
     const {email, password} = req.body;
 
     try{

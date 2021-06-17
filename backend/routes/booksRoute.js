@@ -1,5 +1,9 @@
 const router = require("express").Router(),
-    Books = require('../models/booksModel')
+    Books = require('../models/booksModel'),
+    URL = 'https://api.nytimes.com/svc/books/v3/reviews.json',
+    API_KEY = process.env.API_KEY,
+    fetch = require("node-fetch"),
+    withQuery = require("with-query").default
 
 //@route books
 router.get("/books", async (req, res) => {
@@ -74,5 +78,33 @@ router.get("/book/:id", async (req, res) => {
         });
     }
 });
+
+router.post('/bookReview', async(req,res)=>{
+    //similar to {title, api-key} = req.query
+    try {
+        const url = withQuery(
+            URL,
+            {
+                title: req.body.title,
+                'api-key': API_KEY,
+            }
+        ),
+            resultURL = await (await fetch(url)).json(),
+            bookReview = resultURL.results.map(e=>{
+                return{
+                    title: e.book_title, 
+                    author: e.book_author, 
+                    reviewer: e.byline,
+                    reviewDate: e.publication_dt,
+                    summary: e.summary,
+                    reviewUrl: e.url
+                }
+            })
+
+        res.status(200).json(bookReview)
+    } catch (e) {
+        res.status(500).json({message:"something went south"})
+    }
+})
 
 module.exports = router;
