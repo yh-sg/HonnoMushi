@@ -27,17 +27,20 @@ router.get("/books/:letter", async (req, res) => {
     try {
 
         const limit = 8,
-            startIndex = (Number(page-1)*limit)
+            startIndex = (Number(page-1)*limit),
+            total = await Books.find({ 
+                title: new RegExp('^' + req.params.letter, 'i')
+            }).count(),
             booksLetter = await Books.find({ 
                     title: new RegExp('^' + req.params.letter, 'i')
             }).sort({title:1}).limit(limit).skip(startIndex)
 
         res.status(200).send({
             letter: req.params.letter,
-            count: booksLetter.length,
+            count: total,
             booksLetter,
             currentPage: Number(page), 
-            numberOfPages: Math.ceil(booksLetter.length/limit)
+            numberOfPages: Math.ceil(total/limit)
         });
     } catch (e) {
         console.log(e);
