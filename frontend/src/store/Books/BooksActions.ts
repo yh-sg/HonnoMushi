@@ -8,8 +8,8 @@ import {
 import * as api from '../../api'
 
 export const getBooksByLetter =
-	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
-		const booksAPI = await api.fetchBooks(letter)
+	(letter: string,page: string|number) => async (dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const booksAPI = await api.fetchBooks(letter,page)
 		try {
 			dispatch({
 				type: BOOKS_LOADING,

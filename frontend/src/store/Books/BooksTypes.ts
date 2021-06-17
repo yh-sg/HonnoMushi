@@ -22,6 +22,8 @@ export type Books = {
 	letter: string;
 	count: number;
 	booksLetter: BookLetter[];
+	currentPage?: number|null
+    numberOfPages?: number
 };
 
 interface BooksLoading {

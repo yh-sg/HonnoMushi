@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
@@ -12,15 +12,21 @@ import {
 	BooksTitleStyle,
 } from "./Books.style";
 
+const useQuery = ():URLSearchParams => {
+	return new URLSearchParams(useLocation().search);
+  }
+
 const Books: React.FC = ():React.ReactElement => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const { alphabet } = useParams() as {
 		alphabet: string;
 	};
+	const query = useQuery();
+	const page = query.get(`page`)||1;
 
 	useEffect(() => {
-		dispatch(getBooksByLetter(alphabet));
+		dispatch(getBooksByLetter(alphabet, page));
 	}, []);
 
 	const allBooksState = useSelector((state: RootState) => state.allBooks),
