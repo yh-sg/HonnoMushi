@@ -8,7 +8,7 @@ import Books from "./containers/Books/Books";
 
 import Book from "./containers/Book/Book";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
-import AllBooks from "./containers/AllBooks/AllBooks";
+import AllBooks from "./containers/Books/AllBooks";
 
 export const ROUTES: RouteProps[] = [
 	{ path: "/", component: HomePage, exact: true },

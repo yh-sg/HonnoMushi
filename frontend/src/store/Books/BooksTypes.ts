@@ -3,7 +3,7 @@ export const BOOKS_SUCCESS = "BOOKS_SUCCESS";
 export const BOOKS_FAIL = "BOOKS_FAIL";
 export const BOOKS_FETCH_ALL = "BOOKS_FETCH_ALL"
 
-type BookLetter = {
+export type BookLetter = {
 	_id: string;
 	book_id: string;
 	title: string;
