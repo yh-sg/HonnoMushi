@@ -68,7 +68,8 @@ const Book:React.FC = ():React.ReactElement => {
 										</p>
 										<ButtonsRowStyle className='row'>
 											<Button
-												onClick={() => history.push(`/books/${title[0]}`)}
+												// onClick={() => history.push(`/books/${title[0]}`)}
+												onClick={() => history.goBack()}
 												variant='success'
 												className='ml-3 mr-3'
 											>

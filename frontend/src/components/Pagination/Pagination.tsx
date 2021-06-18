@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux';
-import { getBooksByLetter } from '../../store/Books/BooksActions';
+import { getAllBooks, getBooksByLetter } from '../../store/Books/BooksActions';
 import { RootState } from '../../store/rootReducer';
 import {useHistory} from 'react-router-dom'
 import './Pagination.css'
 
 interface Props{
     page:string|number
-    alphabet:string
+    alphabet?:string
 }
 
 const Pagination:React.FC<Props> = ({page, alphabet}):React.ReactElement => {
@@ -18,12 +18,16 @@ const Pagination:React.FC<Props> = ({page, alphabet}):React.ReactElement => {
         {numberOfPages} = useSelector((state:RootState) => state.allBooks.books)
 
     useEffect(() => {
-		if(page) dispatch(getBooksByLetter(alphabet, page));
+		if(alphabet!==undefined) dispatch(getBooksByLetter(alphabet, page));
+        else dispatch(getAllBooks(page))
 	}, [page]);
 
     const handlePageClick = (e:{selected:number}):void => {
         const pageQuery = e.selected + 1;
-        history.push(`/books/${alphabet}?page=${pageQuery}`)
+        if(alphabet!==undefined)
+            history.push(`/books/${alphabet}?page=${pageQuery}`)
+        else
+            history.push(`/books?page=${pageQuery}`)
     }
 
     return (

@@ -30,4 +30,27 @@ export const getBooksByLetter =
 				payload: error,
 			});
 		}
-	};
+	},
+
+	getAllBooks = (page:string|number) => async(dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const {data, status} = await api.fetchAllBooks(page)
+		try {
+			dispatch({
+				type: BOOKS_LOADING,
+			});
+
+			if (status === 200) {
+				dispatch({
+					type: BOOKS_SUCCESS,
+					payload: data,
+				});
+			}
+
+		} catch (e) {
+			console.log("ERROR >>>> ", e);
+			dispatch({
+				type: BOOKS_FAIL,
+				payload: e,
+			});
+		}
+	}

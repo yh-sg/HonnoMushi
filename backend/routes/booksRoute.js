@@ -7,11 +7,17 @@ const router = require("express").Router(),
 
 //@route books
 router.get("/books", async (req, res) => {
+    const {page} = req.query;
     try {
-        let books = await Books.find();
+        const limit = 15,
+            startIndex = (Number(page-1)*limit),
+            total = await Books.find().count(),
+            books = await Books.find().sort({title:1}).limit(limit).skip(startIndex);
         res.status(200).send({
-            count: books.length,
-            books,
+            count: total,
+            booksLetter: books,
+            currentPage: Number(page), 
+            numberOfPages: Math.ceil(total/limit)
         });
     } catch (e) {
         console.log(e);
@@ -25,15 +31,14 @@ router.get("/books/:letter", async (req, res) => {
     const {page} = req.query
 
     try {
-
         const limit = 8,
             startIndex = (Number(page-1)*limit),
             total = await Books.find({ 
                 title: new RegExp('^' + req.params.letter, 'i')
-            }).count(),
+                }).count(),
             booksLetter = await Books.find({ 
-                    title: new RegExp('^' + req.params.letter, 'i')
-            }).sort({title:1}).limit(limit).skip(startIndex)
+                title: new RegExp('^' + req.params.letter, 'i')
+                }).sort({title:1}).limit(limit).skip(startIndex)
 
         res.status(200).send({
             letter: req.params.letter,
@@ -89,12 +94,11 @@ router.get("/book/:id", async (req, res) => {
 });
 
 router.post('/bookReview', async(req,res)=>{
-    //similar to {title, api-key} = req.query
     try {
         const url = withQuery(
             URL,
             {
-                title: req.body.title,
+                title: req.query.bookTitle,
                 'api-key': API_KEY,
             }
         ),
@@ -113,6 +117,18 @@ router.post('/bookReview', async(req,res)=>{
         res.status(200).json(bookReview)
     } catch (e) {
         res.status(500).json({message:"something went south"})
+    }
+})
+
+router.get('/searchBook', async(req,res)=>{
+    const {searchBook, genres} = req.query;
+
+    try {
+        const title = new RegExp(searchBook,'i'),
+            books = await Books.find({$or:[{title},{genres:{$in: genres.split(',')}}]}).limit(15)
+        res.status(200).json({books})
+    } catch (e) {
+        res.status(404).json({message:e.message})
     }
 })
 

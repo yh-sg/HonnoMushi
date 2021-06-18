@@ -8,6 +8,7 @@ import Books from "./containers/Books/Books";
 
 import Book from "./containers/Book/Book";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
+import AllBooks from "./containers/AllBooks/AllBooks";
 
 export const ROUTES: RouteProps[] = [
 	{ path: "/", component: HomePage, exact: true },
@@ -15,6 +16,7 @@ export const ROUTES: RouteProps[] = [
 	{ path: "/contact", component: Contact },
 	{ path: "/books/:alphabet", component: Books, exact: true },
 	{ path: "/book/:id", component: Book, exact: true },
+	{ path: "/books", component: AllBooks, exact: true },
 	{ path: "*", component: PageNotFound },
 ];
 

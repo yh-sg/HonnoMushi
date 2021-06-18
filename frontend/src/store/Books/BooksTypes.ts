@@ -1,6 +1,7 @@
 export const BOOKS_LOADING = "BOOKS_LOADING";
 export const BOOKS_SUCCESS = "BOOKS_SUCCESS";
 export const BOOKS_FAIL = "BOOKS_FAIL";
+export const BOOKS_FETCH_ALL = "BOOKS_FETCH_ALL"
 
 type BookLetter = {
 	_id: string;
@@ -19,7 +20,7 @@ type BookLetter = {
 };
 
 export type Books = {
-	letter: string;
+	letter?: string;
 	count: number;
 	booksLetter: BookLetter[];
 	currentPage?: number|null
@@ -35,9 +36,14 @@ interface BooksSuccess {
 	payload: Books;
 }
 
+interface BooksFetchAll {
+	type: typeof BOOKS_FETCH_ALL;
+	payload: Books;
+}
+
 interface BooksFail {
 	type: typeof BOOKS_FAIL;
 	payload: string;
 }
 
-export type DispatchBooksActions = BooksLoading | BooksSuccess | BooksFail;
+export type DispatchBooksActions = BooksLoading | BooksSuccess | BooksFail | BooksFetchAll;

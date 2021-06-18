@@ -5,6 +5,7 @@ import {
 	BOOKS_SUCCESS,
 	BOOKS_FAIL,
 	DispatchBooksActions,
+	BOOKS_FETCH_ALL,
 } from "./BooksTypes";
 
 export interface BooksState {
@@ -30,7 +31,9 @@ const booksReducer:Reducer<BooksState,DispatchBooksActions> = (
 					loading: true,
 				};
 			}
-			case BOOKS_SUCCESS: {
+			case BOOKS_SUCCESS:
+			case BOOKS_FETCH_ALL:	
+			{
 				return {
 					...state,
 					loading: false,

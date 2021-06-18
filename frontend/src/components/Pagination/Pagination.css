@@ -10,13 +10,13 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #f08800;
-    color: #f08800;
+    color: black;
     margin: 0 5px
   }
 
-  a:hover {
+  /* a:hover {
     background-color: #f08800;
-  }
+  } */
   
   .pagination_link {
     font-weight: bold;
