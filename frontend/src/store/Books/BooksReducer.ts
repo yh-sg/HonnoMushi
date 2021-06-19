@@ -20,7 +20,7 @@ const initialState = {
 
 const booksReducer = (
 	state: BooksState = initialState,
-action: DispatchBooksActions
+	action: DispatchBooksActions
 ): BooksState => {
 	switch (action.type) {
 		case BOOKS_LOADING: {

@@ -16,7 +16,7 @@ const Book = () => {
 
 	useEffect(() => {
 		dispatch(getBookById(id));
-	}, []);
+	}, [dispatch, id]);
 
 	const bookState = useSelector((state: RootState) => state.book);
 
@@ -69,12 +69,15 @@ const Book = () => {
 										<ButtonsRowStyle className='row'>
 											<Button
 												onClick={() => history.push(`/books/${title[0]}`)}
-												variant='success'
+												variant='outline-success'
 												className='ml-3 mr-3'
 											>
 												Back to Books
 											</Button>
-											<Button onClick={() => history.push(`/`)}>
+											<Button
+												onClick={() => history.push(`/`)}
+												variant='outline-primary'
+											>
 												Back to HonnoMushi
 											</Button>
 										</ButtonsRowStyle>

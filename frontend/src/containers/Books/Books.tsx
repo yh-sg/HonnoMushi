@@ -6,6 +6,7 @@ import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
 import {
+	BooksHeaderFontStyle,
 	BooksTableStyle,
 	BooksTableHeaderStyle,
 	BooksImageStyle,
@@ -21,7 +22,7 @@ const Books: React.FC = () => {
 
 	useEffect(() => {
 		dispatch(getBooksByLetter(alphabet));
-	}, []);
+	}, [dispatch, alphabet]);
 
 	const allBooksState = useSelector((state: RootState) => state.allBooks),
 		{ books, error, loading } = allBooksState,
@@ -37,10 +38,10 @@ const Books: React.FC = () => {
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && (
-					<h3>
-						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗
+					<BooksHeaderFontStyle>
+						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕 📗
 						starting with '{letter}'
-					</h3>
+					</BooksHeaderFontStyle>
 				)}
 			</ContainerStyle>
 

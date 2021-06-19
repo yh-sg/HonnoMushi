@@ -19,12 +19,24 @@ const numberOfBooks = (books: number) => {
 	}
 };
 
+export const BooksHeaderFontStyle = styled.h3`
+	@media screen and (max-width: 575px) {
+		font-size: 1.5rem;
+	}
+`;
+
 export const BooksTableStyle = styled.div<{
 	count: number;
 }>`
 	width: 65vw;
 	margin: 0 auto;
 	margin-bottom: ${(props) => numberOfBooks(props.count)};
+
+	@media screen and (max-width: 575px) {
+		width: 90vw;
+		margin-left: 0.3rem;
+		font-size: 0.7rem;
+	}
 `;
 
 export const BooksTableHeaderStyle = styled.div`
@@ -40,6 +52,10 @@ export const BooksImageStyle = styled.img`
 		cursor: pointer;
 		transform: scale(1.1);
 		box-shadow: 2px 2px 8px black;
+	}
+
+	@media screen and (max-width: 575px) {
+		width: 30px;
 	}
 `;
 
