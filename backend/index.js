@@ -9,18 +9,18 @@ const express = require("express"),
 
 //connection
 mongoose.connect(
-    process.env.MONGODBLOCAL,
+    process.env.MOGODBCLOUD,
     {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
-    }).then(()=>{
+    }).then(() => {
         app.listen(PORT, (e) => {
             if (e) console.log("Error in server setup");
             console.log(`App is listening on PORT ${PORT} at ${new Date()}`);
             console.log("Mongodb connected!");;
-    })
-}).catch(e=>console.log(e));
+        });
+    }).catch(e => console.log(e));
 
 mongoose.set('useFindAndModify', false);
 
@@ -31,8 +31,8 @@ app.use(express.json());
 // test in Heroku
 app.get('/', (req, res) => {
     res.status(200);
-    res.send("Hello!")
+    res.send("Hello!");
 });
 
-app.use('/', require('./routes/booksRoute'))
-app.use('/auth', require('./routes/authRoute'))
+app.use('/', require('./routes/booksRoute'));
+app.use('/auth', require('./routes/authRoute'));
