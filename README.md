@@ -13,7 +13,7 @@
       - This project will help us review and improve on what we had learnt so far from our work and self-studies. Start simple first! Remind each other^^
 
 2. #### Overview (Summary) of the project
-    -	To create a simple book app for users to look at the book details, to search for the book that they want to read. See more specific of the books review e.g., goodread.api.
+    -	To create a simple book app for users to look at the book details, to search for the book that they want to read together with pagination.
     
 3. #### Webpage Design
   ![Books](https://user-images.githubusercontent.com/61861009/120096070-f6b25880-c15b-11eb-938f-4ee972d229e3.png)
@@ -43,12 +43,8 @@
 ## MVC Website: https://honnomushi.netlify.app/
 
 7. #### Furthermore to be added(Enhancement):
-    - Search functions (Linda)
     - Mobile responsiveness (Linda)
     - Login/Logout (Linda/Yonghan)
-    - Authetication(JWT) (Yonghan)
     - More JESTS testcase (Linda/Yonghan)
-    - API file for react(simplify) (Yonghan)
     - CUD for books/users (Yonghan)
     - About/Create/Users book collection for Navbar (Linda)
-    - Pagination for books (yonghan/Linda)
