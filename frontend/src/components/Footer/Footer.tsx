@@ -7,7 +7,7 @@ import {
 	SocialIconsStyle,
 } from "./Footer.style";
 
-const Footer = () => {
+const Footer:React.FC = ():React.ReactElement => {
 	return (
 		<>
 			<FooterStyle className='row'>

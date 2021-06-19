@@ -5,6 +5,7 @@ import {
 	BOOK_SUCCESS,
 	DispatchBookAction,
 } from "./BookType";
+import {Reducer} from 'redux'
 
 interface BookState {
 	loading: boolean;
@@ -18,7 +19,7 @@ const initialState = {
 	error: "",
 };
 
-const bookReducer = (
+const bookReducer:Reducer<BookState,DispatchBookAction> = (
 	state: BookState = initialState,
 	action: DispatchBookAction
 ): BookState => {

@@ -1,18 +1,17 @@
 import { Dispatch } from "redux";
-import axios from "axios";
 import {
 	BOOK_FAIL,
 	BOOK_LOADING,
 	BOOK_SUCCESS,
 	DispatchBookAction,
 } from "./BookType";
+import * as api from '../../api'
 
 export const getBookById =
-	(id: string) => async (dispatch: Dispatch<DispatchBookAction>) => {
-		const endpoint = `http://localhost:8080/book/${id}`;
+	(id: string) => async (dispatch: Dispatch<DispatchBookAction>):Promise<void> => {
 
 		try {
-			const bookAPI = await axios.get(endpoint);
+			const bookAPI = await api.fetchBook(id);
 
 			dispatch({
 				type: BOOK_LOADING,

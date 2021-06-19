@@ -6,7 +6,7 @@ import { BooksSelectionStyle } from "./BooksSelection.style";
 const letters: string[] = "abcdefghijklmnopqrstuvwxyz".toUpperCase().split("");
 const numbers: string[] = "0123456789".split("");
 
-const BooksSelection = () => {
+const BooksSelection:React.FC = ():React.ReactElement => {
 	let history = useHistory();
 	return (
 		<>

@@ -1,28 +1,28 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
+import Pagination from '../../components/Pagination/Pagination'
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
-import {
-	BooksHeaderFontStyle,
-	BooksTableStyle,
-	BooksTableHeaderStyle,
-	BooksImageStyle,
-	BooksTitleStyle,
-} from "./Books.style";
+import BookContent from "./BookContent";
 
-const Books: React.FC = () => {
-	const history = useHistory();
+const useQuery = ():URLSearchParams => {
+	return new URLSearchParams(useLocation().search);
+  }
+
+const Books: React.FC = ():React.ReactElement => {
 	const dispatch = useDispatch();
 	const { alphabet } = useParams() as {
 		alphabet: string;
 	};
+	const query = useQuery();
+	const page = query.get(`page`)||1;
 
 	useEffect(() => {
-		dispatch(getBooksByLetter(alphabet));
-	}, [dispatch, alphabet]);
+		dispatch(getBooksByLetter(alphabet, page));
+	}, []);
 
 	const allBooksState = useSelector((state: RootState) => state.allBooks),
 		{ books, error, loading } = allBooksState,
@@ -45,45 +45,10 @@ const Books: React.FC = () => {
 				)}
 			</ContainerStyle>
 
-			{!loading && books && (
-				<>
-					{count >= 1 && (
-						<BooksTableStyle count={count}>
-							<BooksTableHeaderStyle className='row'>
-								<div className='col-2'>cover</div>
-								<div className='col-6'>title</div>
-								<div className='col-2'>rating</div>
-								<div className='col-2'>format</div>
-							</BooksTableHeaderStyle>
-							<br />
-							{booksLetter.map((book, i) => {
-								return (
-									<div key={i}>
-										<div className='row'>
-											<div className='col-2'>
-												<BooksImageStyle
-													src={book.image_url}
-													alt={book.image_url ? book.title : "not available"}
-													onClick={() => history.push(`/book/${book.book_id}`)}
-												/>
-											</div>
-											<BooksTitleStyle
-												className='col-6'
-												onClick={() => history.push(`/book/${book.book_id}`)}
-											>
-												{book.title}
-											</BooksTitleStyle>
-											<div className='col-2'>{book.rating}</div>
-											<div className='col-2'>{book.format}</div>
-										</div>
-										<br />
-									</div>
-								);
-							})}
-						</BooksTableStyle>
-					)}
-				</>
+			{!loading && letter && books && (
+				<BookContent booksLetter={booksLetter} count={count}/>
 			)}
+			<Pagination page={page} alphabet={alphabet}/>
 		</>
 	);
 };

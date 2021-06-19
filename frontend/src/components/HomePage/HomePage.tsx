@@ -3,7 +3,7 @@ import library from "../../images/library.jpg";
 import BooksSelection from "../BooksSelection/BooksSelection";
 import { ContainerStyle, LibraryImageStyle } from "./HomePage.style";
 
-const HomePage: React.FC = () => {
+const PageOne: React.FC = ():React.ReactElement => {
 	return (
 		<>
 			<ContainerStyle>

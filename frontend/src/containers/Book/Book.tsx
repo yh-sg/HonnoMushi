@@ -7,7 +7,7 @@ import { RootState } from "../../store/rootReducer";
 import { BookContainer, ImageStyle, ButtonsRowStyle } from "./Book.style";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
 
-const Book = () => {
+const Book:React.FC = ():React.ReactElement => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { id } = useParams() as {
@@ -68,8 +68,9 @@ const Book = () => {
 										</p>
 										<ButtonsRowStyle className='row'>
 											<Button
-												onClick={() => history.push(`/books/${title[0]}`)}
-												variant='outline-success'
+												onClick={() => history.goBack()}
+												variant='success'
+
 												className='ml-3 mr-3'
 											>
 												Back to Books

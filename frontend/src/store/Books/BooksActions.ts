@@ -1,23 +1,21 @@
 import { Dispatch } from "react";
-import axios from "axios";
 import {
 	BOOKS_LOADING,
 	BOOKS_SUCCESS,
 	BOOKS_FAIL,
 	DispatchBooksActions,
 } from "./BooksTypes";
+import * as api from '../../api'
 
 export const getBooksByLetter =
-	(letter: string) => async (dispatch: Dispatch<DispatchBooksActions>) => {
-		const endpoint = `http://localhost:8080/books/${letter}`;
-		const booksAPI = await axios.get(endpoint);
+	(letter: string,page: string|number) => async (dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const booksAPI = await api.fetchBooks(letter,page)
 		try {
 			dispatch({
 				type: BOOKS_LOADING,
 			});
 
 			if (booksAPI.status === 200) {
-				// console.log("booksAPI >>> ", booksAPI);
 				setTimeout(() => {
 					dispatch({
 						type: BOOKS_SUCCESS,
@@ -32,4 +30,27 @@ export const getBooksByLetter =
 				payload: error,
 			});
 		}
-	};
+	},
+
+	getAllBooks = (page:string|number) => async(dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const {data, status} = await api.fetchAllBooks(page)
+		try {
+			dispatch({
+				type: BOOKS_LOADING,
+			});
+
+			if (status === 200) {
+				dispatch({
+					type: BOOKS_SUCCESS,
+					payload: data,
+				});
+			}
+
+		} catch (e) {
+			console.log("ERROR >>>> ", e);
+			dispatch({
+				type: BOOKS_FAIL,
+				payload: e,
+			});
+		}
+	}

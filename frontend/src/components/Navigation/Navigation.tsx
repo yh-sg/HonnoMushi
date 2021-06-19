@@ -4,13 +4,14 @@ import { Link } from "react-router-dom";
 import books from "../../images/books.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
-const Navigation: React.FC = () => {
+
+const Navigation: React.FC = ():React.ReactElement => {
 	const [inputValue, setInputValue] = React.useState("Coming soon...");
 
 	const onInputChange = (): void => {
 		setInputValue(inputValue);
 	};
-
+  
 	return (
 		<>
 			<Navbar bg='warning' expand='md'>
@@ -27,6 +28,9 @@ const Navigation: React.FC = () => {
 				<Navbar.Toggle aria-controls='basic-navbar-nav' />
 				<Navbar.Collapse id='basic-navbar-nav'>
 					<Nav className='mr-auto'>
+						<Nav.Link as={Link} to='/books'>
+							Library
+						</Nav.Link>
 						<Nav.Link as={Link} to='/create'>
 							Create
 						</Nav.Link>
