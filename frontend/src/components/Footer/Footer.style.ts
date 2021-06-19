@@ -2,14 +2,26 @@ import styled from "styled-components";
 
 export const FooterStyle = styled.div`
 	background: #f7c133;
+	margin: 0 auto;
+	height: 6.5rem;
 `;
 
 export const AllRightsStyle = styled.div`
-	padding: 2rem 0 0 8rem;
+	padding: 2rem 1rem;
+
+	@media screen and (min-width: 576px) {
+		padding-left: 2.5rem;
+	}
+	@media screen and (min-width: 720px) {
+		padding-left: 4.5rem;
+	}
+	@media screen and (min-width: 960px) {
+		padding-left: 7.5rem;
+	}
 `;
 
 export const SocialLinksStyle = styled.div`
-	padding: 1rem;
+	padding: 1.2rem;
 `;
 
 export const SocialIconsStyle = styled.a`

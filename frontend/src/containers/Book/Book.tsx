@@ -16,7 +16,7 @@ const Book:React.FC = ():React.ReactElement => {
 
 	useEffect(() => {
 		dispatch(getBookById(id));
-	}, []);
+	}, [dispatch, id]);
 
 	const bookState = useSelector((state: RootState) => state.book);
 
@@ -68,14 +68,17 @@ const Book:React.FC = ():React.ReactElement => {
 										</p>
 										<ButtonsRowStyle className='row'>
 											<Button
-												// onClick={() => history.push(`/books/${title[0]}`)}
 												onClick={() => history.goBack()}
 												variant='success'
+
 												className='ml-3 mr-3'
 											>
 												Back to Books
 											</Button>
-											<Button onClick={() => history.push(`/`)}>
+											<Button
+												onClick={() => history.push(`/`)}
+												variant='outline-primary'
+											>
 												Back to HonnoMushi
 											</Button>
 										</ButtonsRowStyle>

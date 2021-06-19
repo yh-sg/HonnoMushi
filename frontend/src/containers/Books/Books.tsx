@@ -38,10 +38,10 @@ const Books: React.FC = ():React.ReactElement => {
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && (
-					<h3>
-						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗
+					<BooksHeaderFontStyle>
+						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕 📗
 						starting with '{letter}'
-					</h3>
+					</BooksHeaderFontStyle>
 				)}
 			</ContainerStyle>
 

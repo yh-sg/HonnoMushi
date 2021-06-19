@@ -1,0 +1,342 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render BooksSelection component correctly should match snapshot 1`] = `
+<div
+  className="sc-bdnxRM cZnSuQ"
+>
+  <div
+    className="row mt-3 mb-3"
+  >
+    <div>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        A
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        B
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        C
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        D
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        E
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        F
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        G
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        H
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        I
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        J
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        K
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        L
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        M
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        N
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        O
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        P
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Q
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        R
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        S
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        T
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        U
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        V
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        W
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        X
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Y
+      </button>
+      <button
+        className="col-3 col-md-1 m-2 mb-3 btn btn-outline-success"
+        data-testid="letterButton"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        Z
+      </button>
+    </div>
+  </div>
+  <div
+    className="row mb-3"
+  >
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      0
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      1
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      2
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      3
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      4
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      5
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      6
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      7
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      8
+    </button>
+    <button
+      className="col m-2 p-2 btn btn-outline-primary"
+      data-testid="numberButton"
+      disabled={false}
+      onClick={[Function]}
+      type="button"
+    >
+      9
+    </button>
+  </div>
+</div>
+`;

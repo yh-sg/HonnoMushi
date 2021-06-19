@@ -18,4 +18,4 @@ const PageOne: React.FC = ():React.ReactElement => {
 	);
 };
 
-export default PageOne;
+export default HomePage;

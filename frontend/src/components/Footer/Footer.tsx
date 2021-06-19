@@ -11,10 +11,10 @@ const Footer:React.FC = ():React.ReactElement => {
 	return (
 		<>
 			<FooterStyle className='row'>
-				<AllRightsStyle className='col-8'>
-					<p>All Rights Reserved &copy; 2021</p>
+				<AllRightsStyle className='col-6 col-sm-8'>
+					<span>All Rights Reserved &copy; 2021</span>
 				</AllRightsStyle>
-				<SocialLinksStyle className='col-4'>
+				<SocialLinksStyle className='col-6 col-sm-4'>
 					<div>Social Links:</div>
 					<SocialIconsStyle
 						href='https://www.linkedin.com/in/wangyh92/'
