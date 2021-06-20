@@ -4,14 +4,7 @@ import { Link } from "react-router-dom";
 import books from "../../images/books.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
-
-const Navigation: React.FC = ():React.ReactElement => {
-	const [inputValue, setInputValue] = React.useState("Coming soon...");
-
-	const onInputChange = (): void => {
-		setInputValue(inputValue);
-	};
-  
+const Navigation: React.FC = (): React.ReactElement => {
 	return (
 		<>
 			<Navbar bg='warning' expand='md'>
@@ -38,31 +31,6 @@ const Navigation: React.FC = ():React.ReactElement => {
 							Collection
 						</Nav.Link>
 					</Nav>
-					<Form inline>
-						<FormControl
-							type='text'
-							value={inputValue}
-							onChange={onInputChange}
-							className='mt-1'
-							style={{ width: "15rem" }}
-							data-testid='input-book'
-						/>
-						<Button
-							variant='outline-dark'
-							className='ml-1 mr-2 mt-1'
-							data-testid='search'
-						>
-							🔍
-						</Button>
-					</Form>
-					<Button
-						as={Link}
-						to='/register'
-						variant='outline-danger'
-						className='mr-2 mt-1'
-					>
-						Register
-					</Button>
 					<Button
 						as={Link}
 						to='/login'
@@ -71,16 +39,6 @@ const Navigation: React.FC = ():React.ReactElement => {
 					>
 						Log In
 					</Button>
-					{/* {resetPassword && (
-						<Button variant='outline-dark' className='mr-2 mt-1'>
-							Reset Password
-						</Button>
-					)} */}
-					{/* {loggedIn && (
-						<Button variant='outline-danger' className='mr-2 mt-1'>
-							Log Out
-						</Button>
-					)} */}
 				</Navbar.Collapse>
 			</Navbar>
 		</>

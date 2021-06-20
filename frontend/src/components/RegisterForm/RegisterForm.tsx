@@ -1,8 +1,9 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
+import { useHistory } from "react-router-dom";
 import TextField from "../TextField/TextField";
-import { FormStyle } from "./RegisterForm.style";
+import { FormStyle, HaveAccountStyle } from "./RegisterForm.style";
 
 interface RegisterFormProps {
 	username: string;
@@ -12,6 +13,7 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = () => {
+	const history = useHistory();
 	const validate = Yup.object({
 		username: Yup.string()
 			.min(5, "Usename must be at least 5 characters")
@@ -40,7 +42,6 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 						password: "",
 						confirmPassword: "",
 					}}
-					// onSubmit={(values) => console.log(values)}
 					onSubmit={(values) => handleSubmit(values)}
 					validationSchema={validate}
 				>
@@ -49,6 +50,10 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 							<h3 className='my-4 font-weight-bold-display-4'>
 								Register a new account
 							</h3>
+							<HaveAccountStyle>
+								Already have an account?{" "}
+								<span onClick={() => history.push("/login")}>Login</span>
+							</HaveAccountStyle>
 							<Form>
 								<TextField label='Username' name='username' type='text' />
 								<TextField label='Email' name='email' type='email' />
