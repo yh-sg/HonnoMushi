@@ -2,23 +2,24 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import Pagination from '../../components/Pagination/Pagination'
+import Pagination from "../../components/Pagination/Pagination";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
 import BookContent from "./BookContent";
+import { BooksHeaderFontStyle } from "./Books.style";
 
-const useQuery = ():URLSearchParams => {
+const useQuery = (): URLSearchParams => {
 	return new URLSearchParams(useLocation().search);
-  }
+};
 
-const Books: React.FC = ():React.ReactElement => {
+const Books: React.FC = (): React.ReactElement => {
 	const dispatch = useDispatch();
 	const { alphabet } = useParams() as {
 		alphabet: string;
 	};
 	const query = useQuery();
-	const page = query.get(`page`)||1;
+	const page = query.get(`page`) || 1;
 
 	useEffect(() => {
 		dispatch(getBooksByLetter(alphabet, page));
@@ -46,9 +47,9 @@ const Books: React.FC = ():React.ReactElement => {
 			</ContainerStyle>
 
 			{!loading && letter && books && (
-				<BookContent booksLetter={booksLetter} count={count}/>
+				<BookContent booksLetter={booksLetter} count={count} />
 			)}
-			<Pagination page={page} alphabet={alphabet}/>
+			<Pagination page={page} alphabet={alphabet} />
 		</>
 	);
 };
