@@ -27,7 +27,7 @@ router.post("/login", async(req,res)=>{
     }
 })
 
-router.post("/signup", async(req,res)=>{
+router.post("/register", async(req,res)=>{
     //frontend form
     const {name, email, password, confirmPassword} = req.body;
 

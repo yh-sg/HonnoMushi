@@ -21,10 +21,11 @@ export const ROUTES: RouteProps[] = [
 	{ path: "/login", component: LoginForm },
 	{ path: "/register", component: RegisterForm },
 	{ path: "*", component: PageNotFound },
-]; 
+];
 
 export const Routes: React.FC = () => {
-	//! if
+	// TODO: const userData = localStorage.getItem("user");
+	// TODO: give protected routes for logged in users
 	return (
 		<>
 			<Switch>

@@ -1,6 +1,6 @@
 export const LOGIN = "LOGIN",
 	LOGOUT = "LOGOUT",
-	SIGNUP = "SIGNUP",
+	REGISTER = "REGISTER",
 	AUTH_FAIL = "AUTH_FAIL";
 
 export interface AuthDetails {
@@ -26,8 +26,8 @@ export interface AuthLogin {
 	payload: AuthResult;
 }
 
-interface AuthSignUp {
-	type: typeof SIGNUP;
+interface AuthRegister {
+	type: typeof REGISTER;
 	payload: AuthResult;
 }
 
@@ -41,4 +41,4 @@ interface AuthFail {
 	payload: string;
 }
 
-export type DispatchAuthAction = AuthLogin | AuthSignUp | Logout | AuthFail;
+export type DispatchAuthAction = AuthLogin | AuthRegister | Logout | AuthFail;

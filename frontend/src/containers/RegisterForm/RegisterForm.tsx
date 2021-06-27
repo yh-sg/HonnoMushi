@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import TextField from "../../components/TextField/TextField";
 import { FormStyle, HaveAccountStyle } from "./RegisterForm.style";
-import { signup } from "../../store/Auth/AuthAction";
+import { register } from "../../store/Auth/AuthAction";
 
 interface RegisterFormProps {
 	name: string;
@@ -34,7 +34,7 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 	const handleSubmit = (values: RegisterFormProps) => {
 		// console.log("register formvalues --> ", values); // can get
 		// console.log(values)
-		console.log(dispatch(signup(values,history)));
+		console.log(dispatch(register(values,history)));
 		// clear form values
 		// history.push("/");
 	};

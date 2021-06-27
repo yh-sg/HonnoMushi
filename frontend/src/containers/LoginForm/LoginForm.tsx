@@ -1,17 +1,16 @@
 import React from "react";
-import {useDispatch} from 'react-redux'
+import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import TextField from "../../components/TextField/TextField";
 import { FormStyle } from "../RegisterForm/RegisterForm.style";
-import { AuthDetails, LOGIN } from "../../store/Auth/AuthType";
+import { AuthDetails } from "../../store/Auth/AuthType";
 import { NoAccountStyle } from "./LoginForm.style";
-import { signin } from "../../store/Auth/AuthAction";
-// import { loginThunkAction } from "../../store/Auth/AuthAction";
+import { login } from "../../store/Auth/AuthAction";
 
 const LoginForm: React.FC = () => {
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const validate = Yup.object({
 		email: Yup.string().email("Email is invalid").required("Email is required"),
@@ -20,18 +19,9 @@ const LoginForm: React.FC = () => {
 			.required("Password is required"),
 	});
 
-	// const [email, setEmail] = React.useState("")
-	// const [password, setPassword] = React.useState("")
-
 	const handleSubmitLogin = (values: AuthDetails): void => {
-		// dispatch(loginThunkAction(values))
-		// values.email = ""
-		// values.password = ""
-		// setEmail("")
-		// setPassword("")
-		// history.push('/')
-		console.log(dispatch(signin(values, history)))
-}
+		dispatch(login(values, history));
+	};
 
 	return (
 		<>
@@ -42,8 +32,8 @@ const LoginForm: React.FC = () => {
 						password: "",
 					}}
 					onSubmit={(values) => {
-						handleSubmitLogin(values)}
-					}
+						handleSubmitLogin(values);
+					}}
 					validationSchema={validate}
 				>
 					{(formik) => (
@@ -62,7 +52,7 @@ const LoginForm: React.FC = () => {
 								<TextField label='Password' name='password' type='password' />
 								<button className='btn btn-dark mt-4 mb-4' type='submit'>
 									Login
-								</button>m
+								</button>
 								<button className='btn btn-danger mx-3 mt-4 mb-4' type='reset'>
 									Reset
 								</button>
