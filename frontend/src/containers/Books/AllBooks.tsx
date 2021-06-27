@@ -5,7 +5,7 @@ import { getAllBooks } from '../../store/Books/BooksActions';
 import { RootState } from '../../store/rootReducer';
 import { Spinner } from "react-bootstrap";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
-import Pagination from '../../components/Pagination/Pagination'
+import Pagination from '../Pagination/Pagination'
 import BookContent from './BookContent';
 
 const useQuery = ():URLSearchParams => {

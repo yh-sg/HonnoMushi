@@ -18,7 +18,7 @@ mongoose.connect(
         app.listen(PORT, (e) => {
             if (e) console.log("Error in server setup");
             console.log(`App is listening on PORT ${PORT} at ${new Date()}`);
-            console.log("Mongodb connected!");;
+            console.log("Mongodb connected!");
         });
     }).catch(e => console.log(e));
 

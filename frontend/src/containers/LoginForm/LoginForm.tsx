@@ -1,12 +1,16 @@
 import React from "react";
+import {useDispatch} from 'react-redux'
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
-import TextField from "../TextField/TextField";
+import TextField from "../../components/TextField/TextField";
 import { FormStyle } from "../RegisterForm/RegisterForm.style";
+import { AuthDetails } from "../../store/Auth/AuthType";
 import { NoAccountStyle } from "./LoginForm.style";
+import { loginThunkAction } from "../../store/Auth/AuthAction";
 
 const LoginForm: React.FC = () => {
+	const dispatch = useDispatch()
 	const history = useHistory();
 	const validate = Yup.object({
 		email: Yup.string().email("Email is invalid").required("Email is required"),
@@ -14,6 +18,18 @@ const LoginForm: React.FC = () => {
 			.min(5, "Password must be at least 5 characters")
 			.required("Password is required"),
 	});
+
+	// const [email, setEmail] = React.useState("")
+	// const [password, setPassword] = React.useState("")
+
+	const handleSubmitLogin = (values: AuthDetails): void => {
+		dispatch(loginThunkAction(values))
+		// values.email = ""
+		// values.password = ""
+		// setEmail("")
+		// setPassword("")
+		history.push('/')
+	}
 
 	return (
 		<>
@@ -23,7 +39,9 @@ const LoginForm: React.FC = () => {
 						email: "",
 						password: "",
 					}}
-					onSubmit={(values) => console.log(values)}
+					onSubmit={(values) => {
+						handleSubmitLogin(values)}
+					}
 					validationSchema={validate}
 				>
 					{(formik) => (

@@ -1,8 +1,10 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
-import TextField from "../TextField/TextField";
+import TextField from "../../components/TextField/TextField";
+import { signupAction } from "../../store/Auth/AuthAction";
 import { FormStyle, HaveAccountStyle } from "./RegisterForm.style";
 
 interface RegisterFormProps {
@@ -13,6 +15,7 @@ interface RegisterFormProps {
 }
 
 const RegisterForm: React.FC<RegisterFormProps> = () => {
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const validate = Yup.object({
 		username: Yup.string()
@@ -29,7 +32,10 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 	});
 
 	const handleSubmit = (values: RegisterFormProps) => {
-		console.log(values);
+		// console.log("register formvalues --> ", values); // can get
+		dispatch(signupAction(values));
+		// clear form values
+		// history.push("/");
 	};
 
 	return (
