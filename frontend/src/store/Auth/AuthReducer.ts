@@ -1,47 +1,20 @@
 import { Reducer } from "redux";
-import { DispatchAuthAction, AuthDetails, LOGIN } from "./AuthType";
+import { DispatchAuthAction, AuthDetails, AuthResult, LOGIN } from "./AuthType";
 
-interface AuthReducerState {
-	// name: string;
-	// email: string;
-	// password: string;
-	// confirmPassword: string;
-	// error: string;
-	// token: string;
-	name?: string;
-	email?: string;
-	loggedIn?: boolean;
-	error?: string
+export interface AuthReducerState {
+	authData: object | null
 }
 
-const initialState = {
-	// name: "",
-	// email: "",
-	// password: "",
-	// confirmPassword: "",
-	// error: "",
-	// token: "",
-	name: "",
-	email: "",
-	loggedIn: false,
-	error: ""
-};
-
 const AuthReducer: Reducer<AuthReducerState, DispatchAuthAction> = (
-	state: AuthReducerState = initialState,
+	state: AuthReducerState = {authData:null},
 	action: DispatchAuthAction
 ): AuthReducerState => {
 	switch (action.type) {
 		//Login
-		case LOGIN: {
-			return {
-				...state, 
-				name: action.payload.result.name,
-				email: action.payload.result.email,
-				loggedIn: true
-			}
-		}
+		case LOGIN: 
+			return {...state, authData: action.payload}
 		//Signup
+		// case SIGNUP: 
 		//Logout
 		default:
 			return state;

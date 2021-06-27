@@ -1,10 +1,14 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {useSelector} from 'react-redux'
 import books from "../../images/books.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
-const Navigation: React.FC = (): React.ReactElement => {
+const Navigation: React.FC = ():React.ReactElement => {
+	const userData = JSON.parse(localStorage.getItem('user')||"{}")
+	console.log(userData?.result?.name)
+	console.log(userData)
 	return (
 		<>
 			<Navbar bg='warning' expand='md'>
@@ -37,7 +41,7 @@ const Navigation: React.FC = (): React.ReactElement => {
 						variant='outline-dark'
 						className='mr-2 mt-1'
 					>
-						Log In
+						{Object.keys(userData).length === 0 ? 'Log In' : 'Log Out'}
 					</Button>
 				</Navbar.Collapse>
 			</Navbar>

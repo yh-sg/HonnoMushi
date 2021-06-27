@@ -5,9 +5,10 @@ import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import TextField from "../../components/TextField/TextField";
 import { FormStyle } from "../RegisterForm/RegisterForm.style";
-import { AuthDetails } from "../../store/Auth/AuthType";
+import { AuthDetails, LOGIN } from "../../store/Auth/AuthType";
 import { NoAccountStyle } from "./LoginForm.style";
-import { loginThunkAction } from "../../store/Auth/AuthAction";
+import { signin } from "../../store/Auth/AuthAction";
+// import { loginThunkAction } from "../../store/Auth/AuthAction";
 
 const LoginForm: React.FC = () => {
 	const dispatch = useDispatch()
@@ -23,13 +24,14 @@ const LoginForm: React.FC = () => {
 	// const [password, setPassword] = React.useState("")
 
 	const handleSubmitLogin = (values: AuthDetails): void => {
-		dispatch(loginThunkAction(values))
+		// dispatch(loginThunkAction(values))
 		// values.email = ""
 		// values.password = ""
 		// setEmail("")
 		// setPassword("")
-		history.push('/')
-	}
+		// history.push('/')
+		console.log(dispatch(signin(values, history)))
+}
 
 	return (
 		<>
@@ -60,7 +62,7 @@ const LoginForm: React.FC = () => {
 								<TextField label='Password' name='password' type='password' />
 								<button className='btn btn-dark mt-4 mb-4' type='submit'>
 									Login
-								</button>
+								</button>m
 								<button className='btn btn-danger mx-3 mt-4 mb-4' type='reset'>
 									Reset
 								</button>

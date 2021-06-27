@@ -4,11 +4,11 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import TextField from "../../components/TextField/TextField";
-import { signupAction } from "../../store/Auth/AuthAction";
 import { FormStyle, HaveAccountStyle } from "./RegisterForm.style";
+import { signup } from "../../store/Auth/AuthAction";
 
 interface RegisterFormProps {
-	username: string;
+	name: string;
 	email: string;
 	password: string;
 	confirmPassword: string;
@@ -18,7 +18,7 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const validate = Yup.object({
-		username: Yup.string()
+		name: Yup.string()
 			.min(5, "Usename must be at least 5 characters")
 			.max(15, "Username must not be more than 15 characters")
 			.required("Required"),
@@ -33,7 +33,8 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 
 	const handleSubmit = (values: RegisterFormProps) => {
 		// console.log("register formvalues --> ", values); // can get
-		dispatch(signupAction(values));
+		// console.log(values)
+		console.log(dispatch(signup(values,history)));
 		// clear form values
 		// history.push("/");
 	};
@@ -43,7 +44,7 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 			<FormStyle>
 				<Formik
 					initialValues={{
-						username: "",
+						name: "",
 						email: "",
 						password: "",
 						confirmPassword: "",
@@ -61,7 +62,7 @@ const RegisterForm: React.FC<RegisterFormProps> = () => {
 								<span onClick={() => history.push("/login")}>Login</span>
 							</HaveAccountStyle>
 							<Form>
-								<TextField label='Username' name='username' type='text' />
+								<TextField label='Name' name='name' type='text' />
 								<TextField label='Email' name='email' type='email' />
 								<TextField label='Password' name='password' type='password' />
 								<TextField
