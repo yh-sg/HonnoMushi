@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import * as api from "../../api";
-import { DispatchAuthAction, AuthDetails, LOGIN } from "./AuthType";
+import { DispatchAuthAction, AuthDetails, LOGIN, AUTH_FAIL } from "./AuthType";
 
 export const login =
 	(form: AuthDetails, history: any) =>
@@ -17,7 +17,8 @@ export const login =
 			history.push("/");
 			window.location.reload();
 		} catch (e) {
-			console.log(e);
+			// can't get message: "Wrong Password!" from authRoute (backend)
+			dispatch({ type: AUTH_FAIL, payload: "The password is incorrect" });
 		}
 	};
 

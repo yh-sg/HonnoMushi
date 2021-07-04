@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
@@ -8,6 +8,7 @@ import { FormStyle } from "../RegisterForm/RegisterForm.style";
 import { AuthDetails } from "../../store/Auth/AuthType";
 import { NoAccountStyle } from "./LoginForm.style";
 import { login } from "../../store/Auth/AuthAction";
+import { RootState } from "../../store/rootReducer";
 
 const LoginForm: React.FC = () => {
 	const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const LoginForm: React.FC = () => {
 	const handleSubmitLogin = (values: AuthDetails): void => {
 		dispatch(login(values, history));
 	};
+
+	const errorMessage = useSelector((state: RootState) => state.auth.error);
 
 	return (
 		<>
@@ -50,6 +53,9 @@ const LoginForm: React.FC = () => {
 							<Form>
 								<TextField label='Email' name='email' type='email' />
 								<TextField label='Password' name='password' type='password' />
+								{errorMessage && (
+									<p className='pt-2 text-warning'>{errorMessage}</p>
+								)}
 								<button className='btn btn-dark mt-4 mb-4' type='submit'>
 									Login
 								</button>

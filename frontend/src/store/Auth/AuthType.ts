@@ -33,7 +33,6 @@ interface AuthRegister {
 
 interface Logout {
 	type: typeof LOGOUT;
-	// payload: void;
 }
 
 interface AuthFail {

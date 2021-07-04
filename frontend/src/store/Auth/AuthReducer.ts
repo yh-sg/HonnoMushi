@@ -1,12 +1,14 @@
 import { Reducer } from "redux";
-import { DispatchAuthAction, LOGIN } from "./AuthType";
+import { DispatchAuthAction, LOGIN, AUTH_FAIL } from "./AuthType";
 
 export interface AuthReducerState {
 	authData: object | null;
+	error: string;
 }
 
 const initialState = {
 	authData: null,
+	error: "",
 };
 
 const AuthReducer: Reducer<AuthReducerState, DispatchAuthAction> = (
@@ -14,11 +16,11 @@ const AuthReducer: Reducer<AuthReducerState, DispatchAuthAction> = (
 	action: DispatchAuthAction
 ): AuthReducerState => {
 	switch (action.type) {
-		//Login
 		case LOGIN:
 			return { ...state, authData: action.payload };
+		case AUTH_FAIL:
+			return { ...state, error: action.payload };
 		//register
-		// case REGISTER:
 		//Logout
 		default:
 			return state;

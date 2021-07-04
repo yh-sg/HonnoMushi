@@ -1,0 +1,8 @@
+"email":"cinderella@gmail.com",
+"password":"cinderella123"
+
+"email":"alibaba@gmail.com",
+"password":"alibaba"
+
+"email":"snowhite@gmail.com",
+"password":"snowhite"
