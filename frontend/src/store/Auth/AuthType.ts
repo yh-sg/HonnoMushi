@@ -1,46 +1,43 @@
 export const LOGIN = "LOGIN",
-		        LOGOUT = "LOGOUT",
-		        SIGNUP = "SIGNUP",
-		        AUTH_FAIL = "AUTH_FAIL";
-		
+	LOGOUT = "LOGOUT",
+	REGISTER = "REGISTER",
+	AUTH_FAIL = "AUTH_FAIL";
 
-export interface AuthDetails{
-    email:string;
-    password:string
-    name?:string;
-    confirmPassword?:string
+export interface AuthDetails {
+	email: string;
+	password: string;
+	name?: string;
+	confirmPassword?: string;
 }
 
-
-export interface AuthResult{
-    result:{
-        email: string
-        name: string
-        password: string
-        __v?: number
-        _id: string
-    }
-    token:string
+export interface AuthResult {
+	result: {
+		name: string;
+		email: string;
+		password?: string;
+		__v?: number;
+		_id: string;
+	};
+	token: string;
 }
 
-interface AuthSignIn {
-    type: typeof LOGIN;
-    data: AuthResult;
+export interface AuthLogin {
+	type: typeof LOGIN;
+	payload: AuthResult;
 }
 
-interface AuthSignUp {
-    type: typeof SIGNUP;
-    data: AuthResult;
+interface AuthRegister {
+	type: typeof REGISTER;
+	payload: AuthResult;
 }
 
 interface Logout {
-    type: typeof LOGOUT;
-    data: void;
+	type: typeof LOGOUT;
 }
 
 interface AuthFail {
-    type: typeof AUTH_FAIL;
-    data: string;
+	type: typeof AUTH_FAIL;
+	payload: string;
 }
 
-export type DispatchAuthAction = AuthSignIn | AuthSignUp | Logout | AuthFail; 
+export type DispatchAuthAction = AuthLogin | AuthRegister | Logout | AuthFail;

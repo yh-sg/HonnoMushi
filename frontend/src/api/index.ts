@@ -8,5 +8,5 @@ const API = axios.create({baseURL: 'http://localhost:3010'})
 export const fetchAllBooks = (page:string|number):Promise<AxiosResponse<Books>> => API.get<Books>(`/books?page=${page}`),
     fetchBooks = (letter:string,page:string|number):Promise<AxiosResponse<Books>> => API.get<Books>(`/books/${letter}?page=${page}`),
     fetchBook = (id:string):Promise<AxiosResponse<Book>> => API.get<Book>(`/book/${id}`),
-    signup = (form:AuthDetails):Promise<AxiosResponse<AuthResult>> => API.post<AuthResult>(`auth/signup`, form),
+    register = (form:AuthDetails):Promise<AxiosResponse<AuthResult>> => API.post<AuthResult>(`auth/register`, form),
     login = (form:AuthDetails):Promise<AxiosResponse<AuthResult>> => API.post<AuthResult>(`auth/login`, form);

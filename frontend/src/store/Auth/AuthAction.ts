@@ -1,16 +1,38 @@
 import { Dispatch } from "redux";
-import {DispatchAuthAction, AuthDetails} from "./AuthType";
-// import * as api from '../../api'
-import { RouteProps } from "react-router";
+import * as api from "../../api";
+import { DispatchAuthAction, AuthDetails, LOGIN, AUTH_FAIL } from "./AuthType";
 
-//need history so that after signin, signup | push them to homepage and don't allow them in login/logout.
+export const login =
+	(form: AuthDetails, history: any) =>
+	async (dispatch: Dispatch<DispatchAuthAction>): Promise<void> => {
+		try {
+			const { data, status } = await api.login(form);
 
-export const signin = (formData:AuthDetails, history:RouteProps) => async(dispatch:Dispatch<DispatchAuthAction>):Promise<void> => {
+			if (status === 200) {
+				localStorage.setItem("user", JSON.stringify(data));
+				dispatch({ type: LOGIN, payload: data });
+			}
+			history.push("/");
+			window.location.reload();
+		} catch (e) {
+			// can't get message: "Wrong Password!" from authRoute (backend)
+			dispatch({ type: AUTH_FAIL, payload: "The password is incorrect" });
+		}
+	};
 
+export const register =
+	(form: AuthDetails, history: any) =>
+	async (dispatch: Dispatch<DispatchAuthAction>): Promise<void> => {
+		try {
+			const { data, status } = await api.register(form);
+			console.log("data", data);
 
-},
-
-signup  = (formData:AuthDetails, history:RouteProps) => async(dispatch:Dispatch<DispatchAuthAction>):Promise<void> => {
-
-
-} 
+			if (status === 200) {
+				localStorage.setItem("user", JSON.stringify(data));
+			}
+			history.push("/");
+			window.location.reload();
+		} catch (e) {
+			console.log(e);
+		}
+	};

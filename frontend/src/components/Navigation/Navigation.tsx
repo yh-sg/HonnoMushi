@@ -1,10 +1,28 @@
 import React from "react";
-import { Navbar, Nav, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import books from "../../images/books.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
 const Navigation: React.FC = (): React.ReactElement => {
+	const history = useHistory();
+	const userData = JSON.parse(localStorage.getItem("user") || "{}");
+
+	let displayName;
+
+	if (Object.keys(userData).length > 0) {
+		displayName = userData["result"]["name"];
+	}
+
+	const onLogOut = () => {
+		if (Object.keys(userData).length > 0) {
+			localStorage.removeItem("user");
+			history.push("/");
+			window.location.reload();
+		}
+	};
+
 	return (
 		<>
 			<Navbar bg='warning' expand='md'>
@@ -31,13 +49,15 @@ const Navigation: React.FC = (): React.ReactElement => {
 							Collection
 						</Nav.Link>
 					</Nav>
+					<code className='mr-3'>{displayName}</code>
 					<Button
 						as={Link}
 						to='/login'
 						variant='outline-dark'
 						className='mr-2 mt-1'
+						onClick={onLogOut}
 					>
-						Log In
+						{Object.keys(userData).length === 0 ? "Log In" : "Log Out"}
 					</Button>
 				</Navbar.Collapse>
 			</Navbar>

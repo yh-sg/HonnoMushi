@@ -1,12 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
-import TextField from "../TextField/TextField";
+import TextField from "../../components/TextField/TextField";
 import { FormStyle } from "../RegisterForm/RegisterForm.style";
+import { AuthDetails } from "../../store/Auth/AuthType";
 import { NoAccountStyle } from "./LoginForm.style";
+import { login } from "../../store/Auth/AuthAction";
+import { RootState } from "../../store/rootReducer";
 
 const LoginForm: React.FC = () => {
+	const dispatch = useDispatch();
 	const history = useHistory();
 	const validate = Yup.object({
 		email: Yup.string().email("Email is invalid").required("Email is required"),
@@ -14,6 +19,12 @@ const LoginForm: React.FC = () => {
 			.min(5, "Password must be at least 5 characters")
 			.required("Password is required"),
 	});
+
+	const handleSubmitLogin = (values: AuthDetails): void => {
+		dispatch(login(values, history));
+	};
+
+	const errorMessage = useSelector((state: RootState) => state.auth.error);
 
 	return (
 		<>
@@ -23,7 +34,9 @@ const LoginForm: React.FC = () => {
 						email: "",
 						password: "",
 					}}
-					onSubmit={(values) => console.log(values)}
+					onSubmit={(values) => {
+						handleSubmitLogin(values);
+					}}
 					validationSchema={validate}
 				>
 					{(formik) => (
@@ -40,6 +53,9 @@ const LoginForm: React.FC = () => {
 							<Form>
 								<TextField label='Email' name='email' type='email' />
 								<TextField label='Password' name='password' type='password' />
+								{errorMessage && (
+									<p className='pt-2 text-warning'>{errorMessage}</p>
+								)}
 								<button className='btn btn-dark mt-4 mb-4' type='submit'>
 									Login
 								</button>
