@@ -17,7 +17,7 @@ interface RegisterFormProps {
 const RegisterForm: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const validate:Yup.SchemaOf<RegisterFormProps> = Yup.object({
+	const validate: Yup.SchemaOf<RegisterFormProps> = Yup.object({
 		name: Yup.string()
 			.min(5, "Usename must be at least 5 characters")
 			.max(15, "Username must not be more than 15 characters")
@@ -34,7 +34,7 @@ const RegisterForm: React.FC = () => {
 	const handleSubmit = (values: RegisterFormProps) => {
 		// console.log("register formvalues --> ", values); // can get
 		// console.log(values)
-		console.log(dispatch(register(values,history)));
+		dispatch(register(values, history));
 		// clear form values
 		// history.push("/");
 	};

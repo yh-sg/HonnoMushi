@@ -7,7 +7,6 @@ export const login =
 	async (dispatch: Dispatch<DispatchAuthAction>): Promise<void> => {
 		try {
 			const { data, status } = await api.login(form);
-			// console.log(data)
 
 			if (status === 200) {
 				localStorage.setItem("user", JSON.stringify(data));

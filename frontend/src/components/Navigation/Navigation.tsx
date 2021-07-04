@@ -1,22 +1,25 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import books from "../../images/books.png";
 import { HonnoMushiLogoStyled } from "./Navigation.style";
 
 const Navigation: React.FC = (): React.ReactElement => {
+	const history = useHistory();
 	const userData = JSON.parse(localStorage.getItem("user") || "{}");
 
 	let displayName;
 
-		if (Object.keys(userData).length > 0) {
-			displayName = userData["result"]["name"];
-		}
+	if (Object.keys(userData).length > 0) {
+		displayName = userData["result"]["name"];
+	}
 
 	const onLogOut = () => {
 		if (Object.keys(userData).length > 0) {
+			localStorage.removeItem("user");
+			history.push("/");
 			window.location.reload();
-			return localStorage.removeItem("user");
 		}
 	};
 
