@@ -9,9 +9,9 @@ const Navigation: React.FC = (): React.ReactElement => {
 
 	let displayName;
 
-	if (Object.keys(userData).length > 0) {
-		displayName = userData["result"]["name"];
-	}
+		if (Object.keys(userData).length > 0) {
+			displayName = userData["result"]["name"];
+		}
 
 	const onLogOut = () => {
 		if (Object.keys(userData).length > 0) {

@@ -13,7 +13,6 @@ export const login =
 				localStorage.setItem("user", JSON.stringify(data));
 				dispatch({ type: LOGIN, payload: data });
 			}
-
 			history.push("/");
 			window.location.reload();
 		} catch (e) {
@@ -26,11 +25,14 @@ export const register =
 	(form: AuthDetails, history: any) =>
 	async (dispatch: Dispatch<DispatchAuthAction>): Promise<void> => {
 		try {
-			const data = await api.register(form);
+			const { data, status } = await api.register(form);
+			console.log("data", data);
 
-			localStorage.setItem("user", JSON.stringify(data));
-
+			if (status === 200) {
+				localStorage.setItem("user", JSON.stringify(data));
+			}
 			history.push("/");
+			window.location.reload();
 		} catch (e) {
 			console.log(e);
 		}
