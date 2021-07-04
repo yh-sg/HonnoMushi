@@ -14,10 +14,10 @@ interface RegisterFormProps {
 	confirmPassword: string;
 }
 
-const RegisterForm: React.FC<RegisterFormProps> = () => {
+const RegisterForm: React.FC = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const validate = Yup.object({
+	const validate:Yup.SchemaOf<RegisterFormProps> = Yup.object({
 		name: Yup.string()
 			.min(5, "Usename must be at least 5 characters")
 			.max(15, "Username must not be more than 15 characters")
