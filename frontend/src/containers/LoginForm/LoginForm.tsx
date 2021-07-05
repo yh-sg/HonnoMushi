@@ -59,7 +59,11 @@ const LoginForm: React.FC = () => {
 								<button className='btn btn-dark mt-4 mb-4' type='submit'>
 									Login
 								</button>
-								<button className='btn btn-danger mx-3 mt-4 mb-4' type='reset'>
+								<button
+									onClick={() => window.location.reload()}
+									className='btn btn-danger mx-3 mt-4 mb-4'
+									type='reset'
+								>
 									Reset
 								</button>
 							</Form>
