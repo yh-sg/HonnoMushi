@@ -15,8 +15,8 @@ export const login =
 			history.push("/");
 			window.location.reload();
 		} catch (e) {
-			// can't get message: "Wrong Password!" from authRoute (backend)
-			dispatch({ type: AUTH_FAIL, payload: "The password is incorrect" });
+			// console.log("e.response.data.message --> ", e.response.data.message);
+			dispatch({ type: AUTH_FAIL, payload: e.response.data.message });
 		}
 	};
 
