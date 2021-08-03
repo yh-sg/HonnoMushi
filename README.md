@@ -43,8 +43,10 @@
 ## MVC Website: https://honnomushi.netlify.app/
 
 7. #### Furthermore to be added(Enhancement):
-    - Mobile responsiveness (Linda)
-    - Login/Logout (Linda/Yonghan)
     - More JESTS testcase (Linda/Yonghan)
     - CUD for books/users (Yonghan)
     - About/Create/Users book collection for Navbar (Linda)
+    - Pagination Bug fix(Back to book should stay at the number - Use makequery)
+    - Search function
+    - Data Cleanup
+    - Styling
