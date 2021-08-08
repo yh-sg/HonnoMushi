@@ -57,7 +57,6 @@ export const getBooksByLetter =
 
 	searchBooks  = (searchTitle:string|null,searchGenres:string|null) => async(dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
 		const {data, status} = await api.searchBooks(searchTitle,searchGenres)
-		console.log(data)
 		try {
 			dispatch({
 				type: BOOKS_LOADING,

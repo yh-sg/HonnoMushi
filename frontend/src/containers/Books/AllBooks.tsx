@@ -22,6 +22,13 @@ const AllBooks: React.FC = (): React.ReactElement => {
         [search, setSearch] = useState<string>("")
 
 	useEffect(() => {
+		if (query.has('searchTitle')) {
+			query.delete('searchTitle')
+			query.delete('searchGenres')
+			history.replace({
+			  search: query.toString(),
+			})
+		  }
 		dispatch(getAllBooks(page));
 	}, []);
 

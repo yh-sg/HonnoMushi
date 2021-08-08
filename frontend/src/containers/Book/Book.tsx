@@ -14,6 +14,7 @@ const Book:React.FC = ():React.ReactElement => {
 		id: string;
 	};
 
+
 	useEffect(() => {
 		dispatch(getBookById(id));
 	}, [dispatch, id]);

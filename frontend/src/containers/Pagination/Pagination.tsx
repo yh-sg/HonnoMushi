@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllBooks, getBooksByLetter } from '../../store/Books/BooksActions';
@@ -15,7 +15,7 @@ const Pagination:React.FC<Props> = ({page, alphabet}):React.ReactElement => {
 
     const dispatch = useDispatch(),
         history = useHistory(),
-        {numberOfPages} = useSelector((state:RootState) => state.allBooks.books)
+        {numberOfPages} = useSelector((state:RootState) => state.allBooks.books);
 
     useEffect(() => {
 		if(alphabet!==undefined) dispatch(getBooksByLetter(alphabet, page));
@@ -38,6 +38,7 @@ const Pagination:React.FC<Props> = ({page, alphabet}):React.ReactElement => {
                 pageCount={numberOfPages!}
                 pageRangeDisplayed={5}
                 marginPagesDisplayed={2}
+                forcePage={Number(page)-1}
                 onPageChange={handlePageClick}
                 containerClassName={"pagination"}
                 previousLinkClassName={"pagination_link"}
