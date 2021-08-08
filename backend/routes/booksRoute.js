@@ -70,7 +70,6 @@ router.get("/book/:id", async (req, res) => {
             return {
                 bookId: e.book_id,
                 title: e.title,
-                authors: e.authors,
                 authors: e.authors.split("|"),
                 summary: e.description,
                 pages: e.pages,
@@ -121,12 +120,19 @@ router.post('/bookReview', async(req,res)=>{
 })
 
 router.get('/searchBook', async(req,res)=>{
-    const {searchBook, genres} = req.query;
+    const {searchTitle, searchGenres} = req.query;
 
     try {
-        const title = new RegExp(searchBook,'i'),
-            books = await Books.find({$or:[{title},{genres:{$in: genres.split(',')}}]}).limit(15)
-        res.status(200).json({books})
+        const allBooks = await Books.find(),
+            regexTitle = new RegExp([searchTitle],"i"),
+            regexGenres = new RegExp([searchGenres],"i"),
+            result = allBooks.filter(e=>(regexTitle.test(e.title)||regexGenres.test(e.genres)))
+
+        res.status(200).json({
+            count: result.length,
+            booksLetter: result
+            //! For pagination?
+        })
     } catch (e) {
         res.status(404).json({message:e.message})
     }

@@ -70,7 +70,6 @@ const Book:React.FC = ():React.ReactElement => {
 											<Button
 												onClick={() => history.goBack()}
 												variant='success'
-
 												className='ml-3 mr-3'
 											>
 												Back to Books

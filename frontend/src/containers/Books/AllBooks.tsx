@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
-import { getAllBooks } from "../../store/Books/BooksActions";
+import { useHistory, useLocation } from "react-router-dom";
+import { getAllBooks, searchBooks } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
 import { Spinner } from "react-bootstrap";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
@@ -15,7 +15,11 @@ const useQuery = (): URLSearchParams => {
 const AllBooks: React.FC = (): React.ReactElement => {
 	const dispatch = useDispatch(),
 		query = useQuery(),
-		page = query.get(`page`) || 1;
+		page = query.get(`page`)||1,
+        searchTitle = query.get(`searchTitle`),
+        searchGenres = query.get('ask'),
+        history = useHistory(),
+        [search, setSearch] = useState<string>("")
 
 	useEffect(() => {
 		dispatch(getAllBooks(page));
@@ -24,9 +28,22 @@ const AllBooks: React.FC = (): React.ReactElement => {
 	const { loading, books, error } = useSelector(
 			(state: RootState) => state.allBooks
 		),
-		{ count, booksLetter, letter } = books;
+		{ count, booksLetter} = books;
 
-	console.log(letter);
+	const handleKeyPress = (e:React.KeyboardEvent<HTMLInputElement>):void => {
+		if(e.key === "Enter"){
+			searchAllBooks()
+		  }
+	};
+	
+	const searchAllBooks = ():void => {
+		if(search.trim()){
+				dispatch(searchBooks(search, "none"));
+				history.push(`/books?searchTitle=${search||'none'}&searchGenres=${'none'}`)
+			}else{
+				history.push('/books')
+			}
+		}
 
 	return (
 		<>
@@ -40,10 +57,24 @@ const AllBooks: React.FC = (): React.ReactElement => {
 				{!loading && books && <h3>There {`are ${count} books`} 📕📗</h3>}
 			</ContainerStyle>
 
-			{!loading && books && (
+			<input 
+				name="search" 
+				value={search} 
+				placeholder="Search" 
+				onChange={(e)=>setSearch(e.target.value)} 
+				onKeyPress={handleKeyPress}
+			/>
+
+			{!loading && books && 
+			(
 				<BookContent booksLetter={booksLetter} count={count} />
 			)}
-			<Pagination page={page} />
+			{
+				(!searchTitle&&(
+					<Pagination page={page} />
+				))
+			}
+			
 		</>
 	);
 };
