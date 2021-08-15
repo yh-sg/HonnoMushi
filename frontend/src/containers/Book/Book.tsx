@@ -4,23 +4,21 @@ import { useParams, useHistory } from "react-router-dom";
 import { Spinner, Button } from "react-bootstrap";
 import { getBookById } from "../../store/Book/BookAction";
 import { RootState } from "../../store/rootReducer";
-import { BookContainer, ImageStyle, ButtonsRowStyle } from "./Book.style";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
+import { BookContainer, ImageStyle, ButtonsRowStyle } from "./Book.style";
 
-const Book:React.FC = ():React.ReactElement => {
+const Book: React.FC = (): React.ReactElement => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const { id } = useParams() as {
 		id: string;
 	};
 
-
 	useEffect(() => {
 		dispatch(getBookById(id));
 	}, [dispatch, id]);
 
 	const bookState = useSelector((state: RootState) => state.book);
-
 	const { loading, book, error } = bookState;
 
 	return (
@@ -33,7 +31,6 @@ const Book:React.FC = ():React.ReactElement => {
 			{!loading && book && (
 				<>
 					{book.bookFormat.map((content, i) => {
-						// console.log("content", content);
 						const { authors, image_url, pages, rating, ratingCount, title } =
 							content;
 						const genres = content.genres.join(", ");
