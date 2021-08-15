@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, useLocation } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
-import Pagination from "../Pagination/Pagination";
 import { getBooksByLetter } from "../../store/Books/BooksActions";
 import { RootState } from "../../store/rootReducer";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
+import Pagination from "../Pagination/Pagination";
 import BookContent from "./BookContent";
 import { BooksHeaderFontStyle } from "./Books.style";
 

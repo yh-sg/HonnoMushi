@@ -3,7 +3,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import books from "../../images/books.png";
-import { HonnoMushiLogoStyled } from "./Navigation.style";
+import { HonnoMushiLogoStyled, DisplayNameStyled } from "./Navigation.style";
 
 const Navigation: React.FC = (): React.ReactElement => {
 	const history = useHistory();
@@ -49,7 +49,7 @@ const Navigation: React.FC = (): React.ReactElement => {
 							Collection
 						</Nav.Link>
 					</Nav>
-					<code className='mr-3'>{displayName}</code>
+					<DisplayNameStyled className='mr-3'>{displayName}</DisplayNameStyled>
 					<Button
 						as={Link}
 						to='/login'
