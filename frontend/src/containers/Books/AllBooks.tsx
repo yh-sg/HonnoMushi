@@ -68,15 +68,13 @@ const AllBooks: React.FC = (): React.ReactElement => {
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && <h3>There {`are ${count} books`} 📕📗</h3>}
-				<SearchBookStyle>
-					<input
-						name='search'
-						value={search}
-						placeholder='Search for a book'
-						onChange={(e) => setSearch(e.target.value)}
-						onKeyPress={handleKeyPress}
-					/>
-				</SearchBookStyle>
+				<SearchBookStyle
+					name='search'
+					value={search}
+					placeholder='Search for a book'
+					onChange={(e) => setSearch(e.target.value)}
+					onKeyPress={handleKeyPress}
+				/>
 			</ContainerStyle>
 
 			{!loading && books && (

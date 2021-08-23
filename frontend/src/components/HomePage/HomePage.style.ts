@@ -18,10 +18,7 @@ export const LibraryImageStyle = styled.img`
 	box-shadow: 5px 5px 10px black;
 `;
 
-export const SearchBookStyle = styled.div`
-	margin: 0 auto;
-	& input {
+export const SearchBookStyle = styled.input`
 		width: 16rem;
 		padding: 0.3rem;
-	}
 `;
