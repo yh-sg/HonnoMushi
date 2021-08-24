@@ -36,14 +36,9 @@ interface BooksSuccess {
 	payload: Books;
 }
 
-interface BooksFetchAll {
-	type: typeof BOOKS_FETCH_ALL;
-	payload: Books;
-}
-
 interface BooksFail {
 	type: typeof BOOKS_FAIL;
 	payload: string;
 }
 
-export type DispatchBooksActions = BooksLoading | BooksSuccess | BooksFail | BooksFetchAll;
+export type DispatchBooksActions = BooksLoading | BooksSuccess | BooksFail;

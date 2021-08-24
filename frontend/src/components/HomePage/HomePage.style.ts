@@ -17,3 +17,8 @@ export const LibraryImageStyle = styled.img`
 	margin: 2rem;
 	box-shadow: 5px 5px 10px black;
 `;
+
+export const SearchBookStyle = styled.input`
+		width: 16rem;
+		padding: 0.3rem;
+`;
