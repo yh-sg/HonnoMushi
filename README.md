@@ -46,7 +46,5 @@
     - More JESTS testcase (Linda/Yonghan)
     - CUD for books/users (Yonghan)
     - About/Create/Users book collection for Navbar (Linda)
-    - Pagination Bug fix(Back to book should stay at the number - Use makequery)
-    - Search function
     - Data Cleanup
     - Styling
