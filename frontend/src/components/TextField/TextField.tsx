@@ -5,6 +5,8 @@ interface TextFieldProps {
 	label: string;
 	name: string;
 	type: string;
+	min?: number;
+	step?: number;
 }
 
 const TextField: React.FC<TextFieldProps> = ({ label, ...props }) => {

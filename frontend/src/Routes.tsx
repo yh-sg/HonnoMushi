@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route, RouteProps, Redirect } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
-import Create from "./containers/CreateBook/CreateBook";
 import Collection from "./components/Collection/Collection";
 import Books from "./containers/Books/Books";
 import LoginForm from "./containers/LoginForm/LoginForm";
@@ -12,17 +11,20 @@ import PageNotFound from "./components/PageNotFound/PageNotFound";
 import AllBooks from "./containers/Books/AllBooks";
 import About from "./components/About/About";
 import { AuthResult } from "./store/Auth/AuthType";
+import CreateBook from "./containers/CreateBook/CreateBook";
+import EditBook from "./containers/EditBook/EditBook";
 
 const user: AuthResult = JSON.parse(localStorage.getItem("user") || "{}");
 
 export const ROUTES: RouteProps[] = [
 	{ path: "/", component: HomePage, exact: true },
 	{ path: "/about", component: About },
-	{ path: "/create", component: Create },
 	{ path: "/collection", component: Collection },
 	{ path: "/books/:alphabet", component: Books, exact: true },
 	{ path: "/book/:id", component: Book, exact: true },
 	{ path: "/books", component: AllBooks, exact: true },
+	{ path: "/create", component: CreateBook },
+	{ path: "/edit/:id", component: EditBook },
 	{
 		path: "/login",
 		component: () =>

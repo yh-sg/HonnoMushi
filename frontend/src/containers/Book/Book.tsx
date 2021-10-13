@@ -80,12 +80,13 @@ const Book: React.FC = (): React.ReactElement => {
 												Back to HonnoMushi
 											</Button>
 											<Button
-												onClick={() => history.push(`/edit`)}
+												onClick={() => history.push(`/edit/${id}`)}
 												variant='outline-secondary'
 												className='ml-3'
 											>
 												Edit
 											</Button>
+											{/* add 'are you sure?' modal */}
 											<Button
 												onClick={() => history.push(`/deleteBook`)}
 												variant='outline-danger'
