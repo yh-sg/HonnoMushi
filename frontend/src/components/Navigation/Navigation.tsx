@@ -1,7 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 import books from "../../images/books.png";
 import { HonnoMushiLogoStyled, DisplayNameStyled } from "./Navigation.style";
 
@@ -10,14 +9,17 @@ const Navigation: React.FC = (): React.ReactElement => {
 	const userData = JSON.parse(localStorage.getItem("user") || "{}");
 
 	let displayName;
+	let isLoggedIn;
 
 	if (Object.keys(userData).length > 0) {
 		displayName = userData["result"]["name"];
+		isLoggedIn = true;
 	}
 
 	const onLogOut = () => {
 		if (Object.keys(userData).length > 0) {
 			localStorage.removeItem("user");
+			isLoggedIn = false;
 			history.push("/");
 			window.location.reload();
 		}
@@ -45,9 +47,11 @@ const Navigation: React.FC = (): React.ReactElement => {
 						<Nav.Link as={Link} to='/books'>
 							Library
 						</Nav.Link>
-						<Nav.Link as={Link} to='/create'>
-							Create
-						</Nav.Link>
+						{isLoggedIn && (
+							<Nav.Link as={Link} to='/create'>
+								Create
+							</Nav.Link>
+						)}
 						<Nav.Link as={Link} to='/collection'>
 							Collection
 						</Nav.Link>

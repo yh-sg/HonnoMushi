@@ -68,15 +68,30 @@ const Book: React.FC = (): React.ReactElement => {
 											<Button
 												onClick={() => history.goBack()}
 												variant='success'
-												className='ml-3 mr-3'
+												className='ml-3'
 											>
 												Back to Books
 											</Button>
 											<Button
 												onClick={() => history.push(`/`)}
-												variant='outline-primary'
+												variant='primary'
+												className='ml-3'
 											>
 												Back to HonnoMushi
+											</Button>
+											<Button
+												onClick={() => history.push(`/edit`)}
+												variant='outline-secondary'
+												className='ml-3'
+											>
+												Edit
+											</Button>
+											<Button
+												onClick={() => history.push(`/deleteBook`)}
+												variant='outline-danger'
+												className='ml-3'
+											>
+												Delete
 											</Button>
 										</ButtonsRowStyle>
 									</div>
