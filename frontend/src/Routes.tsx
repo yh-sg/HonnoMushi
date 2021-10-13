@@ -10,12 +10,14 @@ import RegisterForm from "./containers/RegisterForm/RegisterForm";
 import Book from "./containers/Book/Book";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import AllBooks from "./containers/Books/AllBooks";
+import About from "./components/About/About";
 import { AuthResult } from "./store/Auth/AuthType";
 
 const user: AuthResult = JSON.parse(localStorage.getItem("user") || "{}");
 
 export const ROUTES: RouteProps[] = [
 	{ path: "/", component: HomePage, exact: true },
+	{ path: "/about", component: About },
 	{ path: "/create", component: Create },
 	{ path: "/collection", component: Collection },
 	{ path: "/books/:alphabet", component: Books, exact: true },
