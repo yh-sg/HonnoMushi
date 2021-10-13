@@ -2,7 +2,7 @@ export const BOOK_LOADING = "BOOK_LOADING";
 export const BOOK_SUCCESS = "BOOK_SUCCESS";
 export const BOOK_FAIL = "BOOK_FAIL";
 
-type BookFormat = {
+export type BookFormat = {
 	book_id: string;
 	title: string;
 	authors: string[];
