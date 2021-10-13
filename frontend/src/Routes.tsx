@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route, RouteProps, Redirect } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
-import Create from "./components/Create/Create";
+import Create from "./containers/CreateBook/CreateBook";
 import Collection from "./components/Collection/Collection";
 import Books from "./containers/Books/Books";
 import LoginForm from "./containers/LoginForm/LoginForm";

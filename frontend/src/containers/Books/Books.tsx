@@ -23,7 +23,7 @@ const Books: React.FC = (): React.ReactElement => {
 
 	useEffect(() => {
 		dispatch(getBooksByLetter(alphabet, page));
-	}, []);
+	}, [dispatch, alphabet, page]);
 
 	const allBooksState = useSelector((state: RootState) => state.allBooks),
 		{ books, error, loading } = allBooksState,

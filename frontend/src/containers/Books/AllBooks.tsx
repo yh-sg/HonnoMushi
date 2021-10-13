@@ -20,7 +20,6 @@ const AllBooks: React.FC = (): React.ReactElement => {
 		query = useQuery(),
 		page = query.get(`page`) || 1,
 		searchTitle = query.get(`searchTitle`),
-		searchGenres = query.get("ask"),
 		history = useHistory(),
 		[search, setSearch] = useState<string>("");
 
@@ -33,7 +32,7 @@ const AllBooks: React.FC = (): React.ReactElement => {
 			});
 		}
 		dispatch(getAllBooks(page));
-	}, []);
+	}, [dispatch, history, query, page]);
 
 	const { loading, books, error } = useSelector(
 			(state: RootState) => state.allBooks
