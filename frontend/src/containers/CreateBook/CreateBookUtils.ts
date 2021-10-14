@@ -4,7 +4,7 @@ import { CreateBookProps } from "./CreateBook";
 export const validateBook: Yup.SchemaOf<CreateBookProps> = Yup.object({
 	title: Yup.string()
 		.min(1, "Title must be at least 1 character")
-		.max(100, "Title must not be more than 100 characters")
+		.max(200, "Title must not be more than 200 characters")
 		.required("Required"),
 	author: Yup.string().required("Author(s) is required"),
 	summary: Yup.string()

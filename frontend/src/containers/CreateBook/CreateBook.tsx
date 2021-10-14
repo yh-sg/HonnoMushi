@@ -65,10 +65,10 @@ const CreateBook: React.FC = () => {
 							<TextField label='Genre(s)' name='genre' type='text' />
 
 							<button className='btn btn-dark mt-4 mb-4' type='submit'>
-								Create
+								Save
 							</button>
 							<button className='btn btn-danger mx-3 mt-4 mb-4' type='reset'>
-								Reset
+								Clear form
 							</button>
 						</Form>
 					</div>

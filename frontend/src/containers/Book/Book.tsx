@@ -39,7 +39,9 @@ const Book: React.FC = (): React.ReactElement => {
 							.replaceAll("â€™", "'")
 							.replaceAll("â€”", "; ")
 							.replaceAll("â€“", "")
-							.replaceAll("â€¦", ". ");
+							.replaceAll("â€¦", ". ")
+							.replaceAll("â€¢Â", " ")
+							.replaceAll("Â", " ");
 						return (
 							<BookContainer key={i}>
 								<div className='row'>
@@ -69,7 +71,8 @@ const Book: React.FC = (): React.ReactElement => {
 										</p>
 										<ButtonsRowStyle className='row'>
 											<Button
-												onClick={() => history.goBack()}
+												// onClick={() => history.goBack()} // will go back to EditBook if came from there
+												onClick={() => history.push(`/books/${title[0]}`)}
 												variant='success'
 												className='ml-3'
 											>
@@ -83,7 +86,7 @@ const Book: React.FC = (): React.ReactElement => {
 												Back to HonnoMushi
 											</Button>
 											<Button
-												onClick={() => history.push(`/edit`)}
+												onClick={() => history.push(`/edit/${id}`)}
 												variant='outline-secondary'
 												className='ml-3'
 											>
