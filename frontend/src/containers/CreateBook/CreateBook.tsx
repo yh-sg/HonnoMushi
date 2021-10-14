@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { FormStyle } from "../RegisterForm/RegisterForm.style";
 import TextField from "../../components/TextField/TextField";
@@ -17,9 +18,13 @@ export interface CreateBookProps {
 }
 
 const CreateBook: React.FC = () => {
+	const history = useHistory();
+
 	const handleCreateBook = (bookValues: CreateBookProps) => {
 		console.log("BOOK >> ", bookValues);
 		// add book_id here before submitting entry
+		// history.push(`/book/${id}`);
+		history.push(`/books/${bookValues.title[0].toUpperCase()}`);
 	};
 
 	return (

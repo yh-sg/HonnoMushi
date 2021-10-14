@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
 								<TextField label='Email' name='email' type='email' />
 								<TextField label='Password' name='password' type='password' />
 								{errorMessage && (
-									<p className='pt-2 text-warning'>{errorMessage}</p>
+									<p className='pt-2 text-danger'>{errorMessage}</p>
 								)}
 								<button className='btn btn-dark mt-4 mb-4' type='submit'>
 									Login

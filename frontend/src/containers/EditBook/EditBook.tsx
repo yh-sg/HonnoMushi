@@ -41,12 +41,15 @@ const EditBook = () => {
 			{!loading &&
 				book &&
 				book.bookFormat.map((content) => {
-					const { image_url, pages, rating, ratingCount, title } = content;
+					const { image_url, pages, rating, ratingCount } = content;
 					const authors = content.authors.join(", ");
 					const genres = content.genres.join(", ");
+					const title = content.title.replaceAll("â€™", "'");
 					const summary = content.summary
 						.replaceAll("â€™", "'")
 						.replaceAll("â€”", "; ")
+						.replaceAll("â€“", "")
+						.replaceAll("â€¦", ". ")
 						.replaceAll("â€¢Â", " ")
 						.replaceAll("Â", " ");
 					return (
@@ -66,7 +69,7 @@ const EditBook = () => {
 								validationSchema={validateBook}
 							>
 								{(formik) => (
-									<div className='container' key={content.book_id}>
+									<div className='container'>
 										<h3 className='my-4 font-weight-bold-display-4'>
 											Edit this book
 										</h3>

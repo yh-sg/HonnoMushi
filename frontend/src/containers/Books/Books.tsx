@@ -23,7 +23,7 @@ const Books: React.FC = (): React.ReactElement => {
 
 	useEffect(() => {
 		dispatch(getBooksByLetter(alphabet, page));
-	}, []);
+	}, [alphabet, dispatch, page]);
 
 	const allBooksState = useSelector((state: RootState) => state.allBooks),
 		{ books, error, loading } = allBooksState,
@@ -40,7 +40,7 @@ const Books: React.FC = (): React.ReactElement => {
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && (
 					<BooksHeaderFontStyle>
-						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕 📗
+						There {count === 1 ? "is 1 book" : `are ${count} books`} 📕📗
 						starting with '{letter}'
 					</BooksHeaderFontStyle>
 				)}
