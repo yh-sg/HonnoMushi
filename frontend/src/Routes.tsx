@@ -11,6 +11,7 @@ import Book from "./containers/Book/Book";
 import PageNotFound from "./components/PageNotFound/PageNotFound";
 import AllBooks from "./containers/Books/AllBooks";
 import { AuthResult } from "./store/Auth/AuthType";
+import About from "./components/About/About";
 
 const user: AuthResult = JSON.parse(localStorage.getItem("user") || "{}");
 
@@ -21,6 +22,7 @@ export const ROUTES: RouteProps[] = [
 	{ path: "/books/:alphabet", component: Books, exact: true },
 	{ path: "/book/:id", component: Book, exact: true },
 	{ path: "/books", component: AllBooks, exact: true },
+	{ path: "/about", component: About },
 	{
 		path: "/login",
 		component: () =>

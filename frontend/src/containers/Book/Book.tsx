@@ -36,7 +36,8 @@ const Book: React.FC = (): React.ReactElement => {
 						const genres = content.genres.join(", ");
 						const summary = content.summary
 							.replaceAll("â€™", "'")
-							.replaceAll("â€”", "; ");
+							.replaceAll("â€”", "; ")
+							.replaceAll("â€¦", ". ");
 						return (
 							<BookContainer key={i}>
 								<div className='row'>

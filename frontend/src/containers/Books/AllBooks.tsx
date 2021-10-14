@@ -67,7 +67,11 @@ const AllBooks: React.FC = (): React.ReactElement => {
 			>
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
-				{!loading && books && <h3>There {`are ${count} books`} 📕📗</h3>}
+				{!loading && books && (
+					<h3>
+						There {count === 1 ? "is 1 book 📗" : `are ${count} books 📚`}
+					</h3>
+				)}
 				<SearchBookStyle
 					name='search'
 					value={search}
