@@ -1,10 +1,11 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import * as Yup from "yup";
 import { FormStyle } from "../RegisterForm/RegisterForm.style";
 import TextField from "../../components/TextField/TextField";
+import { validateBook } from "./CreateBookUtils";
+import TextArea from "../../components/TextField/TextArea";
 
-interface CreateBookProps {
+export interface CreateBookProps {
 	title: string;
 	author: string;
 	summary: string;
@@ -16,32 +17,6 @@ interface CreateBookProps {
 }
 
 const CreateBook: React.FC = () => {
-	const validateBook: Yup.SchemaOf<CreateBookProps> = Yup.object({
-		title: Yup.string()
-			.min(1, "Title must be at least 1 character")
-			.max(30, "Title must not be more than 20 characters")
-			.required("Required"),
-		author: Yup.string().required("Author(s) is required"),
-		summary: Yup.string()
-			.min(20, "Summary must be at least 20 characters")
-			.required("Summary is required"),
-		pages: Yup.number()
-			.min(1, "Pages must be at least 1")
-			.required("Pages is required"),
-		rating: Yup.number()
-			.min(0.1, "Rating must be at least 0.1")
-			.required("Rating is required"),
-		ratingCount: Yup.number()
-			.min(1, "Rating count must be at least 1")
-			.required("Rating count is required"),
-		image: Yup.string()
-			.min(10, "Image url must be at least 10 characters")
-			.required("Image url is required"),
-		genre: Yup.string()
-			.min(5, "Genre must be at least 5 characters")
-			.required("Genre is required"),
-	});
-
 	const handleCreateBook = (bookValues: CreateBookProps) => {
 		console.log("BOOK >> ", bookValues);
 		// add book_id here before submitting entry
@@ -70,15 +45,15 @@ const CreateBook: React.FC = () => {
 						</h3>
 						<Form>
 							<TextField label='Title' name='title' type='text' />
-							<TextField label='Author' name='author' type='text' />
-							<TextField label='Summary' name='summary' type='text' />
+							<TextField label='Author(s)' name='author' type='text' />
+							<TextArea label='Summary' name='summary' type='text' rows={10} />
 							<TextField label='Pages' name='pages' type='number' min={0} />
 							<TextField
 								label='Rating'
 								name='rating'
 								type='number'
 								min={0}
-								step={0.1}
+								step={0.01}
 							/>
 							<TextField
 								label='Rating Count'
@@ -86,8 +61,8 @@ const CreateBook: React.FC = () => {
 								type='number'
 								min={0}
 							/>
-							<TextField label='Image URL' name='image' type='url' />
-							<TextField label='Genre' name='genre' type='text' />
+							<TextArea label='Image URL' name='image' type='url' />
+							<TextField label='Genre(s)' name='genre' type='text' />
 
 							<button className='btn btn-dark mt-4 mb-4' type='submit'>
 								Create
