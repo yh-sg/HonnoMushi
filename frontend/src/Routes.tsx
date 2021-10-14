@@ -2,18 +2,19 @@ import React from "react";
 import { Switch, Route, RouteProps, Redirect } from "react-router-dom";
 
 import HomePage from "./components/HomePage/HomePage";
-import Create from "./components/Create/Create";
+import About from "./components/About/About";
 import Collection from "./components/Collection/Collection";
+import PageNotFound from "./components/PageNotFound/PageNotFound";
+import Create from "./containers/CreateBook/CreateBook";
 import Books from "./containers/Books/Books";
 import LoginForm from "./containers/LoginForm/LoginForm";
 import RegisterForm from "./containers/RegisterForm/RegisterForm";
 import Book from "./containers/Book/Book";
-import PageNotFound from "./components/PageNotFound/PageNotFound";
 import AllBooks from "./containers/Books/AllBooks";
 import { AuthResult } from "./store/Auth/AuthType";
-import About from "./components/About/About";
 
 const user: AuthResult = JSON.parse(localStorage.getItem("user") || "{}");
+const isNotLoggedIn = Object.keys(user).length === 0;
 
 export const ROUTES: RouteProps[] = [
 	{ path: "/", component: HomePage, exact: true },
@@ -25,13 +26,11 @@ export const ROUTES: RouteProps[] = [
 	{ path: "/about", component: About },
 	{
 		path: "/login",
-		component: () =>
-			Object.keys(user).length === 0 ? <LoginForm /> : <Redirect to='/' />,
+		component: () => (isNotLoggedIn ? <LoginForm /> : <Redirect to='/' />),
 	},
 	{
 		path: "/register",
-		component: () =>
-			Object.keys(user).length === 0 ? <RegisterForm /> : <Redirect to='/' />,
+		component: () => (isNotLoggedIn ? <RegisterForm /> : <Redirect to='/' />),
 	},
 	{ path: "*", component: PageNotFound },
 ];

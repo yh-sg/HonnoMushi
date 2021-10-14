@@ -32,7 +32,9 @@ const BookContent: React.FC<Props> = ({
 						</BooksTableHeaderStyle>
 						<br />
 						{booksLetter.map((book) => {
-							const { book_id, _id, rating, format, image_url, title } = book;
+							const { book_id, _id, rating, format, image_url } = book;
+							const title = book.title.replaceAll("â€™", "'");
+
 							return (
 								<div key={_id}>
 									<div className='row'>

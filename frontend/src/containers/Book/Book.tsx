@@ -31,12 +31,14 @@ const Book: React.FC = (): React.ReactElement => {
 			{!loading && book && (
 				<>
 					{book.bookFormat.map((content, i) => {
-						const { authors, image_url, pages, rating, ratingCount, title } =
-							content;
+						const { image_url, pages, rating, ratingCount } = content;
+						const authors = content.authors.join(", ");
 						const genres = content.genres.join(", ");
+						const title = content.title.replaceAll("â€™", "'");
 						const summary = content.summary
 							.replaceAll("â€™", "'")
 							.replaceAll("â€”", "; ")
+							.replaceAll("â€“", "")
 							.replaceAll("â€¦", ". ");
 						return (
 							<BookContainer key={i}>
