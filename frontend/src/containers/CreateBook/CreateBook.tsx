@@ -6,6 +6,8 @@ import TextField from "../../components/TextField/TextField";
 import { validateBook } from "./CreateBookUtils";
 import TextArea from "../../components/TextField/TextArea";
 
+import { uuid } from "uuidv4";
+
 export interface CreateBookProps {
 	title: string;
 	author: string;
@@ -16,8 +18,10 @@ export interface CreateBookProps {
 	image: string;
 	genre: string;
 }
-
 const CreateBook: React.FC = () => {
+	const myUUID = uuid();
+	console.log(">>>> ", myUUID);
+
 	const history = useHistory();
 
 	const handleCreateBook = (bookValues: CreateBookProps) => {

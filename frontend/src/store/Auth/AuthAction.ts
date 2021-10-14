@@ -14,9 +14,14 @@ export const login =
 			}
 			history.push("/");
 			window.location.reload();
-		} catch (e) {
-			// console.log("e.response.data.message --> ", e.response.data.message);
-			dispatch({ type: AUTH_FAIL, payload: e.response.data.message });
+		} catch (error) {
+			let errorMessage = "There is an error in authentication";
+			if (error instanceof Error) {
+				errorMessage = error.message;
+				dispatch({ type: AUTH_FAIL, payload: error.message });
+			}
+			console.log(errorMessage);
+			// dispatch({ type: AUTH_FAIL, payload: error.response.data.message });
 		}
 	};
 
