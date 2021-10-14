@@ -13,13 +13,14 @@ const Book: React.FC = (): React.ReactElement => {
 	const { id } = useParams() as {
 		id: string;
 	};
+	const userData = JSON.parse(localStorage.getItem("user") || "{}");
+	const isLoggedIn = Object.keys(userData).length > 0;
+	const bookState = useSelector((state: RootState) => state.book);
+	const { loading, book, error } = bookState;
 
 	useEffect(() => {
 		dispatch(getBookById(id));
 	}, [dispatch, id]);
-
-	const bookState = useSelector((state: RootState) => state.book);
-	const { loading, book, error } = bookState;
 
 	return (
 		<>
@@ -85,20 +86,24 @@ const Book: React.FC = (): React.ReactElement => {
 											>
 												Back to HonnoMushi
 											</Button>
-											<Button
-												onClick={() => history.push(`/edit/${id}`)}
-												variant='outline-secondary'
-												className='ml-3'
-											>
-												Edit
-											</Button>
-											<Button
-												onClick={() => history.push(`/deleteBook`)}
-												variant='outline-danger'
-												className='ml-3'
-											>
-												Delete
-											</Button>
+											{isLoggedIn && (
+												<Button
+													onClick={() => history.push(`/edit/${id}`)}
+													variant='outline-secondary'
+													className='ml-3'
+												>
+													Edit
+												</Button>
+											)}
+											{isLoggedIn && (
+												<Button
+													onClick={() => history.push(`/deleteBook`)}
+													variant='outline-danger'
+													className='ml-3'
+												>
+													Delete
+												</Button>
+											)}
 										</ButtonsRowStyle>
 									</div>
 								</div>

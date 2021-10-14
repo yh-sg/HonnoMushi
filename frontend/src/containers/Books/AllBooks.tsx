@@ -32,8 +32,7 @@ const AllBooks: React.FC = (): React.ReactElement => {
 			});
 		}
 		dispatch(getAllBooks(page));
-		// }, [dispatch, history, page, query]);
-	}, []);
+	}, [dispatch, history, page]); // don't add query. will keep refreshing and making server calls
 
 	const { loading, books, error } = useSelector(
 			(state: RootState) => state.allBooks
