@@ -1,26 +1,27 @@
-//All dependencies/variables
-require('dotenv').config();
-const express = require("express"),
-    morgan = require("morgan"),
-    app = express(),
-    PORT = process.env.PORT || 3010,
-    cors = require("cors"),
-    mongoose = require("mongoose");
+import express, {Request, Response} from "express";
+import morgan from "morgan";
+import cors from "cors";
+import mongoose from "mongoose";
+import dotenv from 'dotenv'
+
+dotenv.config();
+
+const app = express(),
+    PORT = process.env.PORT || 3010;
 
 //connection
 mongoose.connect(
-    process.env.MOGODBCLOUD,
+    process.env.MOGODBCLOUD as string,
     {
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
     }).then(() => {
-        app.listen(PORT, (e) => {
-            if (e) console.log("Error in server setup");
+        app.listen(PORT, () => {
             console.log(`App is listening on PORT ${PORT} at ${new Date()}`);
             console.log("Mongodb connected!");
         });
-    }).catch(e => console.log(e));
+    }).catch((e:Error) => console.log(e));
 
 mongoose.set('useFindAndModify', false);
 
@@ -29,7 +30,7 @@ app.use(cors());
 app.use(express.json());
 
 // test in Heroku
-app.get('/', (req, res) => {
+app.get('/', (req:Request, res:Response) => {
     res.status(200);
     res.send("Hello!");
 });
