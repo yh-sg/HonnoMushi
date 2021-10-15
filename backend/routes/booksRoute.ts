@@ -1,16 +1,23 @@
-const router = require("express").Router(),
-    Books = require('../models/booksModel'),
+import express, {Request, Response} from "express";
+import Books from "../models/booksModel";
+
+const router = express.Router(),
     URL = 'https://api.nytimes.com/svc/books/v3/reviews.json',
     API_KEY = process.env.API_KEY,
     fetch = require("node-fetch"),
     withQuery = require("with-query").default
 
+    type ReqQuery = { page : string }
+    type ReqQuery2 = {searchTitle: string, searchGenres: string}
+    type ReqParams = { letter : string } 
+
 //@route books
-router.get("/books", async (req, res) => {
-    const {page} = req.query;
+router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response) => {
+    const {page} = req.query,
+        newPage:number = parseInt(page)
     try {
         const limit = 15,
-            startIndex = (Number(page-1)*limit),
+            startIndex = (Number(newPage-1)*limit),
             total = await Books.find().count(),
             books = await Books.find().sort({title:1}).limit(limit).skip(startIndex);
         res.status(200).send({
@@ -27,12 +34,13 @@ router.get("/books", async (req, res) => {
     }
 });
 
-router.get("/books/:letter", async (req, res) => {
-    const {page} = req.query
+router.get("/books/:letter", async (req:Request<ReqParams, {}, {}, ReqQuery>, res:Response) => {
+    const {page} = req.query,
+        newPage:number = parseInt(page)
 
     try {
         const limit = 8,
-            startIndex = (Number(page-1)*limit),
+            startIndex = (Number(newPage-1)*limit),
             total = await Books.find({ 
                 title: new RegExp('^' + req.params.letter, 'i')
                 }).count(),
@@ -92,40 +100,40 @@ router.get("/book/:id", async (req, res) => {
     }
 });
 
-router.post('/bookReview', async(req,res)=>{
-    try {
-        const url = withQuery(
-            URL,
-            {
-                title: req.query.bookTitle,
-                'api-key': API_KEY,
-            }
-        ),
-            resultURL = await (await fetch(url)).json(),
-            bookReview = resultURL.results.map(e=>{
-                return{
-                    title: e.book_title, 
-                    author: e.book_author, 
-                    reviewer: e.byline,
-                    reviewDate: e.publication_dt,
-                    summary: e.summary,
-                    reviewUrl: e.url
-                }
-            })
+// router.post('/bookReview', async(req,res)=>{
+//     try {
+//         const url = withQuery(
+//             URL,
+//             {
+//                 title: req.query.bookTitle,
+//                 'api-key': API_KEY,
+//             }
+//         ),
+//             resultURL = await (await fetch(url)).json(),
+//             bookReview = resultURL.results.map(e=>{
+//                 return{
+//                     title: e.book_title, 
+//                     author: e.book_author, 
+//                     reviewer: e.byline,
+//                     reviewDate: e.publication_dt,
+//                     summary: e.summary,
+//                     reviewUrl: e.url
+//                 }
+//             })
 
-        res.status(200).json(bookReview)
-    } catch (e) {
-        res.status(500).json({message:"something went south"})
-    }
-})
+//         res.status(200).json(bookReview)
+//     } catch (e) {
+//         res.status(500).json({message:"something went south"})
+//     }
+// })
 
-router.get('/searchBook', async(req,res)=>{
+router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response):Promise<void>=>{
     const {searchTitle, searchGenres} = req.query;
 
     try {
         const allBooks = await Books.find(),
-            regexTitle = new RegExp([searchTitle],"i"),
-            regexGenres = new RegExp([searchGenres],"i"),
+            regexTitle = new RegExp(searchTitle,"i"),
+            regexGenres = new RegExp(searchGenres,"i"),
             result = allBooks.filter(e=>(regexTitle.test(e.title)||regexGenres.test(e.genres)))
 
         res.status(200).json({
@@ -134,7 +142,7 @@ router.get('/searchBook', async(req,res)=>{
             //! For pagination?
         })
     } catch (e) {
-        res.status(404).json({message:e.message})
+        res.status(404).json({message:"Error in searching book"})
     }
 })
 

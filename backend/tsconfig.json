@@ -16,5 +16,5 @@
     "noImplicitThis": true
   },
   "exclude": ["node_modules"],
-  "include": ["./**/*.ts", "routes/*"]
+  "include": ["./**/*.ts", "./routes/*.ts", "./models/*.ts"]
 }

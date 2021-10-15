@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 
 const router = express.Router();
 
-router.post("/login", async (req:Request, res:Response) => {
+router.post("/login", async (req:Request, res:Response):Promise<Response> => {
     //email, password from frontend
     //frontend form, hope to add react-dropzone
     const { email, password } = req.body;
@@ -23,13 +23,13 @@ router.post("/login", async (req:Request, res:Response) => {
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.SECRET as string, { expiresIn: '30m' });
 
-        res.status(200).json({ result: existingUser, token });
+        return res.status(200).json({ result: existingUser, token });
     } catch (e) {
-        res.status(500).json({ message: "something went south" });
+        return res.status(500).json({ message: "something went south" });
     }
 });
 
-router.post("/register", async (req:Request, res:Response) => {
+router.post("/register", async (req:Request, res:Response):Promise<Response> => {
     //frontend form
     const { name, email, password, confirmPassword } = req.body;
 
@@ -47,10 +47,10 @@ router.post("/register", async (req:Request, res:Response) => {
             result = await User.create({ email, password: hashedPassword, name }),
             token = jwt.sign({ email: result.email, id: result._id }, process.env.SECRET as string, { expiresIn: '1h' });
 
-        res.status(200).json({ result, token });
+        return res.status(200).json({ result, token });
     } catch (e) {
-        res.status(500).json({ message: "something went south" });
+        return res.status(500).json({ message: "something went south" });
     }
 });
 
-module.exports = router;
+export default router; 
