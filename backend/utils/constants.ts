@@ -10,7 +10,8 @@ export enum HttpStatusCode {
     //The request has succeeded. The information returned with the response is dependent on the method used in the request
     //General status code. Most common code used to indicate success.
     OK = 200,
-    //Successful creation occurred (via either POST or PUT). Set the Location header to contain a link to the newly-created resource (on POST). Response body content may or may not be present.
+    //Successful creation occurred (via either POST or PUT). 
+    //Set the Location header to contain a link to the newly-created resource (on POST). Response body content may or may not be present.
     CREATED=201,
     NO_CONTENT=204,
 

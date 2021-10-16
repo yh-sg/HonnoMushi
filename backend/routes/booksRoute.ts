@@ -1,6 +1,7 @@
-import express, {Request, Response} from "express";
+import express, {NextFunction, Request, Response} from "express";
 import Books from "../models/booksModel";
 import { HttpStatusCode } from "../utils/constants";
+import ErrorResponse from "../utils/expressErrorResponse";
 
 const router = express.Router(),
     URL = 'https://api.nytimes.com/svc/books/v3/reviews.json',
@@ -27,7 +28,7 @@ const router = express.Router(),
     }
 
 //@route books
-router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response):Promise<void> => {
+router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response, next:NextFunction):Promise<void> => {
     const {page} = req.query,
         newPage:number = parseInt(page)
     try {
@@ -43,13 +44,11 @@ router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response):Pro
         });
     } catch (e) {
         console.error(e);
-        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: "Unable to get books"
-        });
+        return next(new ErrorResponse("Unable to get books!",HttpStatusCode.BAD_REQUEST));
     }
 });
 
-router.get("/books/:letter", async (req:Request<ReqParams, {}, {}, ReqQuery>, res:Response):Promise<void> => {
+router.get("/books/:letter", async (req:Request<ReqParams, {}, {}, ReqQuery>, res:Response, next:NextFunction):Promise<void> => {
     const {page} = req.query,
         {letter}= req.params,
         newPage:number = parseInt(page)
@@ -73,21 +72,17 @@ router.get("/books/:letter", async (req:Request<ReqParams, {}, {}, ReqQuery>, re
         });
     } catch (e) {
         console.error(e);
-        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: `Unable to get books from alphabet ${req.params.letter}`
-        });
+        return next(new ErrorResponse(`Unable to get books from alphabet ${letter}`,HttpStatusCode.BAD_REQUEST));
     }
 });
 
 //@route book/id
-router.get("/book/:id", async (req:Request, res:Response):Promise<Response> => {
+router.get("/book/:id", async (req:Request, res:Response, next:NextFunction):Promise<Response|void> => {
 
     try {
         let book = await Books.find({ book_id: req.params.id });
 
-        if (!book) {
-            return res.status(HttpStatusCode.NOT_FOUND).json({ message: "Book not found" });
-        }
+        if (!book||book.length===0) return next(new ErrorResponse("Book not found", HttpStatusCode.NOT_FOUND));
 
         //only take what we wanted^^
         let bookFormat = book.map(e => {
@@ -110,13 +105,11 @@ router.get("/book/:id", async (req:Request, res:Response):Promise<Response> => {
         });
     } catch (e) {
         console.error(e);
-        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
-            message: `Unable to get book details`
-        });
+        return next(new ErrorResponse(`Unable to get book details`, HttpStatusCode.INTERNAL_SERVER_ERROR));
     }
 });
 
-router.post('/bookReview', async(req,res):Promise<void>=>{
+router.post('/bookReview', async(req,res,next:NextFunction):Promise<void>=>{
     try {
         const url:string = withQuery(
             URL,
@@ -141,11 +134,11 @@ router.post('/bookReview', async(req,res):Promise<void>=>{
 
         res.status(HttpStatusCode.OK).json(bookReview)
     } catch (e) {
-        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message:"something went south"})
+        next(e)
     }
 })
 
-router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response):Promise<void>=>{
+router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response, next):Promise<void>=>{
     const {searchTitle, searchGenres} = req.query;
 
     try {
@@ -160,7 +153,8 @@ router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response):Pr
             //! For pagination?
         })
     } catch (e) {
-        res.status(HttpStatusCode.NOT_FOUND).json({message:"Error in searching book"})
+        console.error(e);
+        next(e)
     }
 })
 

@@ -15,6 +15,8 @@ interface IError{
 
 const errorHandler:ErrorRequestHandler = (err:IError, req, res, next):void => {
 
+    console.error(err)
+
     let error = {...err};
 
     error.message = err.message;

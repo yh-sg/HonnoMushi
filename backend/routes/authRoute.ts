@@ -27,7 +27,8 @@ router.post("/login", async (req:Request, res:Response, next:NextFunction):Promi
 
         return res.status(HttpStatusCode.OK).json({ result: existingUser, token });
     } catch (e) {
-        next(e)
+        console.error(e);
+        next(e);
     }
 });
 
@@ -51,6 +52,7 @@ router.post("/register", async (req:Request, res:Response, next:NextFunction):Pr
 
         return res.status(HttpStatusCode.OK).json({ result, token });
     } catch (e) {
+        console.error(e);
         next(e)
     }
 });
