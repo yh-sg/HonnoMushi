@@ -53,4 +53,4 @@ router.post("/register", async (req:Request, res:Response):Promise<Response> => 
     }
 });
 
-export default router; 
+export default router;

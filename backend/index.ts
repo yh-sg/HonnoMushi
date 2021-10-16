@@ -2,7 +2,9 @@ import express, {Request, Response} from "express";
 import morgan from "morgan";
 import cors from "cors";
 import mongoose from "mongoose";
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import BookRoute from './routes/booksRoute';
+import UserRoute from './routes/authRoute';
 
 dotenv.config();
 
@@ -16,24 +18,23 @@ mongoose.connect(
         useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        useFindAndModify: false,
     }).then(() => {
         app.listen(PORT, () => {
             console.log(`App is listening on PORT ${PORT} at ${new Date()}`);
             console.log("Mongodb connected!");
         });
-    }).catch((e:Error) => console.log(e));
-
-mongoose.set('useFindAndModify', false);
+    }).catch((e:Error) => console.error(e));
 
 app.use(morgan("combined"));
 app.use(cors());
 app.use(express.json());
 
 // test in Heroku
-app.get('/', (req:Request, res:Response) => {
+app.get('/', (req:Request, res:Response):void => {
     res.status(200);
     res.send("Hello!");
 });
 
-app.use('/', require('./routes/booksRoute'));
-app.use('/auth', require('./routes/authRoute'));
+app.use('/', BookRoute);
+app.use('/auth', UserRoute);
