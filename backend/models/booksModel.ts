@@ -1,4 +1,5 @@
 import { Schema, model, Document } from 'mongoose';
+import User from './userModel';
 
 export interface IBook extends Document{
     book_id:string,
@@ -54,7 +55,10 @@ const bookSchema = new Schema<IBook>({
     },
     image_url: {
         type: String
-    }
+    },
+    user:[
+        {type: Schema.Types.ObjectId, ref: User}
+    ]
 });
 
 const Books = model<IBook>("Books", bookSchema);

@@ -36,7 +36,7 @@ router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response, nex
             startIndex = (Number(newPage-1)*limit),
             total = await Books.find().countDocuments(),
             books = await Books.find().sort({title:1}).limit(limit).skip(startIndex);
-        res.status(HttpStatusCode.OK).send({
+        res.status(HttpStatusCode.OK).json({
             count: total,
             booksLetter: books,
             currentPage: Number(page), 
@@ -63,7 +63,7 @@ router.get("/books/:letter", async (req:Request<ReqParams, {}, {}, ReqQuery>, re
                 title: new RegExp('^' + letter, 'i')
                 }).sort({title:1}).limit(limit).skip(startIndex)
 
-        res.status(HttpStatusCode.OK).send({
+        res.status(HttpStatusCode.OK).json({
             letter: letter,
             count: total,
             booksLetter,
