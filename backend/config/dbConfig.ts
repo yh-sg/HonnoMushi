@@ -7,7 +7,7 @@ dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 const PORT = process.env.PORT || 3010;
 
 const connection = (app:Express) => mongoose.connect(
-    process.env.MOGODBCLOUD as string,
+    'mongodb://localhost/honnomushi',
     {
         useCreateIndex: true,
         useNewUrlParser: true,
@@ -17,6 +17,8 @@ const connection = (app:Express) => mongoose.connect(
         app.listen(PORT, async() => {
             console.log(`App is listening on PORT ${PORT} at ${new Date()}`);
             console.log("Mongodb connected!");
+            console.log('mongodb://localhost/honnomushi');
+            
         });
 }).catch((e:Error) => console.error(e));
 
