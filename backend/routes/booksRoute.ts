@@ -43,7 +43,7 @@ router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response):Pro
         });
     } catch (e) {
         console.error(e);
-        res.status(500).json({
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
             message: "Unable to get books"
         });
     }
@@ -73,7 +73,7 @@ router.get("/books/:letter", async (req:Request<ReqParams, {}, {}, ReqQuery>, re
         });
     } catch (e) {
         console.error(e);
-        res.status(500).json({
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
             message: `Unable to get books from alphabet ${req.params.letter}`
         });
     }
@@ -86,7 +86,7 @@ router.get("/book/:id", async (req:Request, res:Response):Promise<Response> => {
         let book = await Books.find({ book_id: req.params.id });
 
         if (!book) {
-            return res.status(400).json({ message: "Book not found" });
+            return res.status(HttpStatusCode.NOT_FOUND).json({ message: "Book not found" });
         }
 
         //only take what we wanted^^
@@ -110,7 +110,7 @@ router.get("/book/:id", async (req:Request, res:Response):Promise<Response> => {
         });
     } catch (e) {
         console.error(e);
-        return res.status(500).json({
+        return res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({
             message: `Unable to get book details`
         });
     }
@@ -141,7 +141,7 @@ router.post('/bookReview', async(req,res):Promise<void>=>{
 
         res.status(HttpStatusCode.OK).json(bookReview)
     } catch (e) {
-        res.status(500).json({message:"something went south"})
+        res.status(HttpStatusCode.INTERNAL_SERVER_ERROR).json({message:"something went south"})
     }
 })
 
@@ -160,7 +160,7 @@ router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response):Pr
             //! For pagination?
         })
     } catch (e) {
-        res.status(404).json({message:"Error in searching book"})
+        res.status(HttpStatusCode.NOT_FOUND).json({message:"Error in searching book"})
     }
 })
 

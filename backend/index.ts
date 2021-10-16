@@ -5,6 +5,7 @@ import mongoose from "mongoose";
 import dotenv from 'dotenv';
 import BookRoute from './routes/booksRoute';
 import UserRoute from './routes/authRoute';
+import errorHandler from "./middleWares/error";
 
 dotenv.config();
 
@@ -38,3 +39,5 @@ app.get('/', (req:Request, res:Response):void => {
 
 app.use('/', BookRoute);
 app.use('/auth', UserRoute);
+
+app.use(errorHandler);
