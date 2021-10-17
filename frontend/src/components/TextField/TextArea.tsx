@@ -1,20 +1,19 @@
 import React from "react";
 import { ErrorMessage, useField } from "formik";
 
-interface TextFieldProps {
+interface TextAreaProps {
 	label: string;
 	name: string;
 	type: string;
-	min?: number;
-	step?: number;
+	rows?: number;
 }
 
-const TextField: React.FC<TextFieldProps> = ({ label, ...props }) => {
+const TextArea: React.FC<TextAreaProps> = ({ label, ...props }) => {
 	const [field, meta] = useField(props);
 	return (
 		<div className='mb-2'>
 			<label htmlFor={field.name}>{label}</label>
-			<input
+			<textarea
 				className={`form-control shadow-none ${
 					meta.touched && meta.error && "is-invalid"
 				}`}
@@ -27,4 +26,4 @@ const TextField: React.FC<TextFieldProps> = ({ label, ...props }) => {
 	);
 };
 
-export default TextField;
+export default TextArea;

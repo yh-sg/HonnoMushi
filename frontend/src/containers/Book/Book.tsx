@@ -13,13 +13,14 @@ const Book: React.FC = (): React.ReactElement => {
 	const { id } = useParams() as {
 		id: string;
 	};
+	const userData = JSON.parse(localStorage.getItem("user") || "{}");
+	const isLoggedIn = Object.keys(userData).length > 0;
+	const bookState = useSelector((state: RootState) => state.book);
+	const { loading, book, error } = bookState;
 
 	useEffect(() => {
 		dispatch(getBookById(id));
 	}, [dispatch, id]);
-
-	const bookState = useSelector((state: RootState) => state.book);
-	const { loading, book, error } = bookState;
 
 	return (
 		<>
@@ -31,12 +32,17 @@ const Book: React.FC = (): React.ReactElement => {
 			{!loading && book && (
 				<>
 					{book.bookFormat.map((content, i) => {
-						const { authors, image_url, pages, rating, ratingCount, title } =
-							content;
+						const { image_url, pages, rating, ratingCount } = content;
+						const authors = content.authors.join(", ");
 						const genres = content.genres.join(", ");
+						const title = content.title.replaceAll("â€™", "'");
 						const summary = content.summary
 							.replaceAll("â€™", "'")
-							.replaceAll("â€”", "; ");
+							.replaceAll("â€”", "; ")
+							.replaceAll("â€“", "")
+							.replaceAll("â€¦", ". ")
+							.replaceAll("â€¢Â", " ")
+							.replaceAll("Â", " ");
 						return (
 							<BookContainer key={i}>
 								<div className='row'>
@@ -66,18 +72,38 @@ const Book: React.FC = (): React.ReactElement => {
 										</p>
 										<ButtonsRowStyle className='row'>
 											<Button
-												onClick={() => history.goBack()}
+												// onClick={() => history.goBack()} // will go back to EditBook if came from there
+												onClick={() => history.push(`/books/${title[0]}`)}
 												variant='success'
-												className='ml-3 mr-3'
+												className='ml-3'
 											>
 												Back to Books
 											</Button>
 											<Button
 												onClick={() => history.push(`/`)}
-												variant='outline-primary'
+												variant='primary'
+												className='ml-3'
 											>
 												Back to HonnoMushi
 											</Button>
+											{isLoggedIn && (
+												<Button
+													onClick={() => history.push(`/edit/${id}`)}
+													variant='outline-secondary'
+													className='ml-3'
+												>
+													Edit
+												</Button>
+											)}
+											{isLoggedIn && (
+												<Button
+													onClick={() => history.push(`/deleteBook`)}
+													variant='outline-danger'
+													className='ml-3'
+												>
+													Delete
+												</Button>
+											)}
 										</ButtonsRowStyle>
 									</div>
 								</div>

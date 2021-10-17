@@ -20,7 +20,6 @@ const AllBooks: React.FC = (): React.ReactElement => {
 		query = useQuery(),
 		page = query.get(`page`) || 1,
 		searchTitle = query.get(`searchTitle`),
-		searchGenres = query.get("ask"),
 		history = useHistory(),
 		[search, setSearch] = useState<string>("");
 
@@ -33,7 +32,7 @@ const AllBooks: React.FC = (): React.ReactElement => {
 			});
 		}
 		dispatch(getAllBooks(page));
-	}, []);
+	}, [dispatch, history, page]); // don't add query. will keep refreshing and making server calls
 
 	const { loading, books, error } = useSelector(
 			(state: RootState) => state.allBooks
@@ -67,7 +66,11 @@ const AllBooks: React.FC = (): React.ReactElement => {
 			>
 				{error && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
-				{!loading && books && <h3>There {`are ${count} books`} 📕📗</h3>}
+				{!loading && books && (
+					<h3>
+						There {count === 1 ? "is 1 book 📗" : `are ${count} books 📚`}
+					</h3>
+				)}
 				<SearchBookStyle
 					name='search'
 					value={search}
