@@ -1,4 +1,6 @@
-.env
+.env*
 node_modules
+coverage
 datamigration.txt
 notes.txt
+books.json

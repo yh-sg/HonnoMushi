@@ -1,7 +1,23 @@
-const mongoose = require("mongoose");
+import { Schema, model, Document } from 'mongoose';
+import User from './userModel';
+
+export interface IBook extends Document{
+    book_id:string,
+    title:string,
+    authors:string,
+    description:string,
+    edition:string,
+    format: string,
+    pages:number,
+    rating:number,
+    rating_count:number,
+    review_count:number,
+    genres:string,
+    image_url: string
+}
 
 //mongoose profile schema
-const bookSchema = new mongoose.Schema({
+const bookSchema = new Schema<IBook>({
     book_id: {
         type: String,
         unique: true,
@@ -39,9 +55,12 @@ const bookSchema = new mongoose.Schema({
     },
     image_url: {
         type: String
-    }
+    },
+    user:[
+        {type: Schema.Types.ObjectId, ref: User}
+    ]
 });
 
-const Books = mongoose.model("Books", bookSchema);
+const Books = model<IBook>("Books", bookSchema);
 
-module.exports = Books;
+export default Books;
