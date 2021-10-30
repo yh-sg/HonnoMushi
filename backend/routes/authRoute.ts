@@ -21,7 +21,7 @@ router.post("/login", async (req:Request, res:Response, next:NextFunction):Promi
         //Check password
         const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
 
-        if (!isPasswordCorrect) return next(new ErrorResponse("Wrong password!",HttpStatusCode.NOT_FOUND))
+        if (!isPasswordCorrect) return next(new ErrorResponse("Wrong password!",HttpStatusCode.UNAUTHORIZED))
 
         const token = jwt.sign({ email: existingUser.email, id: existingUser._id }, process.env.SECRET as string, { expiresIn: '30m' });
 

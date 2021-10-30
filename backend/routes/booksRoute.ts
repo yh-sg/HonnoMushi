@@ -1,4 +1,5 @@
 import express, {NextFunction, Request, Response} from "express";
+import auth, { UserAuthReq } from "../middleWares/auth";
 import Books from "../models/booksModel";
 import { HttpStatusCode } from "../utils/constants";
 import ErrorResponse from "../utils/expressErrorResponse";
@@ -28,7 +29,7 @@ const router = express.Router(),
     }
 
 //@route books
-router.get("/books", async (req:Request<{}, {}, {}, ReqQuery>, res:Response, next:NextFunction):Promise<void> => {
+router.get("/books" ,async (req:Request<{}, {}, {}, ReqQuery>, res:Response, next:NextFunction):Promise<void> => {
     const {page} = req.query,
         newPage:number = parseInt(page)
     try {
@@ -151,6 +152,25 @@ router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response, ne
             count: result.length,
             booksLetter: result
             //! For pagination?
+        })
+    } catch (e) {
+        console.error(e);
+        next(e)
+    }
+})
+
+router.post('/createBook', auth,async(req:Request,res:Response, next):Promise<void>=>{
+
+    const authReq = req as UserAuthReq
+
+    try {
+        const newBook = new Books({...req.body, user: authReq.userId})
+        if(req.body.rating > 5 || req.body.rating < 0) return next(new ErrorResponse(`Rating must be between 0 to 5`, HttpStatusCode.BAD_REQUEST));
+        const savedBook = await newBook.save();
+        
+        // result.user = req.user.id;
+        res.status(HttpStatusCode.CREATED).json({
+            savedBook
         })
     } catch (e) {
         console.error(e);
