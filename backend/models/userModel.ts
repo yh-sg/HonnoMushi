@@ -6,10 +6,10 @@ enum UserPrivilege{
 }
 
 export interface IUser extends Document {
-    name: string;
+    name?: string;
     email: string;
     password: string;
-    userPrivilege: UserPrivilege
+    userPrivilege?: UserPrivilege
   }
 
 const userSchema = new Schema<IUser>({

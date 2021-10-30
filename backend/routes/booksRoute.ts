@@ -4,10 +4,14 @@ import Books from "../models/booksModel";
 import { HttpStatusCode } from "../utils/constants";
 import ErrorResponse from "../utils/expressErrorResponse";
 import mongoose from 'mongoose';
+import dotenv from 'dotenv'
 import fs from 'fs';
 import s3 from '../config/s3';
 import { ManagedUpload } from 'aws-sdk/clients/s3';
 import multer from 'multer';
+import { getAllBooksService } from "../services/booksService";
+
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const router = express.Router(),
     URL = 'https://api.nytimes.com/svc/books/v3/reviews.json',
@@ -36,13 +40,11 @@ const router = express.Router(),
 
 //@route books
 router.get("/books" ,async (req:Request<{}, {}, {}, ReqQuery>, res:Response, next:NextFunction):Promise<void> => {
-    const {page} = req.query,
-        newPage:number = parseInt(page)
     try {
-        const limit = 15,
-            startIndex = (Number(newPage-1)*limit),
-            total = await Books.find().countDocuments(),
-            books = await Books.find().sort({title:1}).limit(limit).skip(startIndex);
+        const getAllBooks = await getAllBooksService(req.query.page);
+
+        const {total, books, page, limit} = getAllBooks;
+
         res.status(HttpStatusCode.OK).json({
             count: total,
             booksLetter: books,
