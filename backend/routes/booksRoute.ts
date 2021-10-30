@@ -3,12 +3,18 @@ import auth, { UserAuthReq } from "../middleWares/auth";
 import Books from "../models/booksModel";
 import { HttpStatusCode } from "../utils/constants";
 import ErrorResponse from "../utils/expressErrorResponse";
+import mongoose from 'mongoose';
+import fs from 'fs';
+import s3 from '../config/s3';
+import { ManagedUpload } from 'aws-sdk/clients/s3';
+import multer from 'multer';
 
 const router = express.Router(),
     URL = 'https://api.nytimes.com/svc/books/v3/reviews.json',
     API_KEY = process.env.API_KEY,
     {fetch} = require("node-fetch"),
-    {withQuery} = require("with-query").default;
+    {withQuery} = require("with-query").default,
+    upload = multer({dest: "./temp", limits:{fieldSize: 8 * 1024 * 1024 }})
 
     //Import and Export are ES6 features(Next gen JS, selective and save memory) | asynchronous.
     //Require is old school method of importing code from other files | synchronous
@@ -159,19 +165,77 @@ router.get('/searchBook', async(req:Request<{},{},{},ReqQuery2>,res:Response, ne
     }
 })
 
-router.post('/createBook', auth,async(req:Request,res:Response, next):Promise<void>=>{
+router.post('/createBook', auth, upload.single('image_url'),async(req:Request,res:Response, next):Promise<void>=>{
 
     const authReq = req as UserAuthReq
 
-    try {
-        const newBook = new Books({...req.body, user: authReq.userId})
-        if(req.body.rating > 5 || req.body.rating < 0) return next(new ErrorResponse(`Rating must be between 0 to 5`, HttpStatusCode.BAD_REQUEST));
-        const savedBook = await newBook.save();
+    if(req.file?.path===undefined) return next(new ErrorResponse('Please update an image', HttpStatusCode.FORBIDDEN));
+
+    const params = {
+        Bucket: process.env.BUCKET_NAME as string,
+        Body: fs.createReadStream(req.file?.path as string),
+        Key: `userAvatar/${req.file?.originalname}`,
+    };
+
+    s3.upload(params, async (err:Error, data:ManagedUpload.SendData) => {
         
-        // result.user = req.user.id;
-        res.status(HttpStatusCode.CREATED).json({
-            savedBook
+        console.error(err)
+
+        if(err) return next(new ErrorResponse('Error occured while trying to upload to S3 bucket', HttpStatusCode.BAD_REQUEST));
+        
+        if(data) fs.unlinkSync(req.file?.path as string); //!Empty temp folder
+
+        console.log(data.Location)
+
+        try {
+            const newBook = new Books({...req.body, user: authReq.userId, image_url:params.Key})
+            if(req.body.rating > 5 || req.body.rating < 0) return next(new ErrorResponse(`Rating must be between 0 to 5`, HttpStatusCode.BAD_REQUEST));
+            
+            const savedBook = await newBook.save();
+            
+            // result.user = req.user.id;
+            res.status(HttpStatusCode.CREATED).json({
+                savedBook
+            })
+        } catch (e) {
+            console.error(e);
+            next(e)
+        }   
+    })
+
+})
+
+router.put('/updateBook/:id', auth, async(req:Request,res:Response, next):Promise<void>=>{
+    try {
+        const book = req.body
+
+        if(!mongoose.Types.ObjectId.isValid(req.params.id)) return next(new ErrorResponse(`No such id exist`, HttpStatusCode.BAD_REQUEST));
+
+        await Books.findByIdAndUpdate(req.params.id, book, {new: true})
+
+        const updatedBook = await Books.findById(req.params.id)
+
+        console.log(updatedBook)
+
+        res.status(HttpStatusCode.ACCEPTED).json({updatedBook})
+
+    } catch (e) {
+        console.error(e);
+        next(e)
+    }
+})
+
+router.delete('/deleteBook/:id', auth, async(req:Request,res:Response, next):Promise<void>=>{
+    try {
+
+        if(!mongoose.Types.ObjectId.isValid(req.params.id)) return next(new ErrorResponse(`No such book exist`, HttpStatusCode.BAD_REQUEST));
+
+        await Books.findByIdAndDelete(req.params.id)
+
+        res.status(HttpStatusCode.NO_CONTENT).json({
+            message:"deleted"
         })
+
     } catch (e) {
         console.error(e);
         next(e)

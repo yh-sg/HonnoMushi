@@ -13,6 +13,7 @@ export enum HttpStatusCode {
     //Successful creation occurred (via either POST or PUT). 
     //Set the Location header to contain a link to the newly-created resource (on POST). Response body content may or may not be present.
     CREATED=201,
+    ACCEPTED=202,
     NO_CONTENT=204,
 
     //TODO 3xx Redirection

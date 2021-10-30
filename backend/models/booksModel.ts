@@ -46,7 +46,7 @@ const bookSchema = new Schema<IBook>({
         required: true
     },
     rating: {
-        type: Schema.Types.Decimal128,
+        type: Number,
         min: 0,
         max: 5,
         default: 4
