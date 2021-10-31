@@ -104,6 +104,7 @@ export const serachBookReviewService = async(bookTitle:string) => {
 }
 
 export const s3UploadImageService = async(filePath:string | undefined, originalName:string | undefined) => {
+
     if(filePath===undefined) return new ErrorResponse('Please update an image', HttpStatusCode.FORBIDDEN);
 
     const params = {

@@ -12,7 +12,22 @@ import { getAllBooksService, getBooksByLetterService, getOneBookService, searchB
 dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 const router = express.Router(),
-    upload = multer({dest: "./temp", limits:{fieldSize: 8 * 1024 * 1024 }})
+    upload = multer({
+        dest: "./temp",
+        limits:{fieldSize: 8 * 1024 * 1024},
+        fileFilter:(req,file,cb) => {
+            const allowedMimes = [
+                "image/jpeg",
+                "image/jpg",
+                "image/png"
+            ];
+            if (allowedMimes.includes(file.mimetype)) {
+                cb(null, true);
+            }else {
+                cb(new Error("Invalid file type please upload jpeg,jpg or png"));
+            }
+        },
+    })
 
     //Import and Export are ES6 features(Next gen JS, selective and save memory) | asynchronous.
     //Require is old school method of importing code from other files | synchronous
