@@ -2,10 +2,14 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useHistory } from "react-router-dom";
 import { Spinner, Button } from "react-bootstrap";
+import Amplify from "aws-amplify";
+import {AccessLevel} from "@aws-amplify/ui-components"
+
 import { getBookById } from "../../store/Book/BookAction";
+import AmplifyParams from "../../api/awsservice"
 import { RootState } from "../../store/rootReducer";
 import { ContainerStyle } from "../../components/HomePage/HomePage.style";
-import { BookContainer, ImageStyle, ButtonsRowStyle } from "./Book.style";
+import { BookContainer, ImageStyle, ButtonsRowStyle, AWSImage } from "./Book.style";
 
 const Book: React.FC = (): React.ReactElement => {
 	const dispatch = useDispatch();
@@ -20,6 +24,8 @@ const Book: React.FC = (): React.ReactElement => {
 
 	const bookState = useSelector((state: RootState) => state.book);
 	const { loading, book, error } = bookState;
+
+	Amplify.configure(AmplifyParams);
 
 	return (
 		<>
@@ -41,7 +47,11 @@ const Book: React.FC = (): React.ReactElement => {
 							<BookContainer key={i}>
 								<div className='row'>
 									<div className='col-3'>
-										<ImageStyle src={image_url} alt={title} />
+										{image_url.startsWith("public/")?
+											<AWSImage alt="nothing" imgKey={image_url.substring(7)} level={AccessLevel.Public} handleOnError={(e)=>console.error(e)} handleOnLoad={(e)=>console.info(e)}/>			
+										:
+											<ImageStyle src={image_url} alt={title} />
+										}
 									</div>
 									<div className='col-9'>
 										<h2>{title}</h2>
