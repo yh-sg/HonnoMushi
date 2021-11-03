@@ -10,13 +10,13 @@ import {
 export interface BooksState {
 	loading: boolean;
 	books: Books;
-	error: string;
+	error: Error;
 }
 
 const initialState = {
 	loading: false,
 	books: { letter: "", count: 0, booksLetter: [] },
-	error: "",
+	error: {name:"", message:""}
 };
 
 const booksReducer:Reducer<BooksState,DispatchBooksActions> = (

@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export const BOOK_LOADING = "BOOK_LOADING";
 export const BOOK_SUCCESS = "BOOK_SUCCESS";
 export const BOOK_FAIL = "BOOK_FAIL";
@@ -31,7 +33,7 @@ export interface BookSuccess {
 
 export interface BookFail {
 	type: typeof BOOK_FAIL;
-	payload: string;
+	payload: AxiosError<string>;
 }
 
 export type DispatchBookAction = BookLoading | BookSuccess | BookFail;

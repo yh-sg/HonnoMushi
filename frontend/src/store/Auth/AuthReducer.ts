@@ -3,12 +3,12 @@ import { DispatchAuthAction, LOGIN, AUTH_FAIL } from "./AuthType";
 
 export interface AuthReducerState {
 	authData: object | null;
-	error: string;
+	error: Error;
 }
 
 const initialState = {
 	authData: null,
-	error: "",
+	error: {name:"",message:""}
 };
 
 const AuthReducer: Reducer<AuthReducerState, DispatchAuthAction> = (

@@ -6,6 +6,7 @@ import {
 	DispatchBooksActions,
 } from "./BooksTypes";
 import * as api from '../../api'
+import { AxiosError } from "axios";
 
 export const getBooksByLetter =
 	(letter: string,page: string|number) => async (dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
@@ -27,7 +28,7 @@ export const getBooksByLetter =
 			console.log("ERROR >>>> ", error);
 			dispatch({
 				type: BOOKS_FAIL,
-				payload: error,
+				payload: error as AxiosError<string>,
 			});
 		}
 	},
@@ -50,7 +51,7 @@ export const getBooksByLetter =
 			console.log("ERROR >>>> ", e);
 			dispatch({
 				type: BOOKS_FAIL,
-				payload: e,
+				payload: e as AxiosError<string>,
 			});
 		}
 	},
@@ -73,7 +74,7 @@ export const getBooksByLetter =
 			console.log("ERROR >>>> ", e);
 			dispatch({
 				type: BOOKS_FAIL,
-				payload: e,
+				payload: e as AxiosError<string>,
 			});
 		}
 	};
