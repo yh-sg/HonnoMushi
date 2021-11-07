@@ -20,7 +20,6 @@ const AllBooks: React.FC = (): React.ReactElement => {
 		query = useQuery(),
 		page = query.get(`page`) || 1,
 		searchTitle = query.get(`searchTitle`),
-		searchGenres = query.get("ask"),
 		history = useHistory(),
 		[search, setSearch] = useState<string>("");
 
@@ -65,7 +64,7 @@ const AllBooks: React.FC = (): React.ReactElement => {
 				count={count}
 				loading={loading}
 			>
-				{error && <div>Insert React Error Boundary</div>}
+				{error.message.length !== 0 && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && <h3>There {`are ${count} books`} 📕📗</h3>}
 				<SearchBookStyle

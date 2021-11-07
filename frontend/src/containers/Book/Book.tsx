@@ -30,7 +30,7 @@ const Book: React.FC = (): React.ReactElement => {
 	return (
 		<>
 			<ContainerStyle isBooksSearching={!!book} loading={loading}>
-				{error && <div>Insert React Error Boundary</div>}
+				{error.message.length !== 0 && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 			</ContainerStyle>
 

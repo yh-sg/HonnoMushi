@@ -43,7 +43,7 @@ router.get("/books" ,async (req:Request<{}, {}, {}, { page : string }>, res:Resp
         res.status(HttpStatusCode.OK).json({
             count: total,
             booksLetter: books,
-            currentPage: Number(page), 
+            currentPage: Number(page),
             numberOfPages: Math.ceil(total/limit)
         });
     } catch (e) {
@@ -63,7 +63,7 @@ router.get("/books/:letter", async (req:Request<{ letter : string } , {}, {}, { 
             letter: letter,
             count: total,
             booksLetter,
-            currentPage: Number(page), 
+            currentPage: Number(page),
             numberOfPages: Math.ceil(total/limit)
         });
     } catch (e) {
@@ -77,9 +77,9 @@ router.get("/book/:id", async (req:Request, res:Response, next:NextFunction):Pro
 
     try {
         const getOneBookResult = await getOneBookService(req.params.id)
-        
+
         if(getOneBookResult instanceof ErrorResponse) return next(getOneBookResult)
-        
+
         const {book, bookFormat} = getOneBookResult
 
         return res.status(HttpStatusCode.OK).json({
@@ -114,15 +114,15 @@ router.post('/createBook', auth, upload.single('image_url'),async(req:Request,re
     const authReq = req as UserAuthReq
 
     const s3UploadResult = await s3UploadImageService(req.file?.path, req.file?.originalname)
-    
+
     if(s3UploadResult instanceof ErrorResponse) return next(s3UploadResult)
 
     try {
         const newBook = new Books({...req.body, user: authReq.userId, image_url:s3UploadResult})
         if(req.body.rating > 5 || req.body.rating < 0) return next(new ErrorResponse(`Rating must be between 0 to 5`, HttpStatusCode.BAD_REQUEST));
-        
+
         const savedBook = await newBook.save();
-        
+
         // result.user = req.user.id;
         res.status(HttpStatusCode.CREATED).json({
             savedBook
@@ -130,7 +130,7 @@ router.post('/createBook', auth, upload.single('image_url'),async(req:Request,re
     } catch (e) {
         console.error(e);
         next(e)
-    }   
+    }
 
 })
 

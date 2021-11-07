@@ -1,7 +1,4 @@
 import express, {NextFunction, Request, Response} from "express";
-import User from '../models/userModel';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import { HttpStatusCode } from "../utils/constants";
 import ErrorResponse from "../utils/expressErrorResponse";
 import { loginService, signupService } from "../services/authService";

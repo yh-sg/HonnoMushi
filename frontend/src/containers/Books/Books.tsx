@@ -36,7 +36,7 @@ const Books: React.FC = (): React.ReactElement => {
 				count={count}
 				loading={loading}
 			>
-				{error && <div>Insert React Error Boundary</div>}
+				{error.message.length !== 0 && <div>Insert React Error Boundary</div>}
 				{loading && <Spinner animation='border' variant='warning' />}
 				{!loading && books && (
 					<BooksHeaderFontStyle>

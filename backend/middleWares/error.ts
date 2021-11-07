@@ -6,7 +6,7 @@ import ValidationError = Error.ValidationError;
 const ErrorResponse = require('../utils/expressErrorResponse');
 
 //! Is there a better way of handling error??
-interface IError{
+interface IError extends Error{
     message:string
     code:number
     statusCode:number

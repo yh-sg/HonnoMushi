@@ -10,13 +10,13 @@ import {Reducer} from 'redux'
 interface BookState {
 	loading: boolean;
 	book: Book;
-	error: string;
+	error: Error;
 }
 
 const initialState = {
 	loading: false,
 	book: { message: "", book: [], bookFormat: [] },
-	error: "",
+	error: {name:"", message:""},
 };
 
 const bookReducer:Reducer<BookState,DispatchBookAction> = (
