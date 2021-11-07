@@ -6,6 +6,7 @@ import {
 	DispatchBookAction,
 } from "./BookType";
 import * as api from '../../api'
+import { AxiosError } from "axios";
 
 export const getBookById =
 	(id: string) => async (dispatch: Dispatch<DispatchBookAction>):Promise<void> => {
@@ -30,7 +31,7 @@ export const getBookById =
 			console.log("ERROR >>>> ", error);
 			dispatch({
 				type: BOOK_FAIL,
-				payload: error,
+				payload: error.response.data.message as AxiosError<string>,
 			});
 		}
 	};

@@ -4,8 +4,13 @@ import {
 	BOOKS_SUCCESS,
 	BOOKS_FAIL,
 	DispatchBooksActions,
+	BOOK_DELETED,
+	BookLetter,
+	BOOK_UPDATED,
+	BOOK_CREATED,
 } from "./BooksTypes";
 import * as api from '../../api'
+import { AxiosError } from "axios";
 
 export const getBooksByLetter =
 	(letter: string,page: string|number) => async (dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
@@ -27,7 +32,7 @@ export const getBooksByLetter =
 			console.log("ERROR >>>> ", error);
 			dispatch({
 				type: BOOKS_FAIL,
-				payload: error,
+				payload: error as AxiosError<string>,
 			});
 		}
 	},
@@ -50,7 +55,7 @@ export const getBooksByLetter =
 			console.log("ERROR >>>> ", e);
 			dispatch({
 				type: BOOKS_FAIL,
-				payload: e,
+				payload: e as AxiosError<string>,
 			});
 		}
 	},
@@ -73,7 +78,77 @@ export const getBooksByLetter =
 			console.log("ERROR >>>> ", e);
 			dispatch({
 				type: BOOKS_FAIL,
-				payload: e,
+				payload: e as AxiosError<string>,
+			});
+		}
+	},
+
+	createdBooks  = (newBook:BookLetter) => async(dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const {data,status} = await api.createBook(newBook)
+		try {
+			dispatch({
+				type: BOOKS_LOADING,
+			});
+
+			if (status === 201) {
+				dispatch({
+					type: BOOK_CREATED,
+					payload: data
+				});
+			}
+
+		} catch (e) {
+			console.log("ERROR >>>> ", e);
+			dispatch({
+				type: BOOKS_FAIL,
+				payload: e as AxiosError<string>,
+			});
+		}
+	},
+
+	updatedBooks  = (id:string,updateBook:BookLetter) => async(dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const {data,status} = await api.updateBook(id, updateBook)
+		try {
+			dispatch({
+				type: BOOKS_LOADING,
+			});
+
+			if (status === 202) {
+				dispatch({
+					type: BOOK_UPDATED,
+					payload: data
+				});
+			}
+
+		} catch (e) {
+			console.log("ERROR >>>> ", e);
+			dispatch({
+				type: BOOKS_FAIL,
+				payload: e as AxiosError<string>,
+			});
+		}
+	},
+
+	deletedBooks  = (id:string) => async(dispatch: Dispatch<DispatchBooksActions>):Promise<void> => {
+		const {status} = await api.deleteBook(id)
+		try {
+			dispatch({
+				type: BOOKS_LOADING,
+			});
+
+			if (status === 204) {
+				dispatch({
+					type: BOOK_DELETED,
+					payload: id
+				});
+			}
+
+		} catch (e) {
+			console.log("ERROR >>>> ", e);
+			dispatch({
+				type: BOOKS_FAIL,
+				payload: e as AxiosError<string>,
 			});
 		}
 	};
+

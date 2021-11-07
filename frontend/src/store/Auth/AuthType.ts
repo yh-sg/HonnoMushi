@@ -1,3 +1,5 @@
+import { AxiosError } from "axios";
+
 export const LOGIN = "LOGIN",
 	LOGOUT = "LOGOUT",
 	REGISTER = "REGISTER",
@@ -37,7 +39,7 @@ interface Logout {
 
 interface AuthFail {
 	type: typeof AUTH_FAIL;
-	payload: string;
+	payload: AxiosError<string>;
 }
 
 export type DispatchAuthAction = AuthLogin | AuthRegister | Logout | AuthFail;

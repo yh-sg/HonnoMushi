@@ -13,7 +13,8 @@ export interface IBook extends Document{
     rating_count:number,
     review_count:number,
     genres:string,
-    image_url: string
+    image_url: string,
+    user: String
 }
 
 //mongoose profile schema
@@ -28,9 +29,11 @@ const bookSchema = new Schema<IBook>({
     },
     authors: {
         type: String,
+        required: true,
     },
     description: {
         type: String,
+        required: true,
     },
     edition: {
         type: String,
@@ -39,26 +42,34 @@ const bookSchema = new Schema<IBook>({
         type: String,
     },
     pages: {
-        type: Number
+        type: Number,
+        required: true
     },
     rating: {
-        type: Number
+        type: Number,
+        min: 0,
+        max: 5,
+        default: 4
     },
     rating_count: {
-        type: Number
+        type: Number,
+        default:0
     },
     review_count: {
-        type: Number
+        type: Number,
+        default:0
     },
     genres: {
-        type: String
+        type: String,
+        required: true
     },
     image_url: {
         type: String
     },
-    user:[
-        {type: Schema.Types.ObjectId, ref: User}
-    ]
+    user:{   
+        type: Schema.Types.ObjectId, 
+        ref: User
+    }
 });
 
 const Books = model<IBook>("Books", bookSchema);
